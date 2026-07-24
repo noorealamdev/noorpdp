@@ -44,11 +44,5 @@ The JavaScript in the `build/` directory is compiled from the human-readable sou
 
 == Changelog ==
 
-= 1.1.0 =
-* Added WooCommerce product-page blocks: Product Grid, Related Products, Product Tabs, Feature Cards, Icon List, Trust Badges, Sticky Add to Cart Bar, Urgency & Countdown, Review Carousel, Product Gallery Carousel, and more.
-* Added per-block Layout controls (boxed width) across custom blocks.
-* Added a Product Layout split-testing (A/B) feature.
-* Various bug fixes and template library improvements.
-
 = 1.0.0 =
 * Initial release: WooCommerce product blocks, Product Layouts, per-product/category/site-wide template assignment, starter layouts and sections.

@@ -86,9 +86,6 @@
 		display: block;
 		width: 100%;
 		height: 100%;
-		// contain, not cover: never crops, even if a given thumbnail's
-		// aspect ratio doesn't exactly match 1:2 (letterboxes instead).
-		object-fit: contain;
 	}
 
 	&:hover,
