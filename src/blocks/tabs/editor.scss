@@ -1,15 +1,15 @@
-.wp-block-noortemplates-tabs {
+.wp-block-noorpdp-tabs {
 
-	.noortemplates-tabs__tab {
+	.noorpdp-tabs__tab {
 		cursor: pointer;
 	}
 
-	.noortemplates-tabs__add.components-button {
+	.noorpdp-tabs__add.components-button {
 		align-self: center;
 	}
 
 	// Only the active tab panel is visible while editing.
-	.wp-block-noortemplates-tab:not(.is-active) {
+	.wp-block-noorpdp-tab:not(.is-active) {
 		display: none;
 	}
 }

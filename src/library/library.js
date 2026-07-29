@@ -15,7 +15,7 @@ import { layout, image as imagePlaceholder } from '@wordpress/icons';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 
-const LAYOUT_POST_TYPE = 'noortemplates_layout';
+const LAYOUT_POST_TYPE = 'noorpdp_layout';
 
 // Delay, in ms, before a search keystroke triggers a new request.
 const SEARCH_DEBOUNCE = 300;
@@ -42,7 +42,7 @@ function ToolbarPortal( { children } ) {
 		}
 
 		const wrap = document.createElement( 'div' );
-		wrap.className = 'noortemplates-library__toolbar-wrap';
+		wrap.className = 'noorpdp-library__toolbar-wrap';
 		toolbar.appendChild( wrap );
 		setContainer( wrap );
 
@@ -64,10 +64,10 @@ function TemplateCard( { template, isBusy, onSelect } ) {
 	const isLocked = template.is_pro && ! LICENSING.isPro;
 
 	return (
-		<div className="noortemplates-library__card">
+		<div className="noorpdp-library__card">
 			<button
 				type="button"
-				className="noortemplates-library__card-preview"
+				className="noorpdp-library__card-preview"
 				onClick={ () => onSelect( template ) }
 				aria-label={ template.title }
 				disabled={ isBusy }
@@ -79,33 +79,33 @@ function TemplateCard( { template, isBusy, onSelect } ) {
 						loading="lazy"
 					/>
 				) : (
-					<span className="noortemplates-library__card-placeholder">
+					<span className="noorpdp-library__card-placeholder">
 						{ imagePlaceholder }
 					</span>
 				) }
 				{ isBusy && (
-					<span className="noortemplates-library__card-spinner">
+					<span className="noorpdp-library__card-spinner">
 						<Spinner />
 					</span>
 				) }
-				<span className="noortemplates-library__card-action">
+				<span className="noorpdp-library__card-action">
 					{ isLocked
-						? __( 'Upgrade to Pro', 'noortemplates' )
+						? __( 'Upgrade to Pro', 'noorpdp' )
 						: template.type === 'layout'
-						? __( 'Use Layout', 'noortemplates' )
-						: __( 'Insert Section', 'noortemplates' ) }
+						? __( 'Use Layout', 'noorpdp' )
+						: __( 'Insert Section', 'noorpdp' ) }
 				</span>
 			</button>
 			{ isLocked && (
-				<span className="noortemplates-library__card-badge">
-					{ __( 'Pro', 'noortemplates' ) }
+				<span className="noorpdp-library__card-badge">
+					{ __( 'Pro', 'noorpdp' ) }
 				</span>
 			) }
-			<div className="noortemplates-library__card-title">
+			<div className="noorpdp-library__card-title">
 				{ template.title }
 			</div>
 			{ template.description && (
-				<div className="noortemplates-library__card-description">
+				<div className="noorpdp-library__card-description">
 					{ template.description }
 				</div>
 			) }
@@ -126,7 +126,7 @@ function ExportTemplateModal( { onClose } ) {
 
 	const handleExport = () => {
 		if ( ! title.trim() ) {
-			setError( __( 'Please enter a title.', 'noortemplates' ) );
+			setError( __( 'Please enter a title.', 'noorpdp' ) );
 			return;
 		}
 
@@ -163,9 +163,9 @@ function ExportTemplateModal( { onClose } ) {
 
 	return (
 		<Modal
-			title={ __( 'Export as JSON', 'noortemplates' ) }
+			title={ __( 'Export as JSON', 'noorpdp' ) }
 			onRequestClose={ onClose }
-			className="noortemplates-library__export-modal"
+			className="noorpdp-library__export-modal"
 		>
 			{ error && (
 				<Notice status="error" isDismissible={ false }>
@@ -173,27 +173,27 @@ function ExportTemplateModal( { onClose } ) {
 				</Notice>
 			) }
 			<TextControl
-				label={ __( 'Title', 'noortemplates' ) }
+				label={ __( 'Title', 'noorpdp' ) }
 				value={ title }
 				onChange={ setTitle }
 			/>
 			<SelectControl
-				label={ __( 'Type', 'noortemplates' ) }
+				label={ __( 'Type', 'noorpdp' ) }
 				value={ type }
 				onChange={ setType }
 				options={ [
-					{ value: 'layout', label: __( 'Full Layout', 'noortemplates' ) },
-					{ value: 'section', label: __( 'Section', 'noortemplates' ) },
+					{ value: 'layout', label: __( 'Full Layout', 'noorpdp' ) },
+					{ value: 'section', label: __( 'Section', 'noorpdp' ) },
 				] }
 			/>
 			<TextControl
-				label={ __( 'Category (optional)', 'noortemplates' ) }
+				label={ __( 'Category (optional)', 'noorpdp' ) }
 				value={ category }
 				onChange={ setCategory }
-				placeholder={ __( 'e.g. jewelry', 'noortemplates' ) }
+				placeholder={ __( 'e.g. jewelry', 'noorpdp' ) }
 			/>
 			<Button variant="primary" onClick={ handleExport }>
-				{ __( 'Download JSON', 'noortemplates' ) }
+				{ __( 'Download JSON', 'noorpdp' ) }
 			</Button>
 		</Modal>
 	);
@@ -217,7 +217,7 @@ function isPostEmpty() {
  * The Templates button in the editor top bar plus the library modal.
  *
  * Only rendered while editing a Product Layout, since that is the only
- * post type NoorTemplates' premade layouts and sections apply to.
+ * post type NoorPDP's premade layouts and sections apply to.
  */
 export default function Library() {
 	const [ isOpen, setOpen ] = useState( false );
@@ -269,7 +269,7 @@ export default function Library() {
 			args.search = debouncedSearch;
 		}
 
-		apiFetch( { path: addQueryArgs( '/noortemplates/v1/templates', args ) } )
+		apiFetch( { path: addQueryArgs( '/noorpdp/v1/templates', args ) } )
 			.then( ( result ) =>
 				setTemplates( Array.isArray( result ) ? result : [] )
 			)
@@ -283,7 +283,7 @@ export default function Library() {
 			return;
 		}
 
-		apiFetch( { path: addQueryArgs( '/noortemplates/v1/templates', { type } ) } )
+		apiFetch( { path: addQueryArgs( '/noorpdp/v1/templates', { type } ) } )
 			.then( ( result ) => {
 				const found = new Set();
 
@@ -310,7 +310,7 @@ export default function Library() {
 			! window.confirm(
 				__(
 					'This will replace the current layout content. Continue?',
-					'noortemplates'
+					'noorpdp'
 				)
 			)
 		) {
@@ -332,7 +332,7 @@ export default function Library() {
 	// Fetches a template's full content on demand, since the list payload
 	// intentionally omits it to stay lightweight at scale.
 	const fetchFullTemplate = ( name ) =>
-		apiFetch( { path: `/noortemplates/v1/templates/${ name }` } );
+		apiFetch( { path: `/noorpdp/v1/templates/${ name }` } );
 
 	const handleSelect = ( template ) => {
 		if ( template.is_pro && ! LICENSING.isPro ) {
@@ -384,16 +384,16 @@ export default function Library() {
 				// eslint-disable-next-line no-alert
 				window.alert(
 					__(
-						"That file doesn't look like a valid NoorTemplates JSON template.",
-						'noortemplates'
+						"That file doesn't look like a valid NoorPDP JSON template.",
+						'noorpdp'
 					)
 				);
 			} );
 	};
 
 	const tabs = [
-		{ name: 'layout', title: __( 'Full Layouts', 'noortemplates' ) },
-		{ name: 'section', title: __( 'Sections', 'noortemplates' ) },
+		{ name: 'layout', title: __( 'Full Layouts', 'noorpdp' ) },
+		{ name: 'section', title: __( 'Sections', 'noorpdp' ) },
 	];
 
 	const renderContent = () => {
@@ -402,7 +402,7 @@ export default function Library() {
 				<Notice status="error" isDismissible={ false }>
 					{ __(
 						'The template library could not be loaded. Please try again.',
-						'noortemplates'
+						'noorpdp'
 					) }
 				</Notice>
 			);
@@ -410,21 +410,21 @@ export default function Library() {
 
 		return (
 			<>
-				<div className="noortemplates-library__toolbar">
+				<div className="noorpdp-library__toolbar">
 					<TextControl
 						__nextHasNoMarginBottom
-						className="noortemplates-library__search"
+						className="noorpdp-library__search"
 						value={ search }
 						onChange={ setSearch }
-						placeholder={ __( 'Search templates…', 'noortemplates' ) }
+						placeholder={ __( 'Search templates…', 'noorpdp' ) }
 					/>
 					<SelectControl
 						__nextHasNoMarginBottom
-						className="noortemplates-library__category"
+						className="noorpdp-library__category"
 						value={ category }
 						onChange={ setCategory }
 						options={ [
-							{ value: '', label: __( 'All categories', 'noortemplates' ) },
+							{ value: '', label: __( 'All categories', 'noorpdp' ) },
 							...categoryOptions.map( ( slug ) => ( {
 								value: slug,
 								label: slug,
@@ -434,11 +434,11 @@ export default function Library() {
 				</div>
 
 				{ ! templates ? (
-					<div className="noortemplates-library__loading">
+					<div className="noorpdp-library__loading">
 						<Spinner />
 					</div>
 				) : (
-					<div className="noortemplates-library__grid">
+					<div className="noorpdp-library__grid">
 						{ templates.map( ( template ) => (
 							<TemplateCard
 								key={ template.name }
@@ -462,27 +462,27 @@ export default function Library() {
 					icon={ layout }
 					onClick={ () => setOpen( true ) }
 				>
-					{ __( 'NoorTemplates', 'noortemplates' ) }
+					{ __( 'NoorPDP', 'noorpdp' ) }
 				</Button>
 				<Button
 					variant="secondary"
 					size="compact"
 					onClick={ () => setExportOpen( true ) }
 				>
-					{ __( 'Export as JSON', 'noortemplates' ) }
+					{ __( 'Export as JSON', 'noorpdp' ) }
 				</Button>
 				<Button
 					variant="secondary"
 					size="compact"
 					onClick={ () => importInputRef.current?.click() }
 				>
-					{ __( 'Import JSON', 'noortemplates' ) }
+					{ __( 'Import JSON', 'noorpdp' ) }
 				</Button>
 				<input
 					ref={ importInputRef }
 					type="file"
 					accept="application/json,.json"
-					className="noortemplates-library__import-input"
+					className="noorpdp-library__import-input"
 					onChange={ handleImportFile }
 				/>
 			</ToolbarPortal>
@@ -494,15 +494,15 @@ export default function Library() {
 			{ isOpen && (
 				<Modal
 					title={ __(
-						'NoorTemplates Layout Library',
-						'noortemplates'
+						'NoorPDP Layout Library',
+						'noorpdp'
 					) }
 					onRequestClose={ () => setOpen( false ) }
-					className="noortemplates-library__modal"
+					className="noorpdp-library__modal"
 					isFullScreen
 				>
 					<TabPanel
-						className="noortemplates-library__tabs"
+						className="noorpdp-library__tabs"
 						tabs={ tabs }
 						onSelect={ ( tabName ) => {
 							setType( tabName );

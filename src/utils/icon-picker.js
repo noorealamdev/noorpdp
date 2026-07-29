@@ -79,10 +79,10 @@ function MedalIcon() {
 }
 
 const EXTRA_ICONS = {
-	'nt-shieldCheck': { label: __( 'Shield check', 'noortemplates' ), icon: ShieldCheckIcon },
-	'nt-leaf': { label: __( 'Leaf', 'noortemplates' ), icon: LeafIcon },
-	'nt-capsule': { label: __( 'Capsule', 'noortemplates' ), icon: CapsuleIcon },
-	'nt-medal': { label: __( 'Medal', 'noortemplates' ), icon: MedalIcon },
+	'nt-shieldCheck': { label: __( 'Shield check', 'noorpdp' ), icon: ShieldCheckIcon },
+	'nt-leaf': { label: __( 'Leaf', 'noorpdp' ), icon: LeafIcon },
+	'nt-capsule': { label: __( 'Capsule', 'noorpdp' ), icon: CapsuleIcon },
+	'nt-medal': { label: __( 'Medal', 'noorpdp' ), icon: MedalIcon },
 };
 
 function humanizeKey( key ) {
@@ -116,7 +116,7 @@ const DEFAULT_ICON = ALL_ICONS[ 0 ];
 
 const NONE_ICON = {
 	key: '',
-	label: __( 'No icon', 'noortemplates' ),
+	label: __( 'No icon', 'noorpdp' ),
 	icon: wpIcons.close,
 };
 
@@ -152,37 +152,37 @@ export default function IconPicker( { value, onChange, allowNone } ) {
 
 	return (
 		<Dropdown
-			className="noortemplates-icon-picker"
-			contentClassName="noortemplates-icon-picker__popover"
+			className="noorpdp-icon-picker"
+			contentClassName="noorpdp-icon-picker__popover"
 			renderToggle={ ( { isOpen, onToggle } ) => (
 				<Button
 					className={
-						'noortemplates-icon-picker__toggle' +
+						'noorpdp-icon-picker__toggle' +
 						( value ? '' : ' is-empty' )
 					}
 					onClick={ onToggle }
 					aria-expanded={ isOpen }
-					label={ __( 'Choose icon', 'noortemplates' ) }
+					label={ __( 'Choose icon', 'noorpdp' ) }
 					showTooltip
 				>
 					<Icon icon={ current.icon } />
 				</Button>
 			) }
 			renderContent={ ( { onClose } ) => (
-				<div className="noortemplates-icon-picker__content">
+				<div className="noorpdp-icon-picker__content">
 					<TextControl
 						__nextHasNoMarginBottom
-						className="noortemplates-icon-picker__search"
-						placeholder={ __( 'Search icons…', 'noortemplates' ) }
+						className="noorpdp-icon-picker__search"
+						placeholder={ __( 'Search icons…', 'noorpdp' ) }
 						value={ search }
 						onChange={ setSearch }
 					/>
-					<div className="noortemplates-icon-picker__grid">
+					<div className="noorpdp-icon-picker__grid">
 						{ allowNone && (
 							<Button
-								className="noortemplates-icon-picker__option noortemplates-icon-picker__option--none"
+								className="noorpdp-icon-picker__option noorpdp-icon-picker__option--none"
 								isPressed={ ! value }
-								label={ __( 'No icon', 'noortemplates' ) }
+								label={ __( 'No icon', 'noorpdp' ) }
 								showTooltip
 								onClick={ () => {
 									onChange( '' );
@@ -195,7 +195,7 @@ export default function IconPicker( { value, onChange, allowNone } ) {
 						{ filtered.slice( 0, MAX_VISIBLE ).map( ( item ) => (
 							<Button
 								key={ item.key }
-								className="noortemplates-icon-picker__option"
+								className="noorpdp-icon-picker__option"
 								isPressed={ item.key === value }
 								label={ item.label }
 								showTooltip
@@ -208,16 +208,16 @@ export default function IconPicker( { value, onChange, allowNone } ) {
 							</Button>
 						) ) }
 						{ ! filtered.length && (
-							<p className="noortemplates-icon-picker__empty">
-								{ __( 'No icons found.', 'noortemplates' ) }
+							<p className="noorpdp-icon-picker__empty">
+								{ __( 'No icons found.', 'noorpdp' ) }
 							</p>
 						) }
 					</div>
 					{ filtered.length > MAX_VISIBLE && (
-						<p className="noortemplates-icon-picker__hint">
+						<p className="noorpdp-icon-picker__hint">
 							{ __(
 								'Keep typing to narrow the results…',
-								'noortemplates'
+								'noorpdp'
 							) }
 						</p>
 					) }

@@ -1,15 +1,15 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/tab",
+	"name": "noorpdp/tab",
 	"title": "Tab",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "table-row-after",
 	"description": "A single tab panel inside a Tabs block.",
 	"keywords": [ "tab", "panel" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
-	"parent": [ "noortemplates/tabs" ],
+	"textdomain": "noorpdp",
+	"parent": [ "noorpdp/tabs" ],
 	"attributes": {
 		"title": {
 			"type": "string",

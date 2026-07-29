@@ -1,16 +1,16 @@
-.wp-block-noortemplates-product-reviews {
+.wp-block-noorpdp-product-reviews {
 
 	// max-width itself is set inline (it's user-configurable via the
 	// block's Layout panel), this just centers the box once that width
 	// is narrower than its container.
-	.noortemplates-product-reviews__inner.is-boxed {
+	.noorpdp-product-reviews__inner.is-boxed {
 		margin-left: auto;
 		margin-right: auto;
 	}
 
 	// Summary card: rating number + stars + count + CTA on the left,
 	// the star breakdown bars on the right.
-	.noortemplates-product-reviews__summary {
+	.noorpdp-product-reviews__summary {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 2rem;
@@ -21,12 +21,12 @@
 		border-radius: 16px;
 	}
 
-	.noortemplates-product-reviews__summary-main {
+	.noorpdp-product-reviews__summary-main {
 		flex: 0 0 auto;
 		min-width: 220px;
 	}
 
-	.noortemplates-product-reviews__average {
+	.noorpdp-product-reviews__average {
 		font-size: 3.5rem;
 		font-weight: 700;
 		line-height: 1;
@@ -40,7 +40,7 @@
 		margin: 0.5rem 0;
 	}
 
-	.noortemplates-product-reviews__count {
+	.noorpdp-product-reviews__count {
 		margin: 0.5rem 0 1rem;
 		font-size: 0.8rem;
 		letter-spacing: 0.04em;
@@ -48,7 +48,7 @@
 		color: #757575;
 	}
 
-	.noortemplates-product-reviews__write-link {
+	.noorpdp-product-reviews__write-link {
 		display: inline-block;
 		padding: 0.65em 1.5em;
 		background: none;
@@ -70,7 +70,7 @@
 		}
 	}
 
-	.noortemplates-product-reviews__breakdown {
+	.noorpdp-product-reviews__breakdown {
 		flex: 1 1 320px;
 		min-width: 0;
 		display: flex;
@@ -78,19 +78,19 @@
 		gap: 0.5rem;
 	}
 
-	.noortemplates-product-reviews__breakdown-row {
+	.noorpdp-product-reviews__breakdown-row {
 		display: grid;
 		grid-template-columns: 4.5em 1fr 3em;
 		align-items: center;
 		gap: 0.75rem;
 	}
 
-	.noortemplates-product-reviews__breakdown-label {
+	.noorpdp-product-reviews__breakdown-label {
 		font-size: 0.8rem;
 		color: #4a4a4a;
 	}
 
-	.noortemplates-product-reviews__breakdown-track {
+	.noorpdp-product-reviews__breakdown-track {
 		display: block;
 		height: 8px;
 		border-radius: 999px;
@@ -98,7 +98,7 @@
 		overflow: hidden;
 	}
 
-	.noortemplates-product-reviews__breakdown-fill {
+	.noorpdp-product-reviews__breakdown-fill {
 		display: block;
 		height: 100%;
 		// Matches this theme's WooCommerce star-rating color (`.star-rating
@@ -108,7 +108,7 @@
 		border-radius: 999px;
 	}
 
-	.noortemplates-product-reviews__breakdown-percentage {
+	.noorpdp-product-reviews__breakdown-percentage {
 		font-size: 0.8rem;
 		color: #4a4a4a;
 		text-align: right;
@@ -116,7 +116,7 @@
 
 	// Review grid — same responsive column-reduction breakpoints already
 	// established in the Product Grid block, for consistency.
-	.noortemplates-product-reviews__grid {
+	.noorpdp-product-reviews__grid {
 		display: grid;
 		gap: 1.5rem;
 		grid-template-columns: 1fr;
@@ -143,7 +143,7 @@
 		}
 	}
 
-	.noortemplates-product-reviews__card {
+	.noorpdp-product-reviews__card {
 		padding: 1.5rem;
 		background: #fff;
 		border: 1px solid #eee;
@@ -162,13 +162,13 @@
 	// Color intentionally `inherit`, not hardcoded — the block's own Color
 	// support applies on the wrapper, and a directly-targeted rule here
 	// would always beat that inherited value.
-	.noortemplates-product-reviews__content {
+	.noorpdp-product-reviews__content {
 		margin: 0 0 1.25rem;
 		line-height: 1.6;
 		color: inherit;
 	}
 
-	.noortemplates-product-reviews__footer {
+	.noorpdp-product-reviews__footer {
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
@@ -176,7 +176,7 @@
 		border-top: 1px solid #f0f0f0;
 	}
 
-	.noortemplates-product-reviews__avatar {
+	.noorpdp-product-reviews__avatar {
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
@@ -213,19 +213,19 @@
 		}
 	}
 
-	.noortemplates-product-reviews__reviewer {
+	.noorpdp-product-reviews__reviewer {
 		display: flex;
 		flex-direction: column;
 		gap: 0.15rem;
 		min-width: 0;
 	}
 
-	.noortemplates-product-reviews__name {
+	.noorpdp-product-reviews__name {
 		font-weight: 600;
 		font-size: 0.9rem;
 	}
 
-	.noortemplates-product-reviews__verified {
+	.noorpdp-product-reviews__verified {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
@@ -238,17 +238,17 @@
 		}
 	}
 
-	.noortemplates-product-reviews__empty {
+	.noorpdp-product-reviews__empty {
 		margin: 0 0 2rem;
 		color: #757575;
 	}
 
-	.noortemplates-product-reviews__load-more-wrap {
+	.noorpdp-product-reviews__load-more-wrap {
 		margin: 0 0 2rem;
 		text-align: center;
 	}
 
-	.noortemplates-product-reviews__load-more {
+	.noorpdp-product-reviews__load-more {
 		display: inline-block;
 		padding: 0.75em 2em;
 		background: none;
@@ -353,7 +353,7 @@
 
 	@media (max-width: 599px) {
 
-		.noortemplates-product-reviews__summary {
+		.noorpdp-product-reviews__summary {
 			flex-direction: column;
 			align-items: stretch;
 			padding: 1.5rem;
@@ -363,22 +363,22 @@
 		// row layout; once the summary above stacks into a column, that
 		// same 320px is read as a minimum HEIGHT instead, leaving a large
 		// empty gap under 5 short rows. Reset it to size to its content.
-		.noortemplates-product-reviews__breakdown {
+		.noorpdp-product-reviews__breakdown {
 			flex: 0 1 auto;
 			width: 100%;
 		}
 
-		.noortemplates-product-reviews__average {
+		.noorpdp-product-reviews__average {
 			font-size: 2.75rem;
 		}
 
-		.noortemplates-product-reviews__card {
+		.noorpdp-product-reviews__card {
 			padding: 1.25rem;
 		}
 	}
 
 	// "Write a Review" modal.
-	.noortemplates-product-reviews__modal {
+	.noorpdp-product-reviews__modal {
 		position: fixed;
 		inset: 0;
 		z-index: 100000;
@@ -393,13 +393,13 @@
 		}
 	}
 
-	.noortemplates-product-reviews__modal-backdrop {
+	.noorpdp-product-reviews__modal-backdrop {
 		position: fixed;
 		inset: 0;
 		background: rgba(0, 0, 0, 0.5);
 	}
 
-	.noortemplates-product-reviews__modal-panel {
+	.noorpdp-product-reviews__modal-panel {
 		position: relative;
 		z-index: 1;
 		width: 100%;
@@ -422,7 +422,7 @@
 		}
 	}
 
-	.noortemplates-product-reviews__modal-close {
+	.noorpdp-product-reviews__modal-close {
 		position: absolute;
 		top: 0.75rem;
 		right: 0.75rem;
@@ -447,6 +447,6 @@
 	}
 }
 
-body.noortemplates-modal-open {
+body.noorpdp-modal-open {
 	overflow: hidden;
 }

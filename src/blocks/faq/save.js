@@ -8,12 +8,12 @@ export default function save( { attributes } ) {
 		<div { ...blockProps }>
 			<RichText.Content
 				tagName="h2"
-				className="noortemplates-faq__title"
+				className="noorpdp-faq__title"
 				value={ title }
 			/>
 			<div
 				className={
-					'noortemplates-faq__accordion' +
+					'noorpdp-faq__accordion' +
 					( boxed ? ' is-boxed' : '' )
 				}
 				style={ boxed ? { maxWidth: boxedWidth } : undefined }

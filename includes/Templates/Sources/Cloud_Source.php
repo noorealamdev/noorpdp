@@ -2,12 +2,12 @@
 /**
  * Cloud template source.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Templates\Sources;
+namespace NoorPDP\Templates\Sources;
 
-use NoorTemplates\Templates\Lazy_Source;
+use NoorPDP\Templates\Lazy_Source;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  *             "type": "layout",
  *             "category": "bold",
  *             "thumbnail": "https://example.com/thumbnails/bold.png",
- *             "content": "<!-- wp:noortemplates/product-title /-->…"
+ *             "content": "<!-- wp:noorpdp/product-title /-->…"
  *         }
  *     ]
  *
@@ -32,8 +32,8 @@ defined( 'ABSPATH' ) || exit;
  * and `thumbnail` falls back to an empty string (the editor renders a
  * placeholder icon instead).
  *
- * The endpoint URL is configured with the NOORTEMPLATES_CLOUD_URL constant or
- * the `noortemplates/cloud_api_url` filter; the source is inactive until one
+ * The endpoint URL is configured with the NOORPDP_CLOUD_URL constant or
+ * the `noorpdp/cloud_api_url` filter; the source is inactive until one
  * of them provides a URL. Responses are cached in a transient.
  */
 class Cloud_Source implements Lazy_Source {
@@ -41,7 +41,7 @@ class Cloud_Source implements Lazy_Source {
 	/**
 	 * Transient name for the cached cloud response.
 	 */
-	const CACHE_KEY = 'noortemplates_cloud_templates';
+	const CACHE_KEY = 'noorpdp_cloud_templates';
 
 	/**
 	 * How long successful responses are cached.
@@ -149,14 +149,14 @@ class Cloud_Source implements Lazy_Source {
 	 * @return string
 	 */
 	private function get_api_url() {
-		$url = defined( 'NOORTEMPLATES_CLOUD_URL' ) ? NOORTEMPLATES_CLOUD_URL : '';
+		$url = defined( 'NOORPDP_CLOUD_URL' ) ? NOORPDP_CLOUD_URL : '';
 
 		/**
 		 * Filters the cloud template API URL.
 		 *
 		 * @param string $url The API URL; empty string disables the source.
 		 */
-		return (string) apply_filters( 'noortemplates/cloud_api_url', $url );
+		return (string) apply_filters( 'noorpdp/cloud_api_url', $url );
 	}
 
 	/**

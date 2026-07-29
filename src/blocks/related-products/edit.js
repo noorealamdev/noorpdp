@@ -9,9 +9,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Query', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Query', 'noorpdp' ) }>
 					<RangeControl
-						label={ __( 'Number of products', 'noortemplates' ) }
+						label={ __( 'Number of products', 'noorpdp' ) }
 						value={ productsToShow }
 						onChange={ ( value ) =>
 							setAttributes( { productsToShow: value } )
@@ -20,7 +20,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						max={ 12 }
 					/>
 					<RangeControl
-						label={ __( 'Columns', 'noortemplates' ) }
+						label={ __( 'Columns', 'noorpdp' ) }
 						value={ columns }
 						onChange={ ( value ) =>
 							setAttributes( { columns: value } )
@@ -29,26 +29,26 @@ export default function Edit( { attributes, setAttributes } ) {
 						max={ 4 }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -64,10 +64,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...useBlockProps() }>
 				<WooPlaceholder
 					icon="networking"
-					label={ __( 'Related Products', 'noortemplates' ) }
+					label={ __( 'Related Products', 'noorpdp' ) }
 					instructions={ __(
 						"Displays WooCommerce's related products for the current product. Preview appears on the product page.",
-						'noortemplates'
+						'noorpdp'
 					) }
 				/>
 			</div>

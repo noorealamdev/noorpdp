@@ -2,7 +2,7 @@
 // (src/utils/icon-picker.js) — imported by every block that uses it, so
 // there's one picker UI look to maintain instead of one per block.
 
-.noortemplates-icon-picker__toggle {
+.noorpdp-icon-picker__toggle {
 	flex-shrink: 0;
 	width: 2.25rem;
 	height: 2.25rem;
@@ -23,19 +23,19 @@
 	}
 }
 
-.noortemplates-icon-picker__popover {
+.noorpdp-icon-picker__popover {
 	padding: 0.5rem;
 }
 
-.noortemplates-icon-picker__content {
+.noorpdp-icon-picker__content {
 	width: 15rem;
 }
 
-.noortemplates-icon-picker__search {
+.noorpdp-icon-picker__search {
 	margin-bottom: 0.5rem;
 }
 
-.noortemplates-icon-picker__grid {
+.noorpdp-icon-picker__grid {
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	gap: 0.25rem;
@@ -43,7 +43,7 @@
 	overflow-y: auto;
 }
 
-.noortemplates-icon-picker__option {
+.noorpdp-icon-picker__option {
 	width: 2.1rem;
 	height: 2.1rem;
 	padding: 0;
@@ -68,8 +68,8 @@
 	}
 }
 
-.noortemplates-icon-picker__empty,
-.noortemplates-icon-picker__hint {
+.noorpdp-icon-picker__empty,
+.noorpdp-icon-picker__hint {
 	margin: 0.5rem 0 0;
 	font-size: 0.8rem;
 	color: #757575;

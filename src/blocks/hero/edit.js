@@ -26,10 +26,8 @@ import {
 	hasBackgroundVideo,
 	hasOverlay,
 } from './background';
-import ProControl from '../../utils/pro-control';
-import '../../utils/pro-control.scss';
 
-const ACTIONS_TEMPLATE = [ [ 'noortemplates/button' ] ];
+const ACTIONS_TEMPLATE = [ [ 'noorpdp/button' ] ];
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -59,9 +57,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		),
 	} );
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'noortemplates-hero__actions' },
+		{ className: 'noorpdp-hero__actions' },
 		{
-			allowedBlocks: [ 'noortemplates/button', 'core/buttons' ],
+			allowedBlocks: [ 'noorpdp/button', 'core/buttons' ],
 			template: ACTIONS_TEMPLATE,
 			templateInsertUpdatesSelection: false,
 		}
@@ -98,11 +96,11 @@ export default function Edit( { attributes, setAttributes } ) {
 			</BlockControls>
 
 			<InspectorControls>
-				<PanelBody title={ __( 'Background', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Background', 'noorpdp' ) }>
 					<ToggleGroupControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
-						label={ __( 'Type', 'noortemplates' ) }
+						label={ __( 'Type', 'noorpdp' ) }
 						value={ backgroundType }
 						onChange={ ( value ) =>
 							setAttributes( { backgroundType: value } )
@@ -110,22 +108,16 @@ export default function Edit( { attributes, setAttributes } ) {
 					>
 						<ToggleGroupControlOption
 							value="image"
-							label={ __( 'Image', 'noortemplates' ) }
+							label={ __( 'Image', 'noorpdp' ) }
 						/>
 						<ToggleGroupControlOption
 							value="video"
-							label={ __( 'Video', 'noortemplates' ) }
+							label={ __( 'Video', 'noorpdp' ) }
 						/>
 					</ToggleGroupControl>
 
 					{ 'video' === backgroundType ? (
-						<ProControl
-							feature="hero_video_background"
-							message={ __(
-								'Use a video background.',
-								'noortemplates'
-							) }
-						>
+						<>
 							<MediaUploadCheck>
 								<MediaUpload
 									onSelect={ onSelectVideo }
@@ -135,16 +127,16 @@ export default function Edit( { attributes, setAttributes } ) {
 										<Button
 											variant="secondary"
 											onClick={ open }
-											className="noortemplates-hero__select-image"
+											className="noorpdp-hero__select-image"
 										>
 											{ backgroundVideo?.url
 												? __(
 														'Replace video',
-														'noortemplates'
+														'noorpdp'
 												  )
 												: __(
 														'Select video',
-														'noortemplates'
+														'noorpdp'
 												  ) }
 										</Button>
 									) }
@@ -156,10 +148,10 @@ export default function Edit( { attributes, setAttributes } ) {
 									isDestructive
 									onClick={ onRemoveVideo }
 								>
-									{ __( 'Remove video', 'noortemplates' ) }
+									{ __( 'Remove video', 'noorpdp' ) }
 								</Button>
 							) }
-						</ProControl>
+						</>
 					) : (
 						<>
 							<MediaUploadCheck>
@@ -171,16 +163,16 @@ export default function Edit( { attributes, setAttributes } ) {
 										<Button
 											variant="secondary"
 											onClick={ open }
-											className="noortemplates-hero__select-image"
+											className="noorpdp-hero__select-image"
 										>
 											{ backgroundImage?.url
 												? __(
 														'Replace image',
-														'noortemplates'
+														'noorpdp'
 												  )
 												: __(
 														'Select image',
-														'noortemplates'
+														'noorpdp'
 												  ) }
 										</Button>
 									) }
@@ -192,21 +184,21 @@ export default function Edit( { attributes, setAttributes } ) {
 									isDestructive
 									onClick={ onRemoveImage }
 								>
-									{ __( 'Remove image', 'noortemplates' ) }
+									{ __( 'Remove image', 'noorpdp' ) }
 								</Button>
 							) }
 						</>
 					) }
 				</PanelBody>
 
-				<PanelBody title={ __( 'Overlay', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Overlay', 'noorpdp' ) }>
 					<RangeControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
-						label={ __( 'Opacity', 'noortemplates' ) }
+						label={ __( 'Opacity', 'noorpdp' ) }
 						help={ __(
 							'Darkens the background so text stays readable.',
-							'noortemplates'
+							'noorpdp'
 						) }
 						value={ overlayOpacity }
 						onChange={ ( value ) =>
@@ -218,7 +210,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ showOverlay && (
 						<BaseControl
 							__nextHasNoMarginBottom
-							label={ __( 'Color', 'noortemplates' ) }
+							label={ __( 'Color', 'noorpdp' ) }
 						>
 							<ColorPalette
 								colors={ colors }
@@ -233,10 +225,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</PanelBody>
 
-				<PanelBody title={ __( 'Typography', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Typography', 'noorpdp' ) }>
 					<BaseControl
 						__nextHasNoMarginBottom
-						label={ __( 'Heading', 'noortemplates' ) }
+						label={ __( 'Heading', 'noorpdp' ) }
 					>
 						<FontSizePicker
 							__nextHasNoMarginBottom
@@ -251,7 +243,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					</BaseControl>
 					<BaseControl
 						__nextHasNoMarginBottom
-						label={ __( 'Subheading', 'noortemplates' ) }
+						label={ __( 'Subheading', 'noorpdp' ) }
 					>
 						<FontSizePicker
 							__nextHasNoMarginBottom
@@ -266,26 +258,26 @@ export default function Edit( { attributes, setAttributes } ) {
 					</BaseControl>
 				</PanelBody>
 
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Heading, subheading and buttons are constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Heading, subheading and buttons stretch the full width of the hero.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -301,7 +293,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				{ showVideo && (
 					<video
-						className="noortemplates-hero__bg-video"
+						className="noorpdp-hero__bg-video"
 						src={ backgroundVideo.url }
 						autoPlay
 						muted
@@ -311,7 +303,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				) }
 				{ showOverlay && (
 					<div
-						className="noortemplates-hero__overlay"
+						className="noorpdp-hero__overlay"
 						style={ {
 							backgroundColor: overlayColor,
 							opacity: overlayOpacity / 100,
@@ -320,14 +312,14 @@ export default function Edit( { attributes, setAttributes } ) {
 				) }
 				<div
 					className={
-						'noortemplates-hero__content' +
+						'noorpdp-hero__content' +
 						( boxed ? ' is-boxed' : '' )
 					}
 					style={ boxed ? { maxWidth: boxedWidth } : undefined }
 				>
 					<RichText
 						tagName="h1"
-						className="noortemplates-hero__heading"
+						className="noorpdp-hero__heading"
 						style={
 							headingFontSize
 								? { fontSize: headingFontSize }
@@ -337,11 +329,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( value ) =>
 							setAttributes( { heading: value } )
 						}
-						placeholder={ __( 'Your Hero Heading', 'noortemplates' ) }
+						placeholder={ __( 'Your Hero Heading', 'noorpdp' ) }
 					/>
 					<RichText
 						tagName="p"
-						className="noortemplates-hero__subheading"
+						className="noorpdp-hero__subheading"
 						style={
 							subheadingFontSize
 								? { fontSize: subheadingFontSize }
@@ -353,7 +345,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 						placeholder={ __(
 							'Add a supporting subheading…',
-							'noortemplates'
+							'noorpdp'
 						) }
 					/>
 					<div { ...innerBlocksProps } />

@@ -10,17 +10,17 @@ import {
 import ServerSideRender from '@wordpress/server-side-render';
 
 const RELATION_OPTIONS = [
-	{ label: __( 'Latest products', 'noortemplates' ), value: 'latest' },
+	{ label: __( 'Latest products', 'noorpdp' ), value: 'latest' },
 	{
-		label: __( 'Related to current product', 'noortemplates' ),
+		label: __( 'Related to current product', 'noorpdp' ),
 		value: 'related',
 	},
 	{
-		label: __( 'Upsells for current product', 'noortemplates' ),
+		label: __( 'Upsells for current product', 'noorpdp' ),
 		value: 'upsells',
 	},
 	{
-		label: __( 'Cross-sells for current product', 'noortemplates' ),
+		label: __( 'Cross-sells for current product', 'noorpdp' ),
 		value: 'cross-sells',
 	},
 ];
@@ -42,9 +42,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Query', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Query', 'noorpdp' ) }>
 					<SelectControl
-						label={ __( 'Products', 'noortemplates' ) }
+						label={ __( 'Products', 'noorpdp' ) }
 						value={ relation }
 						options={ RELATION_OPTIONS }
 						onChange={ ( value ) =>
@@ -52,7 +52,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<RangeControl
-						label={ __( 'Number of products', 'noortemplates' ) }
+						label={ __( 'Number of products', 'noorpdp' ) }
 						value={ productsToShow }
 						onChange={ ( value ) =>
 							setAttributes( { productsToShow: value } )
@@ -63,19 +63,19 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ 'latest' === relation && (
 						<>
 							<SelectControl
-								label={ __( 'Order by', 'noortemplates' ) }
+								label={ __( 'Order by', 'noorpdp' ) }
 								value={ orderBy }
 								options={ [
 									{
-										label: __( 'Date', 'noortemplates' ),
+										label: __( 'Date', 'noorpdp' ),
 										value: 'date',
 									},
 									{
-										label: __( 'Title', 'noortemplates' ),
+										label: __( 'Title', 'noorpdp' ),
 										value: 'title',
 									},
 									{
-										label: __( 'Random', 'noortemplates' ),
+										label: __( 'Random', 'noorpdp' ),
 										value: 'rand',
 									},
 								] }
@@ -84,20 +84,20 @@ export default function Edit( { attributes, setAttributes } ) {
 								}
 							/>
 							<SelectControl
-								label={ __( 'Order', 'noortemplates' ) }
+								label={ __( 'Order', 'noorpdp' ) }
 								value={ order }
 								options={ [
 									{
 										label: __(
 											'Descending',
-											'noortemplates'
+											'noorpdp'
 										),
 										value: 'desc',
 									},
 									{
 										label: __(
 											'Ascending',
-											'noortemplates'
+											'noorpdp'
 										),
 										value: 'asc',
 									},
@@ -110,9 +110,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</PanelBody>
 
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) }>
 					<RangeControl
-						label={ __( 'Columns', 'noortemplates' ) }
+						label={ __( 'Columns', 'noorpdp' ) }
 						value={ columns }
 						onChange={ ( value ) =>
 							setAttributes( { columns: value } )
@@ -121,24 +121,24 @@ export default function Edit( { attributes, setAttributes } ) {
 						max={ 4 }
 					/>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -150,23 +150,23 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</PanelBody>
 
-				<PanelBody title={ __( 'Content', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Content', 'noorpdp' ) }>
 					<ToggleControl
-						label={ __( 'Product image', 'noortemplates' ) }
+						label={ __( 'Product image', 'noorpdp' ) }
 						checked={ showImage }
 						onChange={ ( value ) =>
 							setAttributes( { showImage: value } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Price', 'noortemplates' ) }
+						label={ __( 'Price', 'noorpdp' ) }
 						checked={ showPrice }
 						onChange={ ( value ) =>
 							setAttributes( { showPrice: value } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Add to cart button', 'noortemplates' ) }
+						label={ __( 'Add to cart button', 'noorpdp' ) }
 						checked={ showAddToCart }
 						onChange={ ( value ) =>
 							setAttributes( { showAddToCart: value } )
@@ -178,7 +178,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...useBlockProps() }>
 				<Disabled>
 					<ServerSideRender
-						block="noortemplates/product-grid"
+						block="noorpdp/product-grid"
 						attributes={ attributes }
 					/>
 				</Disabled>

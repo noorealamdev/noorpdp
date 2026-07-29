@@ -39,7 +39,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 	const [ colors = [] ] = useSettings( 'color.palette' );
 	const blockProps = useBlockProps( {
-		style: { '--noortemplates-feature-cards-columns': columns },
+		style: { '--noorpdp-feature-cards-columns': columns },
 	} );
 
 	// Same pairing as render.php: the dark card default needs a paired
@@ -61,8 +61,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			items: [
 				...items,
 				{
-					heading: __( 'New heading', 'noortemplates' ),
-					text: __( 'Supporting text goes here.', 'noortemplates' ),
+					heading: __( 'New heading', 'noorpdp' ),
+					text: __( 'Supporting text goes here.', 'noorpdp' ),
 				},
 			],
 		} );
@@ -73,14 +73,14 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) }>
 					<RangeControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
-						label={ __( 'Columns', 'noortemplates' ) }
+						label={ __( 'Columns', 'noorpdp' ) }
 						help={ __(
 							'1 column reads as wide, horizontal cards. More columns make each card narrower and taller.',
-							'noortemplates'
+							'noorpdp'
 						) }
 						value={ columns }
 						onChange={ ( value ) =>
@@ -91,18 +91,18 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<ToggleControl
 						__nextHasNoMarginBottom
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
@@ -110,7 +110,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<RangeControl
 							__nextHasNoMarginBottom
 							__next40pxDefaultSize
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -122,10 +122,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</PanelBody>
 
-				<PanelBody title={ __( 'Card', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Card', 'noorpdp' ) }>
 					<BaseControl
 						__nextHasNoMarginBottom
-						label={ __( 'Background', 'noortemplates' ) }
+						label={ __( 'Background', 'noorpdp' ) }
 					>
 						<ColorPalette
 							colors={ colors }
@@ -138,7 +138,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<RangeControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
-						label={ __( 'Corner radius', 'noortemplates' ) }
+						label={ __( 'Corner radius', 'noorpdp' ) }
 						value={ cardRadius }
 						onChange={ ( value ) =>
 							setAttributes( { cardRadius: value || 0 } )
@@ -149,7 +149,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<RangeControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
-						label={ __( 'Padding', 'noortemplates' ) }
+						label={ __( 'Padding', 'noorpdp' ) }
 						value={ cardPadding }
 						onChange={ ( value ) =>
 							setAttributes( { cardPadding: value || 0 } )
@@ -163,14 +163,14 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				<div
 					className={
-						'noortemplates-feature-cards__list' +
+						'noorpdp-feature-cards__list' +
 						( boxed ? ' is-boxed' : '' )
 					}
 					style={ boxed ? { maxWidth: boxedWidth } : undefined }
 				>
 					{ items.map( ( item, index ) => (
 						<div
-							className="noortemplates-feature-cards__item"
+							className="noorpdp-feature-cards__item"
 							key={ index }
 							style={ {
 								backgroundColor:
@@ -182,36 +182,36 @@ export default function Edit( { attributes, setAttributes } ) {
 							} }
 						>
 							<Button
-								className="noortemplates-feature-cards__remove"
+								className="noorpdp-feature-cards__remove"
 								icon={ closeSmall }
-								label={ __( 'Remove card', 'noortemplates' ) }
+								label={ __( 'Remove card', 'noorpdp' ) }
 								onClick={ () => removeItem( index ) }
 							/>
 							<RichText
 								tagName="div"
-								className="noortemplates-feature-cards__heading"
+								className="noorpdp-feature-cards__heading"
 								style={ textStyle }
 								value={ item.heading }
 								onChange={ ( value ) =>
 									updateItem( index, 'heading', value )
 								}
-								placeholder={ __( 'Heading', 'noortemplates' ) }
+								placeholder={ __( 'Heading', 'noorpdp' ) }
 							/>
 							<RichText
 								tagName="div"
-								className="noortemplates-feature-cards__text"
+								className="noorpdp-feature-cards__text"
 								style={ textStyle }
 								value={ item.text }
 								onChange={ ( value ) =>
 									updateItem( index, 'text', value )
 								}
-								placeholder={ __( 'Supporting text', 'noortemplates' ) }
+								placeholder={ __( 'Supporting text', 'noorpdp' ) }
 							/>
 						</div>
 					) ) }
 				</div>
 				<Button variant="secondary" onClick={ addItem }>
-					{ __( 'Add card', 'noortemplates' ) }
+					{ __( 'Add card', 'noorpdp' ) }
 				</Button>
 			</div>
 		</>

@@ -1,4 +1,4 @@
-.wp-block-noortemplates-product-add-to-cart {
+.wp-block-noorpdp-product-add-to-cart {
 
 	.stock {
 		display: inline-block;
@@ -38,7 +38,7 @@
 	// The stepper buttons (view.js) sit either side of the number input,
 	// all three sharing one pill-shaped border instead of the input having
 	// its own — matches the +/- stepper look of the reference design.
-	.noortemplates-quantity {
+	.noorpdp-quantity {
 		display: flex;
 		align-items: stretch;
 		flex-shrink: 0;
@@ -61,7 +61,7 @@
 		}
 	}
 
-	.noortemplates-quantity-step {
+	.noorpdp-quantity-step {
 		width: 2.75rem;
 		padding: 0;
 		background: #f7f7f7;
@@ -100,7 +100,7 @@
 
 	// Forces its own row below the quantity/Add to Cart row (a 100%-basis
 	// flex item can't fit beside anything else, so flex-wrap pushes it down).
-	.noortemplates-buy-now-button {
+	.noorpdp-buy-now-button {
 		flex: 0 0 100%;
 		padding: 0.85em 2.25em;
 		background-color: #6b7280;
@@ -179,13 +179,13 @@
 		}
 	}
 
-	.noortemplates-swatches {
+	.noorpdp-swatches {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.6rem;
 	}
 
-	.noortemplates-swatch {
+	.noorpdp-swatch {
 		// Explicit color — without it these plain <button> elements pick up
 		// the theme's global button text color (white), which combined
 		// with this swatch's own white background made the label invisible.
@@ -217,7 +217,7 @@
 
 		// Image variant — a square thumbnail (each variation's own image)
 		// instead of a text label.
-		&.noortemplates-swatch--image {
+		&.noorpdp-swatch--image {
 			box-sizing: border-box;
 			width: 4.5rem;
 			height: 4.5rem;
@@ -250,7 +250,7 @@
 	// from/writes to — kept functional but out of sight once swatches
 	// (built by view.js) take over as the visible UI. Not `display: none`,
 	// so the plain dropdown still works if JS fails to run.
-	.noortemplates-visually-hidden-select {
+	.noorpdp-visually-hidden-select {
 		position: absolute;
 		width: 1px;
 		height: 1px;

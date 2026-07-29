@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/accordion",
+    "name": "noorpdp/accordion",
     "title": "Accordion",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "menu-alt",
     "description": "Collapsible content panels, perfect for FAQs. Powered by the WordPress Interactivity API — no jQuery, minimal footprint.",
     "keywords": [
@@ -13,7 +13,7 @@
         "collapse"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "allowMultiple": {
             "type": "boolean",

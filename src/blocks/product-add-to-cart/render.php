@@ -2,7 +2,7 @@
 /**
  * Product Add to Cart block server render.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  *
  * @var array $attributes Block attributes.
  */
@@ -24,7 +24,7 @@ if ( ! $product ) {
 // after) so it appears once, right after WooCommerce's own Add to Cart
 // button, without leaking onto any other add-to-cart form the theme
 // might render elsewhere on the site.
-$noortemplates_buy_now_button = function () use ( $product ) {
+$noorpdp_buy_now_button = function () use ( $product ) {
 	/*
 	 * WooCommerce's add-to-cart handler (WC_Form_Handler::add_to_cart_action())
 	 * bails out immediately unless $_REQUEST['add-to-cart'] is set — for a
@@ -41,22 +41,22 @@ $noortemplates_buy_now_button = function () use ( $product ) {
 	<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" />
 	<button
 		type="submit"
-		name="<?php echo esc_attr( \NoorTemplates\Blocks\Buy_Now::FIELD ); ?>"
+		name="<?php echo esc_attr( \NoorPDP\Blocks\Buy_Now::FIELD ); ?>"
 		value="1"
-		class="noortemplates-buy-now-button"
+		class="noorpdp-buy-now-button"
 	>
-		<?php esc_html_e( 'Buy Now', 'noortemplates' ); ?>
+		<?php esc_html_e( 'Buy Now', 'noorpdp' ); ?>
 	</button>
 	<?php
 };
 
-add_action( 'woocommerce_after_add_to_cart_button', $noortemplates_buy_now_button );
+add_action( 'woocommerce_after_add_to_cart_button', $noorpdp_buy_now_button );
 ?>
 <div <?php echo get_block_wrapper_attributes(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>>
 	<?php woocommerce_template_single_add_to_cart(); ?>
 </div>
 <?php
-remove_action( 'woocommerce_after_add_to_cart_button', $noortemplates_buy_now_button );
+remove_action( 'woocommerce_after_add_to_cart_button', $noorpdp_buy_now_button );
 
 /*
  * WooCommerce's own default callbacks on this hook — the product data

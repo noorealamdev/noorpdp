@@ -1,25 +1,25 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/hero",
+	"name": "noorpdp/hero",
 	"title": "Hero",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "cover-image",
 	"description": "A full-width hero section with a heading, subheading, call-to-action button and an optional background image or video.",
 	"keywords": [ "hero", "banner", "section", "cover" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"heading": {
 			"type": "string",
 			"source": "html",
-			"selector": ".noortemplates-hero__heading",
+			"selector": ".noorpdp-hero__heading",
 			"default": "Your Hero Heading"
 		},
 		"subheading": {
 			"type": "string",
 			"source": "html",
-			"selector": ".noortemplates-hero__subheading",
+			"selector": ".noorpdp-hero__subheading",
 			"default": ""
 		},
 		"backgroundType": {

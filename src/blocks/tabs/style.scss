@@ -1,18 +1,18 @@
-.wp-block-noortemplates-tabs {
+.wp-block-noorpdp-tabs {
 
 	&.is-boxed {
 		margin-left: auto;
 		margin-right: auto;
 	}
 
-	.noortemplates-tabs__list {
+	.noorpdp-tabs__list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 4px;
 		border-bottom: 2px solid #e0e0e0;
 	}
 
-	.noortemplates-tabs__tab {
+	.noorpdp-tabs__tab {
 		margin-bottom: -2px;
 		padding: 10px 18px;
 		background: none;
@@ -34,7 +34,7 @@
 		}
 	}
 
-	.noortemplates-tabs__panel {
+	.noorpdp-tabs__panel {
 		padding: 16px 0;
 	}
 
@@ -42,7 +42,7 @@
 	// (src/extensions/style.scss) for consistency.
 	@media (max-width: 599px) {
 
-		.noortemplates-tabs__tab {
+		.noorpdp-tabs__tab {
 			padding: 8px 12px;
 			font-size: 0.875rem;
 		}

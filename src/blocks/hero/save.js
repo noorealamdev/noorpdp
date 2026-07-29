@@ -36,7 +36,7 @@ export default function save( { attributes } ) {
 		<div { ...blockProps }>
 			{ showVideo && (
 				<video
-					className="noortemplates-hero__bg-video"
+					className="noorpdp-hero__bg-video"
 					src={ backgroundVideo.url }
 					autoPlay
 					muted
@@ -46,7 +46,7 @@ export default function save( { attributes } ) {
 			) }
 			{ showOverlay && (
 				<div
-					className="noortemplates-hero__overlay"
+					className="noorpdp-hero__overlay"
 					style={ {
 						backgroundColor: overlayColor,
 						opacity: overlayOpacity / 100,
@@ -55,14 +55,14 @@ export default function save( { attributes } ) {
 			) }
 			<div
 				className={
-					'noortemplates-hero__content' +
+					'noorpdp-hero__content' +
 					( boxed ? ' is-boxed' : '' )
 				}
 				style={ boxed ? { maxWidth: boxedWidth } : undefined }
 			>
 				<RichText.Content
 					tagName="h1"
-					className="noortemplates-hero__heading"
+					className="noorpdp-hero__heading"
 					style={
 						headingFontSize
 							? { fontSize: headingFontSize }
@@ -72,7 +72,7 @@ export default function save( { attributes } ) {
 				/>
 				<RichText.Content
 					tagName="p"
-					className="noortemplates-hero__subheading"
+					className="noorpdp-hero__subheading"
 					style={
 						subheadingFontSize
 							? { fontSize: subheadingFontSize }
@@ -80,7 +80,7 @@ export default function save( { attributes } ) {
 					}
 					value={ subheading }
 				/>
-				<div className="noortemplates-hero__actions">
+				<div className="noorpdp-hero__actions">
 					<InnerBlocks.Content />
 				</div>
 			</div>

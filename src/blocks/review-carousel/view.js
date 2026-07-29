@@ -1,18 +1,18 @@
 function initReviewCarousel( carousel ) {
 	const viewport = carousel.querySelector(
-		'.noortemplates-review-carousel__viewport'
+		'.noorpdp-review-carousel__viewport'
 	);
 	const slides = Array.from(
-		carousel.querySelectorAll( '.noortemplates-review-carousel__slide' )
+		carousel.querySelectorAll( '.noorpdp-review-carousel__slide' )
 	);
 	const dots = Array.from(
-		carousel.querySelectorAll( '.noortemplates-review-carousel__dot' )
+		carousel.querySelectorAll( '.noorpdp-review-carousel__dot' )
 	);
 	const prevButton = carousel.querySelector(
-		'.noortemplates-review-carousel__arrow--prev'
+		'.noorpdp-review-carousel__arrow--prev'
 	);
 	const nextButton = carousel.querySelector(
-		'.noortemplates-review-carousel__arrow--next'
+		'.noorpdp-review-carousel__arrow--next'
 	);
 
 	if ( ! viewport || ! slides.length ) {
@@ -200,5 +200,5 @@ function initReviewCarousel( carousel ) {
 }
 
 document
-	.querySelectorAll( '.noortemplates-review-carousel' )
+	.querySelectorAll( '.noorpdp-review-carousel' )
 	.forEach( initReviewCarousel );

@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-rating",
+    "name": "noorpdp/product-rating",
     "title": "Product Rating",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "star-filled",
     "description": "Displays the current WooCommerce product's star rating.",
     "keywords": [
@@ -14,7 +14,7 @@
         "stars"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "supports": {
         "anchor": true,
         "html": false,

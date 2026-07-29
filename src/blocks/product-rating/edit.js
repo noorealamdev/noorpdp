@@ -7,10 +7,10 @@ export default function Edit() {
 		<div { ...useBlockProps() }>
 			<WooPlaceholder
 				icon="star-filled"
-				label={ __( 'Product Rating', 'noortemplates' ) }
+				label={ __( 'Product Rating', 'noorpdp' ) }
 				instructions={ __(
 					"Displays the current product's star rating. Preview appears on the product page.",
-					'noortemplates'
+					'noorpdp'
 				) }
 			/>
 		</div>

@@ -2,7 +2,7 @@
 /**
  * Product Meta block server render.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  *
  * @var array $attributes Block attributes.
  */

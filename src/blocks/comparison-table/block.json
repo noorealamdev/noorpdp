@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/comparison-table",
+    "name": "noorpdp/comparison-table",
     "title": "Comparison Table",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "editor-table",
     "description": "A feature-by-feature comparison table, useful for plans, variants, size guides or specs.",
     "keywords": [
@@ -14,7 +14,7 @@
         "size guide"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "title": {
             "type": "string",

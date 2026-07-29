@@ -13,7 +13,7 @@ import { Fragment } from '@wordpress/element';
 import { VISIBILITY_DEFAULT, ANIMATION_DEFAULT, isExtendable } from './shared';
 
 /**
- * Adds the visibility/animation attributes to every NoorTemplates block.
+ * Adds the visibility/animation attributes to every NoorPDP block.
  *
  * @param {Object} settings Block settings.
  * @param {string} name     Block name.
@@ -28,11 +28,11 @@ function addExtensionAttributes( settings, name ) {
 		...settings,
 		attributes: {
 			...settings.attributes,
-			noortemplatesVisibility: {
+			noorpdpVisibility: {
 				type: 'object',
 				default: VISIBILITY_DEFAULT,
 			},
-			noortemplatesAnimation: {
+			noorpdpAnimation: {
 				type: 'object',
 				default: ANIMATION_DEFAULT,
 			},
@@ -42,13 +42,13 @@ function addExtensionAttributes( settings, name ) {
 
 addFilter(
 	'blocks.registerBlockType',
-	'noortemplates/extensions/attributes',
+	'noorpdp/extensions/attributes',
 	addExtensionAttributes
 );
 
 /**
  * Appends a "Visibility" and "Animation" Inspector panel to every
- * NoorTemplates block, after its own controls.
+ * NoorPDP block, after its own controls.
  */
 const withExtensionControls = createHigherOrderComponent(
 	( BlockEdit ) => ( props ) => {
@@ -59,21 +59,21 @@ const withExtensionControls = createHigherOrderComponent(
 		const { attributes, setAttributes } = props;
 		const visibility = {
 			...VISIBILITY_DEFAULT,
-			...attributes.noortemplatesVisibility,
+			...attributes.noorpdpVisibility,
 		};
 		const animation = {
 			...ANIMATION_DEFAULT,
-			...attributes.noortemplatesAnimation,
+			...attributes.noorpdpAnimation,
 		};
 
 		const updateVisibility = ( key, value ) =>
 			setAttributes( {
-				noortemplatesVisibility: { ...visibility, [ key ]: value },
+				noorpdpVisibility: { ...visibility, [ key ]: value },
 			} );
 
 		const updateAnimation = ( key, value ) =>
 			setAttributes( {
-				noortemplatesAnimation: { ...animation, [ key ]: value },
+				noorpdpAnimation: { ...animation, [ key ]: value },
 			} );
 
 		return (
@@ -81,12 +81,12 @@ const withExtensionControls = createHigherOrderComponent(
 				<BlockEdit { ...props } />
 				<InspectorControls>
 					<PanelBody
-						title={ __( 'Visibility', 'noortemplates' ) }
+						title={ __( 'Visibility', 'noorpdp' ) }
 						initialOpen={ false }
 					>
 						<ToggleControl
 							__nextHasNoMarginBottom
-							label={ __( 'Hide on desktop', 'noortemplates' ) }
+							label={ __( 'Hide on desktop', 'noorpdp' ) }
 							checked={ visibility.hideOnDesktop }
 							onChange={ ( value ) =>
 								updateVisibility( 'hideOnDesktop', value )
@@ -94,7 +94,7 @@ const withExtensionControls = createHigherOrderComponent(
 						/>
 						<ToggleControl
 							__nextHasNoMarginBottom
-							label={ __( 'Hide on tablet', 'noortemplates' ) }
+							label={ __( 'Hide on tablet', 'noorpdp' ) }
 							checked={ visibility.hideOnTablet }
 							onChange={ ( value ) =>
 								updateVisibility( 'hideOnTablet', value )
@@ -102,7 +102,7 @@ const withExtensionControls = createHigherOrderComponent(
 						/>
 						<ToggleControl
 							__nextHasNoMarginBottom
-							label={ __( 'Hide on mobile', 'noortemplates' ) }
+							label={ __( 'Hide on mobile', 'noorpdp' ) }
 							checked={ visibility.hideOnMobile }
 							onChange={ ( value ) =>
 								updateVisibility( 'hideOnMobile', value )
@@ -110,31 +110,31 @@ const withExtensionControls = createHigherOrderComponent(
 						/>
 					</PanelBody>
 					<PanelBody
-						title={ __( 'Animation', 'noortemplates' ) }
+						title={ __( 'Animation', 'noorpdp' ) }
 						initialOpen={ false }
 					>
 						<SelectControl
 							__nextHasNoMarginBottom
 							label={ __(
 								'Entrance animation',
-								'noortemplates'
+								'noorpdp'
 							) }
 							value={ animation.type }
 							options={ [
 								{
-									label: __( 'None', 'noortemplates' ),
+									label: __( 'None', 'noorpdp' ),
 									value: 'none',
 								},
 								{
-									label: __( 'Fade in', 'noortemplates' ),
+									label: __( 'Fade in', 'noorpdp' ),
 									value: 'fade-in',
 								},
 								{
-									label: __( 'Slide up', 'noortemplates' ),
+									label: __( 'Slide up', 'noorpdp' ),
 									value: 'slide-up',
 								},
 								{
-									label: __( 'Zoom in', 'noortemplates' ),
+									label: __( 'Zoom in', 'noorpdp' ),
 									value: 'zoom-in',
 								},
 							] }
@@ -148,7 +148,7 @@ const withExtensionControls = createHigherOrderComponent(
 									__nextHasNoMarginBottom
 									label={ __(
 										'Duration (ms)',
-										'noortemplates'
+										'noorpdp'
 									) }
 									min={ 100 }
 									max={ 3000 }
@@ -162,7 +162,7 @@ const withExtensionControls = createHigherOrderComponent(
 									__nextHasNoMarginBottom
 									label={ __(
 										'Delay (ms)',
-										'noortemplates'
+										'noorpdp'
 									) }
 									min={ 0 }
 									max={ 3000 }
@@ -179,18 +179,18 @@ const withExtensionControls = createHigherOrderComponent(
 			</Fragment>
 		);
 	},
-	'withNoorTemplatesExtensionControls'
+	'withNoorPDPExtensionControls'
 );
 
 addFilter(
 	'editor.BlockEdit',
-	'noortemplates/extensions/inspector-controls',
+	'noorpdp/extensions/inspector-controls',
 	withExtensionControls
 );
 
 /**
  * Writes the resulting visibility classes and animation data attributes
- * onto the saved markup of static (save.js) NoorTemplates blocks.
+ * onto the saved markup of static (save.js) NoorPDP blocks.
  *
  * @param {Object} extraProps Block save element props.
  * @param {Object} blockType  Block type object.
@@ -204,25 +204,25 @@ function addExtensionSaveProps( extraProps, blockType, attributes ) {
 
 	const visibility = {
 		...VISIBILITY_DEFAULT,
-		...attributes.noortemplatesVisibility,
+		...attributes.noorpdpVisibility,
 	};
 	const animation = {
 		...ANIMATION_DEFAULT,
-		...attributes.noortemplatesAnimation,
+		...attributes.noorpdpAnimation,
 	};
 
 	const classNames = [ extraProps.className ];
 
 	if ( visibility.hideOnMobile ) {
-		classNames.push( 'noortemplates-hide-mobile' );
+		classNames.push( 'noorpdp-hide-mobile' );
 	}
 
 	if ( visibility.hideOnTablet ) {
-		classNames.push( 'noortemplates-hide-tablet' );
+		classNames.push( 'noorpdp-hide-tablet' );
 	}
 
 	if ( visibility.hideOnDesktop ) {
-		classNames.push( 'noortemplates-hide-desktop' );
+		classNames.push( 'noorpdp-hide-desktop' );
 	}
 
 	const nextProps = {
@@ -231,9 +231,9 @@ function addExtensionSaveProps( extraProps, blockType, attributes ) {
 	};
 
 	if ( animation.type && 'none' !== animation.type ) {
-		nextProps[ 'data-noortemplates-animation' ] = animation.type;
-		nextProps[ 'data-noortemplates-duration' ] = animation.duration;
-		nextProps[ 'data-noortemplates-delay' ] = animation.delay;
+		nextProps[ 'data-noorpdp-animation' ] = animation.type;
+		nextProps[ 'data-noorpdp-duration' ] = animation.duration;
+		nextProps[ 'data-noorpdp-delay' ] = animation.delay;
 	}
 
 	return nextProps;
@@ -241,6 +241,6 @@ function addExtensionSaveProps( extraProps, blockType, attributes ) {
 
 addFilter(
 	'blocks.getSaveContent.extraProps',
-	'noortemplates/extensions/save-props',
+	'noorpdp/extensions/save-props',
 	addExtensionSaveProps
 );

@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/button",
+	"name": "noorpdp/button",
 	"title": "Advanced Button",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "button",
 	"description": "A customizable call-to-action button with link, colors and typography options.",
 	"keywords": [ "button", "cta", "link" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"text": {
 			"type": "string",

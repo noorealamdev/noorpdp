@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-title",
+    "name": "noorpdp/product-title",
     "title": "Product Title",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "heading",
     "description": "Displays the current WooCommerce product's title.",
     "keywords": [
@@ -12,7 +12,7 @@
         "title"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "supports": {
         "anchor": true,
         "html": false,

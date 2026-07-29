@@ -27,7 +27,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		setAttributes( {
 			rows: [
 				...rows,
-				{ icon: 'shield', text: __( 'New line', 'noortemplates' ) },
+				{ icon: 'shield', text: __( 'New line', 'noorpdp' ) },
 			],
 		} );
 
@@ -37,26 +37,26 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -70,13 +70,13 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<ul
 				className={
-					'noortemplates-icon-list__list' +
+					'noorpdp-icon-list__list' +
 					( boxed ? ' is-boxed' : '' )
 				}
 				style={ boxed ? { maxWidth: boxedWidth } : undefined }
 			>
 				{ rows.map( ( row, index ) => (
-					<li className="noortemplates-icon-list__row" key={ index }>
+					<li className="noorpdp-icon-list__row" key={ index }>
 						<IconPicker
 							value={ row.icon }
 							onChange={ ( value ) =>
@@ -85,24 +85,24 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						<RichText
 							tagName="span"
-							className="noortemplates-icon-list__text"
+							className="noorpdp-icon-list__text"
 							value={ row.text }
 							onChange={ ( value ) =>
 								updateRow( index, 'text', value )
 							}
-							placeholder={ __( 'Add a line…', 'noortemplates' ) }
+							placeholder={ __( 'Add a line…', 'noorpdp' ) }
 						/>
 						<Button
-							className="noortemplates-icon-list__remove"
+							className="noorpdp-icon-list__remove"
 							icon={ closeSmall }
-							label={ __( 'Remove row', 'noortemplates' ) }
+							label={ __( 'Remove row', 'noorpdp' ) }
 							onClick={ () => removeRow( index ) }
 						/>
 					</li>
 				) ) }
 			</ul>
 			<Button variant="secondary" onClick={ addRow }>
-				{ __( 'Add row', 'noortemplates' ) }
+				{ __( 'Add row', 'noorpdp' ) }
 			</Button>
 		</div>
 	);

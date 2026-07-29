@@ -1,15 +1,15 @@
-.wp-block-noortemplates-comparison-table {
+.wp-block-noorpdp-comparison-table {
 
 	// Own scoped title class rather than borrowing the Heading block's
 	// class — a block's style.css only loads when that block type is
 	// actually present on the page, so relying on Heading's CSS for this
 	// unrelated block's title would silently stop working on any page
 	// that doesn't also happen to use a Heading block elsewhere.
-	.noortemplates-comparison-table__title {
+	.noorpdp-comparison-table__title {
 		text-align: center;
 	}
 
-	.noortemplates-comparison-table__table {
+	.noorpdp-comparison-table__table {
 		margin-top: 1.5rem;
 		max-width: 100%;
 		overflow-x: auto;

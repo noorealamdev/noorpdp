@@ -2,12 +2,12 @@
 /**
  * "Buy Now" redirect for the Product Add to Cart block.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Blocks;
+namespace NoorPDP\Blocks;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,7 +25,7 @@ class Buy_Now {
 	/**
 	 * Request field name the "Buy Now" button submits.
 	 */
-	const FIELD = 'noortemplates_buy_now';
+	const FIELD = 'noorpdp_buy_now';
 
 	/**
 	 * Hooks the redirect filter.

@@ -2,14 +2,14 @@
 /**
  * Asset manager.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Assets;
+namespace NoorPDP\Assets;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Layouts\Resolver;
-use NoorTemplates\Licensing\Gate;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Layouts\Resolver;
+use NoorPDP\Licensing\Gate;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,19 +39,19 @@ class Manager {
 	 * @return void
 	 */
 	public function enqueue_editor_assets() {
-		$this->enqueue_built_script( 'noortemplates-library', 'library/index', true );
-		$this->enqueue_built_script( 'noortemplates-extensions', 'extensions/index', false );
+		$this->enqueue_built_script( 'noorpdp-library', 'library/index', true );
+		$this->enqueue_built_script( 'noorpdp-extensions', 'extensions/index', false );
 
 		// wp_localize_script() stringifies every value (false becomes '',
 		// true becomes '1'), which is a footgun for a boolean callers check
 		// with strict-ish truthiness — wp_add_inline_script() with
 		// wp_json_encode() keeps isPro a real JS boolean instead.
 		wp_add_inline_script(
-			'noortemplates-library',
+			'noorpdp-library',
 			'window.noorTemplatesLicensing = ' . wp_json_encode(
 				array(
 					'isPro'       => Gate::is_pro(),
-					'checkoutUrl' => NOORTEMPLATES_CHECKOUT_URL,
+					'checkoutUrl' => NOORPDP_CHECKOUT_URL,
 				)
 			) . ';',
 			'before'
@@ -60,7 +60,7 @@ class Manager {
 
 	/**
 	 * Enqueues the block-extensions front-end script and styles, only on
-	 * product pages that actually resolve to a NoorTemplates layout.
+	 * product pages that actually resolve to a NoorPDP layout.
 	 *
 	 * @return void
 	 */
@@ -73,7 +73,7 @@ class Manager {
 			return;
 		}
 
-		$this->enqueue_built_script( 'noortemplates-extensions-view', 'extensions/view', false );
+		$this->enqueue_built_script( 'noorpdp-extensions-view', 'extensions/view', false );
 		$this->enqueue_layout_base_styles();
 	}
 
@@ -95,18 +95,18 @@ class Manager {
 	 * @return void
 	 */
 	private function enqueue_layout_base_styles() {
-		wp_register_style( 'noortemplates-layout-base', false, array(), NOORTEMPLATES_VERSION );
-		wp_enqueue_style( 'noortemplates-layout-base' );
+		wp_register_style( 'noorpdp-layout-base', false, array(), NOORPDP_VERSION );
+		wp_enqueue_style( 'noorpdp-layout-base' );
 		wp_add_inline_style(
-			'noortemplates-layout-base',
-			'.noortemplates-layout .alignfull {
+			'noorpdp-layout-base',
+			'.noorpdp-layout .alignfull {
 				margin-left: calc(50% - 50vw);
 				margin-right: calc(50% - 50vw);
 				max-width: 100vw;
 				width: 100vw;
 			}
 			@media (max-width: 600px) {
-				.noortemplates-layout {
+				.noorpdp-layout {
 					padding-left: var(--wp--preset--spacing--50, 1rem);
 					padding-right: var(--wp--preset--spacing--50, 1rem);
 					box-sizing: border-box;
@@ -126,7 +126,7 @@ class Manager {
 	 * @return void
 	 */
 	private function enqueue_built_script( $handle, $entry, $needs_wp_components ) {
-		$asset_file = NOORTEMPLATES_DIR . 'build/' . $entry . '.asset.php';
+		$asset_file = NOORPDP_DIR . 'build/' . $entry . '.asset.php';
 
 		if ( ! file_exists( $asset_file ) ) {
 			return;
@@ -136,7 +136,7 @@ class Manager {
 
 		wp_enqueue_script(
 			$handle,
-			NOORTEMPLATES_URL . 'build/' . $entry . '.js',
+			NOORPDP_URL . 'build/' . $entry . '.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
@@ -147,7 +147,7 @@ class Manager {
 		if ( $style_path ) {
 			wp_enqueue_style(
 				$handle,
-				NOORTEMPLATES_URL . 'build/' . $style_path,
+				NOORPDP_URL . 'build/' . $style_path,
 				$needs_wp_components ? array( 'wp-components' ) : array(),
 				$asset['version']
 			);
@@ -169,7 +169,7 @@ class Manager {
 		$base = basename( $entry );
 
 		foreach ( array( $dir . 'style-' . $base . '.css', $dir . $base . '.css' ) as $candidate ) {
-			if ( file_exists( NOORTEMPLATES_DIR . 'build/' . $candidate ) ) {
+			if ( file_exists( NOORPDP_DIR . 'build/' . $candidate ) ) {
 				return $candidate;
 			}
 		}

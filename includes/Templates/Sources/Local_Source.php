@@ -2,13 +2,13 @@
 /**
  * Bundled template source.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Templates\Sources;
+namespace NoorPDP\Templates\Sources;
 
-use NoorTemplates\Templates\Lazy_Source;
-use NoorTemplates\Patterns\Manager as Patterns_Manager;
+use NoorPDP\Templates\Lazy_Source;
+use NoorPDP\Patterns\Manager as Patterns_Manager;
 
 defined( 'ABSPATH' ) || exit;
 

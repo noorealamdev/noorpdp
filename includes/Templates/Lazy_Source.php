@@ -2,10 +2,10 @@
 /**
  * Lazy-content template source contract.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Templates;
+namespace NoorPDP\Templates;
 
 defined( 'ABSPATH' ) || exit;
 

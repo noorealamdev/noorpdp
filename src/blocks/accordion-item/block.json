@@ -1,20 +1,20 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/accordion-item",
+	"name": "noorpdp/accordion-item",
 	"title": "Accordion Item",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "menu-alt",
 	"description": "A single collapsible panel inside an Accordion.",
 	"keywords": [ "accordion", "item", "panel" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
-	"parent": [ "noortemplates/accordion" ],
+	"textdomain": "noorpdp",
+	"parent": [ "noorpdp/accordion" ],
 	"attributes": {
 		"title": {
 			"type": "string",
 			"source": "html",
-			"selector": ".noortemplates-accordion__title",
+			"selector": ".noorpdp-accordion__title",
 			"default": ""
 		},
 		"uid": {

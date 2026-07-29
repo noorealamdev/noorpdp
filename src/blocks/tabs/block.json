@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/tabs",
+	"name": "noorpdp/tabs",
 	"title": "Tabs",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "table-row-after",
 	"description": "Organize content into switchable tabs. Powered by the WordPress Interactivity API with full keyboard support.",
 	"keywords": [ "tabs", "tabbed", "toggle" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"boxed": {
 			"type": "boolean",

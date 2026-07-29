@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/faq",
+    "name": "noorpdp/faq",
     "title": "FAQ Accordion",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "editor-help",
     "description": "A collapsible list of frequently asked questions about the product.",
     "keywords": [
@@ -13,7 +13,7 @@
         "section"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "title": {
             "type": "string",

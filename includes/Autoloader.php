@@ -1,16 +1,16 @@
 <?php
 /**
- * PSR-4 autoloader for the NoorTemplates namespace.
+ * PSR-4 autoloader for the NoorPDP namespace.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates;
+namespace NoorPDP;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Maps NoorTemplates\Sub\ClassName to includes/Sub/ClassName.php.
+ * Maps NoorPDP\Sub\ClassName to includes/Sub/ClassName.php.
  */
 class Autoloader {
 
@@ -19,7 +19,7 @@ class Autoloader {
 	 *
 	 * @var string
 	 */
-	const PREFIX = 'NoorTemplates\\';
+	const PREFIX = 'NoorPDP\\';
 
 	/**
 	 * Registers the autoloader with SPL.
@@ -42,7 +42,7 @@ class Autoloader {
 		}
 
 		$relative = substr( $class_name, strlen( self::PREFIX ) );
-		$path     = NOORTEMPLATES_DIR . 'includes/' . str_replace( '\\', '/', $relative ) . '.php';
+		$path     = NOORPDP_DIR . 'includes/' . str_replace( '\\', '/', $relative ) . '.php';
 
 		if ( is_readable( $path ) ) {
 			require $path;

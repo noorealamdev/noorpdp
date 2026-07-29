@@ -1,54 +1,54 @@
-.noortemplates-library__toolbar-wrap {
+.noorpdp-library__toolbar-wrap {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	margin-left: 8px;
 }
 
-.noortemplates-library__import-input {
+.noorpdp-library__import-input {
 	display: none;
 }
 
-.noortemplates-library__modal {
+.noorpdp-library__modal {
 
 	.components-modal__content {
 		padding: 0 32px 32px;
 	}
 }
 
-.noortemplates-library__loading {
+.noorpdp-library__loading {
 	display: flex;
 	justify-content: center;
 	padding: 64px 0;
 }
 
-.noortemplates-library__toolbar {
+.noorpdp-library__toolbar {
 	display: flex;
 	gap: 16px;
 	align-items: flex-end;
 	padding-top: 24px;
 
-	.noortemplates-library__search {
+	.noorpdp-library__search {
 		flex: 1;
 	}
 
-	.noortemplates-library__category {
+	.noorpdp-library__category {
 		min-width: 200px;
 	}
 }
 
-.noortemplates-library__grid {
+.noorpdp-library__grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 300px);
 	gap: 32px;
 	padding-top: 24px;
 }
 
-.noortemplates-library__card {
+.noorpdp-library__card {
 	position: relative;
 }
 
-.noortemplates-library__card-action {
+.noorpdp-library__card-action {
 	position: absolute;
 	right: 0;
 	bottom: 16px;
@@ -65,7 +65,7 @@
 	pointer-events: none;
 }
 
-.noortemplates-library__card-preview {
+.noorpdp-library__card-preview {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -93,7 +93,7 @@
 		border-color: var(--wp-admin-theme-color, #3858e9);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-		.noortemplates-library__card-action {
+		.noorpdp-library__card-action {
 			opacity: 1;
 		}
 	}
@@ -104,7 +104,7 @@
 	}
 }
 
-.noortemplates-library__card-placeholder {
+.noorpdp-library__card-placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -118,7 +118,7 @@
 	}
 }
 
-.noortemplates-library__card-badge {
+.noorpdp-library__card-badge {
 	position: absolute;
 	top: 8px;
 	left: 8px;
@@ -132,7 +132,7 @@
 	letter-spacing: 0.04em;
 }
 
-.noortemplates-library__card-spinner {
+.noorpdp-library__card-spinner {
 	position: absolute;
 	inset: 0;
 	display: flex;
@@ -141,13 +141,13 @@
 	background: rgba(255, 255, 255, 0.6);
 }
 
-.noortemplates-library__card-title {
+.noorpdp-library__card-title {
 	margin-top: 12px;
 	font-size: 14px;
 	font-weight: 600;
 }
 
-.noortemplates-library__card-description {
+.noorpdp-library__card-description {
 	margin-top: 4px;
 	color: #757575;
 	font-size: 12px;

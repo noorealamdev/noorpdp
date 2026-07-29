@@ -1,4 +1,4 @@
-.wp-block-noortemplates-urgency {
+.wp-block-noorpdp-urgency {
 	// Background, text color, border, and padding are never hardcoded here
 	// — they come entirely from the block's own Color/Border/Dimensions
 	// Inspector panels (applied to this same wrapper via
@@ -15,33 +15,33 @@
 		margin-right: auto;
 	}
 
-	.noortemplates-urgency__icon {
+	.noorpdp-urgency__icon {
 		flex-shrink: 0;
 		width: 1.25rem;
 		height: 1.25rem;
 		color: inherit;
 	}
 
-	.noortemplates-urgency__message,
-	.noortemplates-urgency__label {
+	.noorpdp-urgency__message,
+	.noorpdp-urgency__label {
 		font-size: inherit;
 		color: inherit;
 		font-weight: 600;
 	}
 
-	.noortemplates-urgency__timer {
+	.noorpdp-urgency__timer {
 		display: flex;
 		gap: 0.75rem;
 	}
 
-	.noortemplates-urgency__unit {
+	.noorpdp-urgency__unit {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		min-width: 2.5rem;
 	}
 
-	.noortemplates-urgency__value {
+	.noorpdp-urgency__value {
 		font-size: 1.25rem;
 		font-weight: 700;
 		line-height: 1.2;
@@ -49,7 +49,7 @@
 		font-variant-numeric: tabular-nums;
 	}
 
-	.noortemplates-urgency__unit-label {
+	.noorpdp-urgency__unit-label {
 		font-size: 0.7rem;
 		text-transform: uppercase;
 		letter-spacing: 0.04em;

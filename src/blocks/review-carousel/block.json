@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/review-carousel",
+	"name": "noorpdp/review-carousel",
 	"title": "Review Carousel",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "slides",
 	"description": "A curated, swipeable carousel of hand-picked reviews for a chosen product.",
 	"keywords": [ "woocommerce", "review", "carousel", "testimonials" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"productId": {
 			"type": "number",

@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/icon-list",
+	"name": "noorpdp/icon-list",
 	"title": "Icon List",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "list-view",
 	"description": "A list of short lines, each with a picked icon instead of a bullet — e.g. shipping info, trust points, feature highlights.",
 	"keywords": [ "list", "icon", "trust", "shipping", "features" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"rows": {
 			"type": "array",

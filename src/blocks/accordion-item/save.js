@@ -2,7 +2,7 @@ import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
 	const { title, uid } = attributes;
-	const panelId = `noortemplates-accordion-panel-${ uid }`;
+	const panelId = `noorpdp-accordion-panel-${ uid }`;
 
 	const blockProps = useBlockProps.save( {
 		'data-wp-context': JSON.stringify( { uid } ),
@@ -10,10 +10,10 @@ export default function save( { attributes } ) {
 
 	return (
 		<div { ...blockProps }>
-			<h3 className="noortemplates-accordion__heading">
+			<h3 className="noorpdp-accordion__heading">
 				<button
 					type="button"
-					className="noortemplates-accordion__toggle"
+					className="noorpdp-accordion__toggle"
 					aria-controls={ panelId }
 					aria-expanded="false"
 					data-wp-on--click="actions.toggle"
@@ -22,18 +22,18 @@ export default function save( { attributes } ) {
 				>
 					<RichText.Content
 						tagName="span"
-						className="noortemplates-accordion__title"
+						className="noorpdp-accordion__title"
 						value={ title }
 					/>
 					<span
-						className="noortemplates-accordion__icon"
+						className="noorpdp-accordion__icon"
 						aria-hidden="true"
 					></span>
 				</button>
 			</h3>
 			<div
 				id={ panelId }
-				className="noortemplates-accordion__panel"
+				className="noorpdp-accordion__panel"
 				hidden
 				data-wp-bind--hidden="!state.isOpen"
 			>

@@ -11,9 +11,9 @@
 // silently overriding our grid-template-columns at tablet widths. Repeating
 // the wrapper class raises every selector below by one class, enough to
 // always win regardless of where a theme's own CSS lands in the page.
-.wp-block-noortemplates-related-products.wp-block-noortemplates-related-products {
+.wp-block-noorpdp-related-products.wp-block-noorpdp-related-products {
 
-	.noortemplates-related-products__inner.is-boxed {
+	.noorpdp-related-products__inner.is-boxed {
 		margin-left: auto;
 		margin-right: auto;
 	}

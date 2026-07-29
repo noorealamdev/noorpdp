@@ -44,10 +44,10 @@ const v1 = {
 			<div { ...blockProps }>
 				<RichText.Content
 					tagName="h2"
-					className="noortemplates-comparison-table__title"
+					className="noorpdp-comparison-table__title"
 					value={ title }
 				/>
-				<div className="noortemplates-comparison-table__table">
+				<div className="noorpdp-comparison-table__table">
 					<InnerBlocks.Content />
 				</div>
 			</div>

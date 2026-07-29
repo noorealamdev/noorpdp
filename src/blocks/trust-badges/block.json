@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/trust-badges",
+	"name": "noorpdp/trust-badges",
 	"title": "Trust Badges",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "shield-alt",
 	"description": "A row of icon + label badges (e.g. Third-Party Tested, Vegan Friendly) in a soft rounded card, divided by vertical lines.",
 	"keywords": [ "trust", "badges", "icons", "guarantee", "features" ],
 	"version": "2.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"items": {
 			"type": "array",

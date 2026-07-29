@@ -53,12 +53,12 @@ function buildSwatches( select ) {
 	const variationImages = getVariationImages( form, select.name );
 
 	const wrapper = document.createElement( 'div' );
-	wrapper.className = 'noortemplates-swatches';
+	wrapper.className = 'noorpdp-swatches';
 
 	const buttons = options.map( ( option ) => {
 		const button = document.createElement( 'button' );
 		button.type = 'button';
-		button.className = 'noortemplates-swatch';
+		button.className = 'noorpdp-swatch';
 		button.disabled = option.disabled;
 		button.setAttribute( 'aria-pressed', option.selected ? 'true' : 'false' );
 		button.setAttribute( 'aria-label', option.textContent );
@@ -67,7 +67,7 @@ function buildSwatches( select ) {
 		const imageUrl = variationImages[ option.value ];
 
 		if ( imageUrl ) {
-			button.classList.add( 'noortemplates-swatch--image' );
+			button.classList.add( 'noorpdp-swatch--image' );
 			const img = document.createElement( 'img' );
 			img.src = imageUrl;
 			img.alt = '';
@@ -118,7 +118,7 @@ function buildSwatches( select ) {
 	);
 
 	select.insertAdjacentElement( 'afterend', wrapper );
-	select.classList.add( 'noortemplates-visually-hidden-select' );
+	select.classList.add( 'noorpdp-visually-hidden-select' );
 }
 
 function buildQuantityStepper( quantityWrapper ) {
@@ -134,7 +134,7 @@ function buildQuantityStepper( quantityWrapper ) {
 	const makeStepButton = ( label, delta ) => {
 		const button = document.createElement( 'button' );
 		button.type = 'button';
-		button.className = 'noortemplates-quantity-step';
+		button.className = 'noorpdp-quantity-step';
 		button.textContent = label;
 		button.setAttribute( 'aria-label', delta > 0 ? 'Increase quantity' : 'Decrease quantity' );
 
@@ -151,17 +151,17 @@ function buildQuantityStepper( quantityWrapper ) {
 		return button;
 	};
 
-	quantityWrapper.classList.add( 'noortemplates-quantity' );
+	quantityWrapper.classList.add( 'noorpdp-quantity' );
 	input.insertAdjacentElement( 'beforebegin', makeStepButton( '−', -1 ) );
 	input.insertAdjacentElement( 'afterend', makeStepButton( '+', 1 ) );
 }
 
 document
 	.querySelectorAll(
-		'.wp-block-noortemplates-product-add-to-cart .variations select'
+		'.wp-block-noorpdp-product-add-to-cart .variations select'
 	)
 	.forEach( buildSwatches );
 
 document
-	.querySelectorAll( '.wp-block-noortemplates-product-add-to-cart .quantity' )
+	.querySelectorAll( '.wp-block-noorpdp-product-add-to-cart .quantity' )
 	.forEach( buildQuantityStepper );

@@ -2,12 +2,12 @@
 /**
  * "Duplicate" row action for Product Layout posts.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Layouts;
+namespace NoorPDP\Layouts;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,7 +25,7 @@ class Duplicate {
 	 */
 	protected function __construct() {
 		add_filter( 'post_row_actions', array( $this, 'add_row_action' ), 10, 2 );
-		add_action( 'admin_action_noortemplates_duplicate_layout', array( $this, 'handle_duplicate' ) );
+		add_action( 'admin_action_noorpdp_duplicate_layout', array( $this, 'handle_duplicate' ) );
 	}
 
 	/**
@@ -43,18 +43,18 @@ class Duplicate {
 		$url = wp_nonce_url(
 			add_query_arg(
 				array(
-					'action' => 'noortemplates_duplicate_layout',
+					'action' => 'noorpdp_duplicate_layout',
 					'post'   => $post->ID,
 				),
 				admin_url( 'admin.php' )
 			),
-			'noortemplates_duplicate_layout_' . $post->ID
+			'noorpdp_duplicate_layout_' . $post->ID
 		);
 
-		$actions['noortemplates_duplicate'] = sprintf(
+		$actions['noorpdp_duplicate'] = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( $url ),
-			esc_html__( 'Duplicate', 'noortemplates' )
+			esc_html__( 'Duplicate', 'noorpdp' )
 		);
 
 		return $actions;
@@ -69,26 +69,26 @@ class Duplicate {
 		$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0;
 
 		if ( ! $post_id ) {
-			wp_die( esc_html__( 'No layout specified.', 'noortemplates' ) );
+			wp_die( esc_html__( 'No layout specified.', 'noorpdp' ) );
 		}
 
-		check_admin_referer( 'noortemplates_duplicate_layout_' . $post_id );
+		check_admin_referer( 'noorpdp_duplicate_layout_' . $post_id );
 
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_die( esc_html__( 'You are not allowed to duplicate this layout.', 'noortemplates' ) );
+			wp_die( esc_html__( 'You are not allowed to duplicate this layout.', 'noorpdp' ) );
 		}
 
 		$source = get_post( $post_id );
 
 		if ( ! $source || Post_Type::SLUG !== $source->post_type ) {
-			wp_die( esc_html__( 'Layout not found.', 'noortemplates' ) );
+			wp_die( esc_html__( 'Layout not found.', 'noorpdp' ) );
 		}
 
 		$new_id = wp_insert_post(
 			array(
 				'post_type'    => Post_Type::SLUG,
 				/* translators: %s: original layout title. */
-				'post_title'   => sprintf( __( '%s (Copy)', 'noortemplates' ), $source->post_title ),
+				'post_title'   => sprintf( __( '%s (Copy)', 'noorpdp' ), $source->post_title ),
 				'post_content' => $source->post_content,
 				// Draft, not published/matching the original's status —
 				// a duplicate is for safely experimenting on, and should

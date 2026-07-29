@@ -15,7 +15,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	// spacing, border, shadow) since it's the actual visible button box;
 	// the wrapper below only ever handles the button's own alignment.
 	const blockProps = useBlockProps( {
-		className: 'noortemplates-button__link',
+		className: 'noorpdp-button__link',
 	} );
 
 	return (
@@ -30,9 +30,9 @@ export default function Edit( { attributes, setAttributes } ) {
 			</BlockControls>
 
 			<InspectorControls>
-				<PanelBody title={ __( 'Link Settings', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Link Settings', 'noorpdp' ) }>
 					<TextControl
-						label={ __( 'URL', 'noortemplates' ) }
+						label={ __( 'URL', 'noorpdp' ) }
 						value={ url }
 						onChange={ ( value ) =>
 							setAttributes( { url: value } )
@@ -40,7 +40,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						placeholder="https://"
 					/>
 					<ToggleControl
-						label={ __( 'Open in new tab', 'noortemplates' ) }
+						label={ __( 'Open in new tab', 'noorpdp' ) }
 						checked={ opensInNewTab }
 						onChange={ ( value ) =>
 							setAttributes( { opensInNewTab: value } )
@@ -52,8 +52,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div
 				className={
 					textAlign
-						? `wp-block-noortemplates-button has-text-align-${ textAlign }`
-						: 'wp-block-noortemplates-button'
+						? `wp-block-noorpdp-button has-text-align-${ textAlign }`
+						: 'wp-block-noorpdp-button'
 				}
 			>
 				<RichText
@@ -61,7 +61,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ ...blockProps }
 					value={ text }
 					onChange={ ( value ) => setAttributes( { text: value } ) }
-					placeholder={ __( 'Add text…', 'noortemplates' ) }
+					placeholder={ __( 'Add text…', 'noorpdp' ) }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				/>
 			</div>

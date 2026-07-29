@@ -1,11 +1,11 @@
-.wp-block-noortemplates-faq {
+.wp-block-noorpdp-faq {
 
 	// Own scoped title class rather than borrowing the Heading block's
 	// class — a block's style.css only loads when that block type is
 	// actually present on the page, so relying on Heading's CSS for this
 	// unrelated block's title would silently stop working on any page
 	// that doesn't also happen to use a Heading block elsewhere.
-	.noortemplates-faq__title {
+	.noorpdp-faq__title {
 		text-align: center;
 		// Without this, a theme's own heading color rules (e.g. Astra's
 		// `h1,h2,h3,h4,h5,h6{color:...}`) can win over the text color picked
@@ -14,7 +14,7 @@
 		color: inherit;
 	}
 
-	.noortemplates-faq__accordion {
+	.noorpdp-faq__accordion {
 		margin-top: 1.5rem;
 
 		&.is-boxed {

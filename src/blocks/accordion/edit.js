@@ -7,8 +7,8 @@ import {
 import { PanelBody, ToggleControl, RangeControl } from '@wordpress/components';
 
 const TEMPLATE = [
-	[ 'noortemplates/accordion-item' ],
-	[ 'noortemplates/accordion-item' ],
+	[ 'noorpdp/accordion-item' ],
+	[ 'noorpdp/accordion-item' ],
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -18,7 +18,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		style: boxed ? { maxWidth: boxedWidth } : undefined,
 	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'noortemplates/accordion-item' ],
+		allowedBlocks: [ 'noorpdp/accordion-item' ],
 		template: TEMPLATE,
 	} );
 
@@ -26,16 +26,16 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Accordion Settings', 'noortemplates' ) }
+					title={ __( 'Accordion Settings', 'noorpdp' ) }
 				>
 					<ToggleControl
 						label={ __(
 							'Allow multiple open items',
-							'noortemplates'
+							'noorpdp'
 						) }
 						help={ __(
 							'When off, opening an item closes the others.',
-							'noortemplates'
+							'noorpdp'
 						) }
 						checked={ allowMultiple }
 						onChange={ ( value ) =>
@@ -43,26 +43,26 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )

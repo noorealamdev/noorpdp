@@ -2,15 +2,15 @@
 /**
  * Admin dashboard page.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Admin;
+namespace NoorPDP\Admin;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Blocks\Manager as Blocks_Manager;
-use NoorTemplates\Layouts\Post_Type as Layouts_Post_Type;
-use NoorTemplates\Layouts\Resolver as Layouts_Resolver;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Blocks\Manager as Blocks_Manager;
+use NoorPDP\Layouts\Post_Type as Layouts_Post_Type;
+use NoorPDP\Layouts\Resolver as Layouts_Resolver;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ class Dashboard {
 	/**
 	 * Admin page slug.
 	 */
-	const PAGE_SLUG = 'noortemplates';
+	const PAGE_SLUG = 'noorpdp';
 
 	/**
 	 * Hooks the admin menu and settings handling.
@@ -35,14 +35,14 @@ class Dashboard {
 	}
 
 	/**
-	 * Adds the NoorTemplates top-level admin menu.
+	 * Adds the NoorPDP top-level admin menu.
 	 *
 	 * @return void
 	 */
 	public function register_menu() {
 		add_menu_page(
-			__( 'NoorTemplates', 'noortemplates' ),
-			__( 'NoorTemplates', 'noortemplates' ),
+			__( 'NoorPDP', 'noorpdp' ),
+			__( 'NoorPDP', 'noorpdp' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			array( $this, 'render_page' ),
@@ -53,13 +53,13 @@ class Dashboard {
 		// add_menu_page() alone doesn't make the top-level menu link open
 		// this page — without a submenu explicitly matching the parent
 		// slug, WordPress instead links it to whichever submenu registers
-		// first under 'noortemplates' (here, Layouts\Post_Type's own
+		// first under 'noorpdp' (here, Layouts\Post_Type's own
 		// "Product Layouts" CPT menu, added via show_in_menu). This
 		// duplicate submenu is the standard WordPress fix for that.
 		add_submenu_page(
 			self::PAGE_SLUG,
-			__( 'NoorTemplates', 'noortemplates' ),
-			__( 'Dashboard', 'noortemplates' ),
+			__( 'NoorPDP', 'noorpdp' ),
+			__( 'Dashboard', 'noorpdp' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			array( $this, 'render_page' )
@@ -72,7 +72,7 @@ class Dashboard {
 	 * @return void
 	 */
 	public function handle_save() {
-		if ( ! isset( $_POST['noortemplates_save_settings'] ) ) {
+		if ( ! isset( $_POST['noorpdp_save_settings'] ) ) {
 			return;
 		}
 
@@ -80,11 +80,11 @@ class Dashboard {
 			return;
 		}
 
-		check_admin_referer( 'noortemplates_settings' );
+		check_admin_referer( 'noorpdp_settings' );
 
 		$all_blocks = array_keys( Blocks_Manager::instance()->get_all_blocks() );
-		$enabled    = isset( $_POST['noortemplates_enabled'] )
-			? array_map( 'sanitize_text_field', wp_unslash( (array) $_POST['noortemplates_enabled'] ) )
+		$enabled    = isset( $_POST['noorpdp_enabled'] )
+			? array_map( 'sanitize_text_field', wp_unslash( (array) $_POST['noorpdp_enabled'] ) )
 			: array();
 
 		// Everything not checked is disabled.
@@ -92,8 +92,8 @@ class Dashboard {
 
 		update_option( Blocks_Manager::DISABLED_OPTION, $disabled );
 
-		$default_layout_id = isset( $_POST['noortemplates_default_layout_id'] )
-			? absint( $_POST['noortemplates_default_layout_id'] )
+		$default_layout_id = isset( $_POST['noorpdp_default_layout_id'] )
+			? absint( $_POST['noorpdp_default_layout_id'] )
 			: 0;
 
 		if ( $default_layout_id ) {
@@ -103,9 +103,9 @@ class Dashboard {
 		}
 
 		add_settings_error(
-			'noortemplates',
+			'noorpdp',
 			'settings_saved',
-			__( 'Settings saved.', 'noortemplates' ),
+			__( 'Settings saved.', 'noorpdp' ),
 			'success'
 		);
 	}
@@ -131,19 +131,19 @@ class Dashboard {
 		);
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'NoorTemplates', 'noortemplates' ); ?></h1>
-			<p><?php esc_html_e( 'Enable or disable individual blocks. Disabled blocks are removed from the editor but existing content is not deleted.', 'noortemplates' ); ?></p>
+			<h1><?php esc_html_e( 'NoorPDP', 'noorpdp' ); ?></h1>
+			<p><?php esc_html_e( 'Enable or disable individual blocks. Disabled blocks are removed from the editor but existing content is not deleted.', 'noorpdp' ); ?></p>
 
-			<?php settings_errors( 'noortemplates' ); ?>
+			<?php settings_errors( 'noorpdp' ); ?>
 
 			<form method="post">
-				<?php wp_nonce_field( 'noortemplates_settings' ); ?>
+				<?php wp_nonce_field( 'noorpdp_settings' ); ?>
 
-				<h2><?php esc_html_e( 'Default Product Page Template', 'noortemplates' ); ?></h2>
-				<p><?php esc_html_e( 'Applied to every product that does not have its own template or a category default.', 'noortemplates' ); ?></p>
+				<h2><?php esc_html_e( 'Default Product Page Template', 'noorpdp' ); ?></h2>
+				<p><?php esc_html_e( 'Applied to every product that does not have its own template or a category default.', 'noorpdp' ); ?></p>
 				<p>
-					<select name="noortemplates_default_layout_id">
-						<option value="0"><?php esc_html_e( '— Default (theme/WooCommerce) —', 'noortemplates' ); ?></option>
+					<select name="noorpdp_default_layout_id">
+						<option value="0"><?php esc_html_e( '— Default (theme/WooCommerce) —', 'noorpdp' ); ?></option>
 						<?php foreach ( $layouts as $layout ) : ?>
 							<option value="<?php echo esc_attr( $layout->ID ); ?>" <?php selected( $default_layout, $layout->ID ); ?>>
 								<?php echo esc_html( $layout->post_title ); ?>
@@ -155,15 +155,15 @@ class Dashboard {
 				<table class="widefat striped" style="max-width: 720px;">
 					<thead>
 						<tr>
-							<th><?php esc_html_e( 'Block', 'noortemplates' ); ?></th>
-							<th><?php esc_html_e( 'Description', 'noortemplates' ); ?></th>
-							<th style="width: 100px;"><?php esc_html_e( 'Enabled', 'noortemplates' ); ?></th>
+							<th><?php esc_html_e( 'Block', 'noorpdp' ); ?></th>
+							<th><?php esc_html_e( 'Description', 'noorpdp' ); ?></th>
+							<th style="width: 100px;"><?php esc_html_e( 'Enabled', 'noorpdp' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php if ( empty( $blocks ) ) : ?>
 							<tr>
-								<td colspan="3"><?php esc_html_e( 'No blocks found. Run the build first (npm run build).', 'noortemplates' ); ?></td>
+								<td colspan="3"><?php esc_html_e( 'No blocks found. Run the build first (npm run build).', 'noorpdp' ); ?></td>
 							</tr>
 						<?php endif; ?>
 						<?php foreach ( $blocks as $name => $metadata ) : ?>
@@ -173,7 +173,7 @@ class Dashboard {
 								<td>
 									<input
 										type="checkbox"
-										name="noortemplates_enabled[]"
+										name="noorpdp_enabled[]"
 										value="<?php echo esc_attr( $name ); ?>"
 										<?php checked( ! in_array( $name, $disabled, true ) ); ?>
 									/>
@@ -183,8 +183,8 @@ class Dashboard {
 					</tbody>
 				</table>
 				<p>
-					<button type="submit" name="noortemplates_save_settings" value="1" class="button button-primary">
-						<?php esc_html_e( 'Save Settings', 'noortemplates' ); ?>
+					<button type="submit" name="noorpdp_save_settings" value="1" class="button button-primary">
+						<?php esc_html_e( 'Save Settings', 'noorpdp' ); ?>
 					</button>
 				</p>
 			</form>

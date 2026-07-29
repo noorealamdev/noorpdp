@@ -2,12 +2,12 @@
 /**
  * Server-side Interactivity API state.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Blocks;
+namespace NoorPDP\Blocks;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,7 +41,7 @@ class Interactivity {
 		}
 
 		wp_interactivity_state(
-			'noortemplates/accordion',
+			'noorpdp/accordion',
 			array(
 				'isOpen' => static function () {
 					$context = wp_interactivity_get_context();
@@ -55,7 +55,7 @@ class Interactivity {
 		);
 
 		wp_interactivity_state(
-			'noortemplates/tabs',
+			'noorpdp/tabs',
 			array(
 				'isSelected' => static function () {
 					$context = wp_interactivity_get_context();

@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/urgency",
+    "name": "noorpdp/urgency",
     "title": "Urgency & Countdown",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "warning",
     "description": "A low-stock warning or countdown timer (sale end date or a custom deadline) that nudges shoppers toward buying now.",
     "keywords": [
@@ -16,7 +16,7 @@
         "woocommerce"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "type": {
             "type": "string",

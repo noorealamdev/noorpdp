@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-meta",
+    "name": "noorpdp/product-meta",
     "title": "Product Meta",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "info",
     "description": "Displays the current WooCommerce product's SKU, categories and tags.",
     "keywords": [
@@ -14,7 +14,7 @@
         "tags"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "supports": {
         "anchor": true,
         "html": false,

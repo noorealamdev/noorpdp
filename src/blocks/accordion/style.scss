@@ -1,21 +1,21 @@
-.wp-block-noortemplates-accordion {
+.wp-block-noorpdp-accordion {
 
 	&.is-boxed {
 		margin-left: auto;
 		margin-right: auto;
 	}
 
-	.wp-block-noortemplates-accordion-item {
+	.wp-block-noorpdp-accordion-item {
 		overflow: hidden;
 		border: 1px solid #e0e0e0;
 		border-radius: 4px;
 
-		+ .wp-block-noortemplates-accordion-item {
+		+ .wp-block-noorpdp-accordion-item {
 			margin-top: 8px;
 		}
 	}
 
-	.noortemplates-accordion__heading {
+	.noorpdp-accordion__heading {
 		margin: 0;
 		font-size: inherit;
 		// Without this, a theme's own heading color rules (e.g. a selector
@@ -25,7 +25,7 @@
 		color: inherit;
 	}
 
-	.noortemplates-accordion__toggle {
+	.noorpdp-accordion__toggle {
 		display: flex;
 		gap: 12px;
 		align-items: center;
@@ -41,7 +41,7 @@
 		text-align: left;
 	}
 
-	.noortemplates-accordion__icon::before {
+	.noorpdp-accordion__icon::before {
 		content: "+";
 		display: inline-block;
 		font-size: 1.25em;
@@ -50,11 +50,11 @@
 		transition: transform 0.2s ease-in-out;
 	}
 
-	.noortemplates-accordion__toggle.is-open .noortemplates-accordion__icon::before {
+	.noorpdp-accordion__toggle.is-open .noorpdp-accordion__icon::before {
 		transform: rotate(45deg);
 	}
 
-	.noortemplates-accordion__panel {
+	.noorpdp-accordion__panel {
 		padding: 0 16px 16px;
 
 		// The panel's own padding-bottom already provides the gap below

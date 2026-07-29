@@ -1,6 +1,6 @@
-.wp-block-noortemplates-review-carousel {
+.wp-block-noorpdp-review-carousel {
 
-	.noortemplates-review-carousel {
+	.noorpdp-review-carousel {
 		// Padding (not margin, which can collapse through this plain div
 		// into whatever follows) keeps the dots from crowding the next
 		// section when this block has no bottom margin/padding of its own.
@@ -14,11 +14,11 @@
 		}
 	}
 
-	.noortemplates-review-carousel__stage {
+	.noorpdp-review-carousel__stage {
 		position: relative;
 	}
 
-	.noortemplates-review-carousel__viewport {
+	.noorpdp-review-carousel__viewport {
 		overflow-x: auto;
 		overflow-y: hidden;
 		scroll-snap-type: x mandatory;
@@ -38,19 +38,19 @@
 			scroll-snap-type: none;
 			user-select: none;
 
-			.noortemplates-review-carousel__slide {
+			.noorpdp-review-carousel__slide {
 				pointer-events: none;
 			}
 		}
 	}
 
-	.noortemplates-review-carousel__track {
+	.noorpdp-review-carousel__track {
 		display: flex;
 		gap: 1.5rem;
 		padding: 0.25rem 0.25rem 1rem;
 	}
 
-	.noortemplates-review-carousel__slide {
+	.noorpdp-review-carousel__slide {
 		flex: 0 0 auto;
 		box-sizing: border-box;
 		width: 100%;
@@ -71,7 +71,7 @@
 		}
 	}
 
-	.noortemplates-review-carousel__card {
+	.noorpdp-review-carousel__card {
 		height: 100%;
 		box-sizing: border-box;
 		padding: 1.75rem;
@@ -92,13 +92,13 @@
 	// Color intentionally `inherit`, not hardcoded — the block's own Color
 	// support applies on the wrapper, and a directly-targeted rule here
 	// would always beat that inherited value.
-	.noortemplates-review-carousel__content {
+	.noorpdp-review-carousel__content {
 		margin: 0 0 1.5rem;
 		line-height: 1.6;
 		color: inherit;
 	}
 
-	.noortemplates-review-carousel__footer {
+	.noorpdp-review-carousel__footer {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -107,7 +107,7 @@
 		border-top: 1px solid #f0f0f0;
 	}
 
-	.noortemplates-review-carousel__verified {
+	.noorpdp-review-carousel__verified {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
@@ -120,14 +120,14 @@
 		}
 	}
 
-	.noortemplates-review-carousel__name {
+	.noorpdp-review-carousel__name {
 		margin-left: auto;
 		font-weight: 700;
 		font-size: 0.9rem;
 		white-space: nowrap;
 	}
 
-	.noortemplates-review-carousel__arrow {
+	.noorpdp-review-carousel__arrow {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
@@ -179,7 +179,7 @@
 		}
 	}
 
-	.noortemplates-review-carousel__dots {
+	.noorpdp-review-carousel__dots {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -187,7 +187,7 @@
 		margin-top: 1rem;
 	}
 
-	.noortemplates-review-carousel__dot {
+	.noorpdp-review-carousel__dot {
 		width: 8px;
 		height: 8px;
 		padding: 0;

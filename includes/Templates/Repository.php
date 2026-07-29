@@ -2,14 +2,14 @@
 /**
  * Template repository.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Templates;
+namespace NoorPDP\Templates;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Templates\Sources\Local_Source;
-use NoorTemplates\Templates\Sources\Cloud_Source;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Templates\Sources\Local_Source;
+use NoorPDP\Templates\Sources\Cloud_Source;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,7 +39,7 @@ class Repository {
 		 *
 		 * @param Source[] $sources Registered sources.
 		 */
-		$sources = apply_filters( 'noortemplates/template_sources', $sources );
+		$sources = apply_filters( 'noorpdp/template_sources', $sources );
 
 		return array_filter(
 			(array) $sources,
@@ -83,7 +83,7 @@ class Repository {
 		 *
 		 * @param array[] $templates Templates keyed by name.
 		 */
-		$templates = apply_filters( 'noortemplates/library_templates', $templates );
+		$templates = apply_filters( 'noorpdp/library_templates', $templates );
 
 		return array_values( $this->filter_templates( $templates, $args ) );
 	}

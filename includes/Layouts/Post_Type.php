@@ -2,13 +2,13 @@
 /**
  * Product Layout custom post type.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Layouts;
+namespace NoorPDP\Layouts;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Admin\Dashboard;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Admin\Dashboard;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,7 +25,7 @@ class Post_Type {
 	/**
 	 * Post type slug.
 	 */
-	const SLUG = 'noortemplates_layout';
+	const SLUG = 'noorpdp_layout';
 
 	/**
 	 * Hooks post type registration.
@@ -44,13 +44,13 @@ class Post_Type {
 			self::SLUG,
 			array(
 				'labels'          => array(
-					'name'          => __( 'Product Layouts', 'noortemplates' ),
-					'singular_name' => __( 'Product Layout', 'noortemplates' ),
-					'add_new_item'  => __( 'Add New Product Layout', 'noortemplates' ),
-					'edit_item'     => __( 'Edit Product Layout', 'noortemplates' ),
-					'all_items'     => __( 'Product Layouts', 'noortemplates' ),
-					'search_items'  => __( 'Search Product Layouts', 'noortemplates' ),
-					'not_found'     => __( 'No product layouts found.', 'noortemplates' ),
+					'name'          => __( 'Product Layouts', 'noorpdp' ),
+					'singular_name' => __( 'Product Layout', 'noorpdp' ),
+					'add_new_item'  => __( 'Add New Product Layout', 'noorpdp' ),
+					'edit_item'     => __( 'Edit Product Layout', 'noorpdp' ),
+					'all_items'     => __( 'Product Layouts', 'noorpdp' ),
+					'search_items'  => __( 'Search Product Layouts', 'noorpdp' ),
+					'not_found'     => __( 'No product layouts found.', 'noorpdp' ),
 				),
 				'public'          => false,
 				'show_ui'         => true,

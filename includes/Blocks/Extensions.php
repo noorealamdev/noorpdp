@@ -2,17 +2,17 @@
 /**
  * Universal visibility/animation block extensions.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Blocks;
+namespace NoorPDP\Blocks;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Applies shared cross-cutting behaviour to every NoorTemplates block's
+ * Applies shared cross-cutting behaviour to every NoorPDP block's
  * rendered output: visibility/animation attributes, and fluid sizing for
  * large padding/font-size values.
  *
@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  * Fluid sizing: unlike visibility/animation, this rewrites styles already
  * present in the rendered HTML (inline styles baked in at save time for
  * static blocks, or generated at render time for dynamic ones), so
- * apply_fluid_sizing() runs for every NoorTemplates block regardless of
+ * apply_fluid_sizing() runs for every NoorPDP block regardless of
  * whether it is static or dynamic.
  */
 class Extensions {
@@ -71,14 +71,14 @@ class Extensions {
 
 	/**
 	 * Injects visibility classes and animation data attributes into a
-	 * dynamic NoorTemplates block's outer tag.
+	 * dynamic NoorPDP block's outer tag.
 	 *
 	 * @param string $block_content Rendered block HTML.
 	 * @param array  $block         Parsed block, including `blockName` and `attrs`.
 	 * @return string
 	 */
 	public function apply_extensions( $block_content, $block ) {
-		if ( empty( $block['blockName'] ) || 0 !== strpos( $block['blockName'], 'noortemplates/' ) ) {
+		if ( empty( $block['blockName'] ) || 0 !== strpos( $block['blockName'], 'noorpdp/' ) ) {
 			return $block_content;
 		}
 
@@ -93,21 +93,21 @@ class Extensions {
 		}
 
 		$attrs      = isset( $block['attrs'] ) ? (array) $block['attrs'] : array();
-		$visibility = isset( $attrs['noortemplatesVisibility'] ) ? (array) $attrs['noortemplatesVisibility'] : array();
-		$animation  = isset( $attrs['noortemplatesAnimation'] ) ? (array) $attrs['noortemplatesAnimation'] : array();
+		$visibility = isset( $attrs['noorpdpVisibility'] ) ? (array) $attrs['noorpdpVisibility'] : array();
+		$animation  = isset( $attrs['noorpdpAnimation'] ) ? (array) $attrs['noorpdpAnimation'] : array();
 
 		$classes = array();
 
 		if ( ! empty( $visibility['hideOnMobile'] ) ) {
-			$classes[] = 'noortemplates-hide-mobile';
+			$classes[] = 'noorpdp-hide-mobile';
 		}
 
 		if ( ! empty( $visibility['hideOnTablet'] ) ) {
-			$classes[] = 'noortemplates-hide-tablet';
+			$classes[] = 'noorpdp-hide-tablet';
 		}
 
 		if ( ! empty( $visibility['hideOnDesktop'] ) ) {
-			$classes[] = 'noortemplates-hide-desktop';
+			$classes[] = 'noorpdp-hide-desktop';
 		}
 
 		$animation_type = isset( $animation['type'] ) ? $animation['type'] : 'none';
@@ -127,9 +127,9 @@ class Extensions {
 		}
 
 		if ( ! empty( $animation_type ) && 'none' !== $animation_type ) {
-			$tags->set_attribute( 'data-noortemplates-animation', $animation_type );
-			$tags->set_attribute( 'data-noortemplates-duration', isset( $animation['duration'] ) ? (int) $animation['duration'] : 600 );
-			$tags->set_attribute( 'data-noortemplates-delay', isset( $animation['delay'] ) ? (int) $animation['delay'] : 0 );
+			$tags->set_attribute( 'data-noorpdp-animation', $animation_type );
+			$tags->set_attribute( 'data-noorpdp-duration', isset( $animation['duration'] ) ? (int) $animation['duration'] : 600 );
+			$tags->set_attribute( 'data-noorpdp-delay', isset( $animation['delay'] ) ? (int) $animation['delay'] : 0 );
 		}
 
 		return $tags->get_updated_html();
@@ -153,7 +153,7 @@ class Extensions {
 	 * @return string
 	 */
 	public function apply_fluid_sizing( $block_content, $block ) {
-		if ( empty( $block['blockName'] ) || 0 !== strpos( $block['blockName'], 'noortemplates/' ) ) {
+		if ( empty( $block['blockName'] ) || 0 !== strpos( $block['blockName'], 'noorpdp/' ) ) {
 			return $block_content;
 		}
 

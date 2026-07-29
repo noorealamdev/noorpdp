@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-grid",
+    "name": "noorpdp/product-grid",
     "title": "Product Grid",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "grid-view",
     "description": "Display a responsive grid of WooCommerce products (latest, related, upsells or cross-sells), rendered dynamically so it always stays up to date.",
     "keywords": [
@@ -15,7 +15,7 @@
         "woocommerce"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "relation": {
             "type": "string",
@@ -57,7 +57,7 @@
             "type": "number",
             "default": 1200
         },
-        "noortemplatesVisibility": {
+        "noorpdpVisibility": {
             "type": "object",
             "default": {
                 "hideOnMobile": false,
@@ -65,7 +65,7 @@
                 "hideOnDesktop": false
             }
         },
-        "noortemplatesAnimation": {
+        "noorpdpAnimation": {
             "type": "object",
             "default": {
                 "type": "none",

@@ -18,7 +18,7 @@ function setUnit( timer, unit, value ) {
 }
 
 function showExpired( timer, hideWhenExpired, expiredMessage ) {
-	const wrapper = timer.closest( '.wp-block-noortemplates-urgency' );
+	const wrapper = timer.closest( '.wp-block-noorpdp-urgency' );
 
 	if ( hideWhenExpired ) {
 		if ( wrapper ) {
@@ -31,7 +31,7 @@ function showExpired( timer, hideWhenExpired, expiredMessage ) {
 	// the timer itself, so the countdown label doesn't linger next to the
 	// expired message (e.g. "Sale ends in: This offer has ended.").
 	const message = document.createElement( 'span' );
-	message.className = 'noortemplates-urgency__message';
+	message.className = 'noorpdp-urgency__message';
 	message.textContent = expiredMessage;
 
 	if ( wrapper ) {
@@ -70,5 +70,5 @@ function startCountdown( timer ) {
 }
 
 document
-	.querySelectorAll( '.noortemplates-urgency__timer[data-deadline]' )
+	.querySelectorAll( '.noorpdp-urgency__timer[data-deadline]' )
 	.forEach( startCountdown );

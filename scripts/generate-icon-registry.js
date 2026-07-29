@@ -60,10 +60,10 @@ const php = `<?php
  * own UI) — regenerate with \`node scripts/generate-icon-registry.js\`
  * whenever @wordpress/icons is updated. Do not hand-edit.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\\Blocks;
+namespace NoorPDP\\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 

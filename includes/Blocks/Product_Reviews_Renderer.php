@@ -4,10 +4,10 @@
  * initial server-render and the paginated REST endpoint that powers its
  * "Load more" button — so both use identical markup from one place.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Blocks;
+namespace NoorPDP\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -71,22 +71,22 @@ class Product_Reviews_Renderer {
 
 		ob_start();
 		?>
-		<div class="noortemplates-product-reviews__card">
+		<div class="noorpdp-product-reviews__card">
 			<?php if ( $ratings_enabled ) : ?>
 				<?php echo wc_get_rating_html( $rating ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>
 			<?php endif; ?>
-			<p class="noortemplates-product-reviews__content">
+			<p class="noorpdp-product-reviews__content">
 				<?php echo wp_kses_post( get_comment_text( $comment ) ); ?>
 			</p>
-			<div class="noortemplates-product-reviews__footer">
-				<span class="noortemplates-product-reviews__avatar noortemplates-product-reviews__avatar--palette-<?php echo esc_attr( self::get_avatar_palette_index( $author ) ); ?>">
+			<div class="noorpdp-product-reviews__footer">
+				<span class="noorpdp-product-reviews__avatar noorpdp-product-reviews__avatar--palette-<?php echo esc_attr( self::get_avatar_palette_index( $author ) ); ?>">
 					<?php echo esc_html( self::get_initials( $author ) ); ?>
 				</span>
-				<span class="noortemplates-product-reviews__reviewer">
-					<span class="noortemplates-product-reviews__name"><?php echo esc_html( $author ); ?></span>
+				<span class="noorpdp-product-reviews__reviewer">
+					<span class="noorpdp-product-reviews__name"><?php echo esc_html( $author ); ?></span>
 					<?php if ( $verified ) : ?>
-						<span class="noortemplates-product-reviews__verified">
-							<?php esc_html_e( 'Verified Purchase', 'noortemplates' ); ?>
+						<span class="noorpdp-product-reviews__verified">
+							<?php esc_html_e( 'Verified Purchase', 'noorpdp' ); ?>
 						</span>
 					<?php endif; ?>
 				</span>

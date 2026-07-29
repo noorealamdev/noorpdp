@@ -1,7 +1,7 @@
 // Hidden by default (slid below the viewport) — view.js adds `.is-visible`
 // once the main Add to Cart block scrolls out of view. z-index sits below
 // WordPress's admin bar (99999) but above ordinary page content.
-.wp-block-noortemplates-sticky-add-to-cart {
+.wp-block-noorpdp-sticky-add-to-cart {
 	position: fixed;
 	left: 0;
 	right: 0;
@@ -30,7 +30,7 @@
 		transform: translateY(0);
 	}
 
-	.noortemplates-sticky-add-to-cart__media {
+	.noorpdp-sticky-add-to-cart__media {
 		flex-shrink: 0;
 		width: 3rem;
 		height: 3rem;
@@ -44,7 +44,7 @@
 		}
 	}
 
-	.noortemplates-sticky-add-to-cart__details {
+	.noorpdp-sticky-add-to-cart__details {
 		display: flex;
 		// No longer `flex: 1` — the __center element below now owns the
 		// flexible middle space, so the badge/hook content it holds can
@@ -63,8 +63,8 @@
 
 	// Takes the remaining flexible space between details and the button,
 	// centering whatever it holds (the badge and/or anything added via the
-	// noortemplates/sticky_add_to_cart_details hook) in the middle of the bar.
-	.noortemplates-sticky-add-to-cart__center {
+	// noorpdp/sticky_add_to_cart_details hook) in the middle of the bar.
+	.noorpdp-sticky-add-to-cart__center {
 		display: flex;
 		flex: 1;
 		justify-content: center;
@@ -74,7 +74,7 @@
 	// Color intentionally `inherit`, not hardcoded — the block's own Color
 	// support applies on the wrapper, and a directly-targeted rule here
 	// would always beat that inherited value.
-	.noortemplates-sticky-add-to-cart__name {
+	.noorpdp-sticky-add-to-cart__name {
 		overflow: hidden;
 		color: inherit;
 		font-weight: 600;
@@ -82,7 +82,7 @@
 		white-space: nowrap;
 	}
 
-	.noortemplates-sticky-add-to-cart__price {
+	.noorpdp-sticky-add-to-cart__price {
 		color: inherit;
 		font-size: 0.9em;
 		opacity: 0.8;
@@ -98,8 +98,8 @@
 
 	// Small pill, kept out of the way of the price/name — a merchant sets
 	// this text via the block's own "Badge" panel, or it's populated
-	// programmatically via the noortemplates/sticky_add_to_cart_details hook.
-	.noortemplates-sticky-add-to-cart__badge {
+	// programmatically via the noorpdp/sticky_add_to_cart_details hook.
+	.noorpdp-sticky-add-to-cart__badge {
 		display: inline-flex;
 		align-items: center;
 		width: fit-content;
@@ -113,9 +113,9 @@
 	}
 
 	// Deliberately a fixed accent (not `inherit`), matching the main
-	// block's own .noortemplates-buy-now-button look for visual
+	// block's own .noorpdp-buy-now-button look for visual
 	// consistency between the two.
-	.noortemplates-sticky-add-to-cart__button {
+	.noorpdp-sticky-add-to-cart__button {
 		flex-shrink: 0;
 		padding: 0.5em 1.25em;
 		background-color: #6b7280;
@@ -140,7 +140,7 @@
 	// the button are the essentials or the bar stops fitting comfortably.
 	@media (max-width: 480px) {
 
-		.noortemplates-sticky-add-to-cart__name {
+		.noorpdp-sticky-add-to-cart__name {
 			display: none;
 		}
 	}

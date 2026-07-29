@@ -2,12 +2,12 @@
 /**
  * Frontend single-product template override.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Layouts;
+namespace NoorPDP\Layouts;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,6 +48,6 @@ class Template_Override {
 			return $template;
 		}
 
-		return NOORTEMPLATES_DIR . 'templates/single-product-layout.php';
+		return NOORPDP_DIR . 'templates/single-product-layout.php';
 	}
 }

@@ -71,7 +71,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		let cancelled = false;
 		setReviewsLoading( true );
 
-		apiFetch( { path: `/noortemplates/v1/product-reviews/${ productId }/list` } )
+		apiFetch( { path: `/noorpdp/v1/product-reviews/${ productId }/list` } )
 			.then( ( results ) => {
 				if ( ! cancelled ) {
 					setReviews( Array.isArray( results ) ? results : [] );
@@ -104,9 +104,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Reviews', 'noortemplates' ) } initialOpen>
+				<PanelBody title={ __( 'Reviews', 'noorpdp' ) } initialOpen>
 					<ComboboxControl
-						label={ __( 'Product', 'noortemplates' ) }
+						label={ __( 'Product', 'noorpdp' ) }
 						value={ productId ? String( productId ) : null }
 						options={ productOptions }
 						onFilterValueChange={ setProductSearch }
@@ -118,7 +118,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 						help={ __(
 							'Search by product name, then pick reviews below.',
-							'noortemplates'
+							'noorpdp'
 						) }
 					/>
 
@@ -128,7 +128,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'This product has no reviews yet.',
-								'noortemplates'
+								'noorpdp'
 							) }
 						</Notice>
 					) }
@@ -148,26 +148,26 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 						) ) }
 				</PanelBody>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -181,20 +181,20 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<WooPlaceholder
 				icon="slides"
-				label={ __( 'Review Carousel', 'noortemplates' ) }
+				label={ __( 'Review Carousel', 'noorpdp' ) }
 				instructions={
 					selectedReviews.length
 						? sprintf(
 								/* translators: %d: number of selected reviews. */
 								__(
 									'%d review(s) selected. Preview appears on the front end.',
-									'noortemplates'
+									'noorpdp'
 								),
 								selectedReviews.length
 						  )
 						: __(
 								'Pick a product and select reviews in the block settings panel.',
-								'noortemplates'
+								'noorpdp'
 						  )
 				}
 			/>

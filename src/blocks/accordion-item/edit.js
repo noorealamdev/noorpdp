@@ -16,26 +16,26 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'noortemplates-accordion__panel' },
+		{ className: 'noorpdp-accordion__panel' },
 		{ template: TEMPLATE }
 	);
 
 	return (
 		<div { ...blockProps }>
-			<div className="noortemplates-accordion__heading">
-				<div className="noortemplates-accordion__toggle">
+			<div className="noorpdp-accordion__heading">
+				<div className="noorpdp-accordion__toggle">
 					<RichText
 						tagName="span"
-						className="noortemplates-accordion__title"
+						className="noorpdp-accordion__title"
 						value={ title }
 						onChange={ ( value ) =>
 							setAttributes( { title: value } )
 						}
-						placeholder={ __( 'Add a title…', 'noortemplates' ) }
+						placeholder={ __( 'Add a title…', 'noorpdp' ) }
 						allowedFormats={ [ 'core/bold', 'core/italic' ] }
 					/>
 					<span
-						className="noortemplates-accordion__icon"
+						className="noorpdp-accordion__icon"
 						aria-hidden="true"
 					></span>
 				</div>

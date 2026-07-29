@@ -25,7 +25,7 @@ const v1 = {
 		const { allowMultiple } = attributes;
 
 		const blockProps = useBlockProps.save( {
-			'data-wp-interactive': 'noortemplates/accordion',
+			'data-wp-interactive': 'noorpdp/accordion',
 			'data-wp-context': JSON.stringify( {
 				open: { ids: [] },
 				allowMultiple,

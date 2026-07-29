@@ -1,7 +1,7 @@
 function openReviewModal( modal ) {
 	modal.hidden = false;
 	modal.setAttribute( 'aria-hidden', 'false' );
-	document.body.classList.add( 'noortemplates-modal-open' );
+	document.body.classList.add( 'noorpdp-modal-open' );
 
 	const firstField = modal.querySelector( 'select, textarea, input:not([type="hidden"])' );
 
@@ -13,7 +13,7 @@ function openReviewModal( modal ) {
 function closeReviewModal( modal ) {
 	modal.hidden = true;
 	modal.setAttribute( 'aria-hidden', 'true' );
-	document.body.classList.remove( 'noortemplates-modal-open' );
+	document.body.classList.remove( 'noorpdp-modal-open' );
 }
 
 document.addEventListener( 'click', ( event ) => {
@@ -34,7 +34,7 @@ document.addEventListener( 'click', ( event ) => {
 	const modalCloser = event.target.closest( '[data-review-modal-close]' );
 
 	if ( modalCloser ) {
-		const modal = modalCloser.closest( '.noortemplates-product-reviews__modal' );
+		const modal = modalCloser.closest( '.noorpdp-product-reviews__modal' );
 
 		if ( modal ) {
 			closeReviewModal( modal );
@@ -44,7 +44,7 @@ document.addEventListener( 'click', ( event ) => {
 	}
 
 	const loadMoreButton = event.target.closest(
-		'.noortemplates-product-reviews__load-more'
+		'.noorpdp-product-reviews__load-more'
 	);
 
 	if ( ! loadMoreButton ) {
@@ -52,9 +52,9 @@ document.addEventListener( 'click', ( event ) => {
 	}
 
 	const wrapper = loadMoreButton.closest(
-		'.wp-block-noortemplates-product-reviews'
+		'.wp-block-noorpdp-product-reviews'
 	);
-	const grid = wrapper && wrapper.querySelector( '.noortemplates-product-reviews__grid' );
+	const grid = wrapper && wrapper.querySelector( '.noorpdp-product-reviews__grid' );
 
 	if ( ! grid ) {
 		return;
@@ -88,7 +88,7 @@ document.addEventListener( 'click', ( event ) => {
 				loadMoreButton.textContent = originalText;
 			} else {
 				loadMoreButton
-					.closest( '.noortemplates-product-reviews__load-more-wrap' )
+					.closest( '.noorpdp-product-reviews__load-more-wrap' )
 					.remove();
 			}
 		} )
@@ -104,7 +104,7 @@ document.addEventListener( 'keydown', ( event ) => {
 	}
 
 	const openModal = document.querySelector(
-		'.noortemplates-product-reviews__modal:not([hidden])'
+		'.noorpdp-product-reviews__modal:not([hidden])'
 	);
 
 	if ( openModal ) {

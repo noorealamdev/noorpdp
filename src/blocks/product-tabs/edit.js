@@ -9,26 +9,26 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...useBlockProps() }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -42,10 +42,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<WooPlaceholder
 				icon="editor-table"
-				label={ __( 'Product Tabs', 'noortemplates' ) }
+				label={ __( 'Product Tabs', 'noorpdp' ) }
 				instructions={ __(
 					'Displays the description, additional information and reviews tabs. Preview appears on the product page.',
-					'noortemplates'
+					'noorpdp'
 				) }
 			/>
 		</div>

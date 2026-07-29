@@ -27,7 +27,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		setAttributes( {
 			items: [
 				...items,
-				{ icon: 'nt-shieldCheck', label: __( 'New badge', 'noortemplates' ) },
+				{ icon: 'nt-shieldCheck', label: __( 'New badge', 'noorpdp' ) },
 			],
 		} );
 
@@ -37,26 +37,26 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -70,17 +70,17 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<ul
 				className={
-					'noortemplates-trust-badges__list' +
+					'noorpdp-trust-badges__list' +
 					( boxed ? ' is-boxed' : '' )
 				}
 				style={ boxed ? { maxWidth: boxedWidth } : undefined }
 			>
 				{ items.map( ( item, index ) => (
-					<li className="noortemplates-trust-badges__item" key={ index }>
+					<li className="noorpdp-trust-badges__item" key={ index }>
 						<Button
-							className="noortemplates-trust-badges__remove"
+							className="noorpdp-trust-badges__remove"
 							icon={ closeSmall }
-							label={ __( 'Remove badge', 'noortemplates' ) }
+							label={ __( 'Remove badge', 'noorpdp' ) }
 							onClick={ () => removeItem( index ) }
 						/>
 						<IconPicker
@@ -92,18 +92,18 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						<RichText
 							tagName="span"
-							className="noortemplates-trust-badges__label"
+							className="noorpdp-trust-badges__label"
 							value={ item.label }
 							onChange={ ( value ) =>
 								updateItem( index, 'label', value )
 							}
-							placeholder={ __( 'Label', 'noortemplates' ) }
+							placeholder={ __( 'Label', 'noorpdp' ) }
 						/>
 					</li>
 				) ) }
 			</ul>
 			<Button variant="secondary" onClick={ addItem }>
-				{ __( 'Add badge', 'noortemplates' ) }
+				{ __( 'Add badge', 'noorpdp' ) }
 			</Button>
 		</div>
 	);

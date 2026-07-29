@@ -1,14 +1,14 @@
 <?php
 /**
- * Fallback single-product template that renders a NoorTemplates Product
+ * Fallback single-product template that renders a NoorPDP Product
  * Layout in place of the theme's default, mirroring the structure of
  * WooCommerce's own templates/single-product.php so theme header, footer
  * and sidebar wrappers stay intact.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-use NoorTemplates\Layouts\Resolver;
+use NoorPDP\Layouts\Resolver;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -26,15 +26,15 @@ while ( have_posts() ) :
 	// Mirrors WooCommerce's own wrapping hooks around content-single-product
 	// (empty by default) so plugins that hook onto them — structured data,
 	// "recently viewed" trackers, page-builder compatibility layers — still
-	// fire around a NoorTemplates layout exactly as they would around the
+	// fire around a NoorPDP layout exactly as they would around the
 	// theme's default template.
 	do_action( 'woocommerce_before_single_product' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook.
 
-	$noortemplates_layout = Resolver::instance()->get_layout( get_the_ID() );
+	$noorpdp_layout = Resolver::instance()->get_layout( get_the_ID() );
 
-	if ( $noortemplates_layout ) {
-		echo '<div class="noortemplates-layout">';
-		echo do_blocks( $noortemplates_layout->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- block content is sanitized like any other post content.
+	if ( $noorpdp_layout ) {
+		echo '<div class="noorpdp-layout">';
+		echo do_blocks( $noorpdp_layout->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- block content is sanitized like any other post content.
 		echo '</div>';
 	}
 

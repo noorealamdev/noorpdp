@@ -3,6 +3,6 @@ import { registerPlugin } from '@wordpress/plugins';
 import Library from './library';
 import './editor.scss';
 
-registerPlugin( 'noortemplates-library', {
+registerPlugin( 'noorpdp-library', {
 	render: Library,
 } );

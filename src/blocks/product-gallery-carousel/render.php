@@ -6,7 +6,7 @@
  * self-contained carousel, instead of wrapping WooCommerce's own
  * flexslider-based gallery output.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  *
  * @var array $attributes Block attributes.
  */
@@ -24,46 +24,46 @@ if ( ! $product ) {
 	return;
 }
 
-$noortemplates_image_ids = array();
-$noortemplates_featured  = $product->get_image_id();
+$noorpdp_image_ids = array();
+$noorpdp_featured  = $product->get_image_id();
 
-if ( $noortemplates_featured ) {
-	$noortemplates_image_ids[] = (int) $noortemplates_featured;
+if ( $noorpdp_featured ) {
+	$noorpdp_image_ids[] = (int) $noorpdp_featured;
 }
 
-foreach ( $product->get_gallery_image_ids() as $noortemplates_gallery_id ) {
-	$noortemplates_image_ids[] = (int) $noortemplates_gallery_id;
+foreach ( $product->get_gallery_image_ids() as $noorpdp_gallery_id ) {
+	$noorpdp_image_ids[] = (int) $noorpdp_gallery_id;
 }
 
-$noortemplates_image_ids = array_values( array_unique( array_filter( $noortemplates_image_ids ) ) );
+$noorpdp_image_ids = array_values( array_unique( array_filter( $noorpdp_image_ids ) ) );
 
-$noortemplates_show_thumbs = ! isset( $attributes['showThumbnails'] ) || (bool) $attributes['showThumbnails'];
-$noortemplates_multiple    = count( $noortemplates_image_ids ) > 1;
-$noortemplates_thumb_size  = wc_get_image_size( 'gallery_thumbnail' );
-$noortemplates_wrapper     = get_block_wrapper_attributes();
+$noorpdp_show_thumbs = ! isset( $attributes['showThumbnails'] ) || (bool) $attributes['showThumbnails'];
+$noorpdp_multiple    = count( $noorpdp_image_ids ) > 1;
+$noorpdp_thumb_size  = wc_get_image_size( 'gallery_thumbnail' );
+$noorpdp_wrapper     = get_block_wrapper_attributes();
 ?>
-<div <?php echo $noortemplates_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>>
-	<div class="noortemplates-product-gallery-carousel">
-		<div class="noortemplates-product-gallery-carousel__stage">
-			<div class="noortemplates-product-gallery-carousel__viewport">
-				<div class="noortemplates-product-gallery-carousel__track">
-					<?php if ( empty( $noortemplates_image_ids ) ) : ?>
-						<div class="noortemplates-product-gallery-carousel__slide">
-							<div class="noortemplates-product-gallery-carousel__image-wrap">
+<div <?php echo $noorpdp_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>>
+	<div class="noorpdp-product-gallery-carousel">
+		<div class="noorpdp-product-gallery-carousel__stage">
+			<div class="noorpdp-product-gallery-carousel__viewport">
+				<div class="noorpdp-product-gallery-carousel__track">
+					<?php if ( empty( $noorpdp_image_ids ) ) : ?>
+						<div class="noorpdp-product-gallery-carousel__slide">
+							<div class="noorpdp-product-gallery-carousel__image-wrap">
 								<?php echo wc_placeholder_img( 'woocommerce_single' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>
 							</div>
 						</div>
 					<?php else : ?>
-						<?php foreach ( $noortemplates_image_ids as $noortemplates_id ) : ?>
-							<div class="noortemplates-product-gallery-carousel__slide" data-image-id="<?php echo esc_attr( $noortemplates_id ); ?>">
-								<div class="noortemplates-product-gallery-carousel__image-wrap">
+						<?php foreach ( $noorpdp_image_ids as $noorpdp_id ) : ?>
+							<div class="noorpdp-product-gallery-carousel__slide" data-image-id="<?php echo esc_attr( $noorpdp_id ); ?>">
+								<div class="noorpdp-product-gallery-carousel__image-wrap">
 									<?php
 									echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped.
-										$noortemplates_id,
+										$noorpdp_id,
 										'woocommerce_single',
 										false,
 										array(
-											'class'     => 'noortemplates-product-gallery-carousel__image',
+											'class'     => 'noorpdp-product-gallery-carousel__image',
 											// Otherwise the browser's native "drag this image out"
 											// gesture competes with (and can override) our own
 											// pointer-based carousel drag.
@@ -78,52 +78,52 @@ $noortemplates_wrapper     = get_block_wrapper_attributes();
 				</div>
 			</div>
 
-			<?php if ( $noortemplates_multiple ) : ?>
-				<button type="button" class="noortemplates-product-gallery-carousel__arrow noortemplates-product-gallery-carousel__arrow--prev" aria-label="<?php echo esc_attr__( 'Previous image', 'noortemplates' ); ?>">
+			<?php if ( $noorpdp_multiple ) : ?>
+				<button type="button" class="noorpdp-product-gallery-carousel__arrow noorpdp-product-gallery-carousel__arrow--prev" aria-label="<?php echo esc_attr__( 'Previous image', 'noorpdp' ); ?>">
 					<span aria-hidden="true">&#10094;</span>
 				</button>
-				<button type="button" class="noortemplates-product-gallery-carousel__arrow noortemplates-product-gallery-carousel__arrow--next" aria-label="<?php echo esc_attr__( 'Next image', 'noortemplates' ); ?>">
+				<button type="button" class="noorpdp-product-gallery-carousel__arrow noorpdp-product-gallery-carousel__arrow--next" aria-label="<?php echo esc_attr__( 'Next image', 'noorpdp' ); ?>">
 					<span aria-hidden="true">&#10095;</span>
 				</button>
 			<?php endif; ?>
 		</div>
 
-		<?php if ( $noortemplates_multiple && $noortemplates_show_thumbs ) : ?>
-			<div class="noortemplates-product-gallery-carousel__thumbs">
-				<?php foreach ( $noortemplates_image_ids as $noortemplates_index => $noortemplates_id ) : ?>
+		<?php if ( $noorpdp_multiple && $noorpdp_show_thumbs ) : ?>
+			<div class="noorpdp-product-gallery-carousel__thumbs">
+				<?php foreach ( $noorpdp_image_ids as $noorpdp_index => $noorpdp_id ) : ?>
 					<?php
 					/* translators: %d: image number in the gallery. */
-					$noortemplates_thumb_label = sprintf( __( 'Show image %d', 'noortemplates' ), $noortemplates_index + 1 );
+					$noorpdp_thumb_label = sprintf( __( 'Show image %d', 'noorpdp' ), $noorpdp_index + 1 );
 					?>
 					<button
 						type="button"
-						class="noortemplates-product-gallery-carousel__thumb<?php echo 0 === $noortemplates_index ? ' is-active' : ''; ?>"
-						data-slide-index="<?php echo esc_attr( $noortemplates_index ); ?>"
-						aria-label="<?php echo esc_attr( $noortemplates_thumb_label ); ?>"
+						class="noorpdp-product-gallery-carousel__thumb<?php echo 0 === $noorpdp_index ? ' is-active' : ''; ?>"
+						data-slide-index="<?php echo esc_attr( $noorpdp_index ); ?>"
+						aria-label="<?php echo esc_attr( $noorpdp_thumb_label ); ?>"
 					>
 						<?php
 						echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped.
-							$noortemplates_id,
-							array( $noortemplates_thumb_size['width'], $noortemplates_thumb_size['height'] ),
+							$noorpdp_id,
+							array( $noorpdp_thumb_size['width'], $noorpdp_thumb_size['height'] ),
 							false,
-							array( 'class' => 'noortemplates-product-gallery-carousel__thumb-image' )
+							array( 'class' => 'noorpdp-product-gallery-carousel__thumb-image' )
 						);
 						?>
 					</button>
 				<?php endforeach; ?>
 			</div>
-		<?php elseif ( $noortemplates_multiple ) : ?>
-			<div class="noortemplates-product-gallery-carousel__dots">
-				<?php foreach ( $noortemplates_image_ids as $noortemplates_index => $noortemplates_id ) : ?>
+		<?php elseif ( $noorpdp_multiple ) : ?>
+			<div class="noorpdp-product-gallery-carousel__dots">
+				<?php foreach ( $noorpdp_image_ids as $noorpdp_index => $noorpdp_id ) : ?>
 					<?php
 					/* translators: %d: image number in the gallery. */
-					$noortemplates_dot_label = sprintf( __( 'Show image %d', 'noortemplates' ), $noortemplates_index + 1 );
+					$noorpdp_dot_label = sprintf( __( 'Show image %d', 'noorpdp' ), $noorpdp_index + 1 );
 					?>
 					<button
 						type="button"
-						class="noortemplates-product-gallery-carousel__dot<?php echo 0 === $noortemplates_index ? ' is-active' : ''; ?>"
-						data-slide-index="<?php echo esc_attr( $noortemplates_index ); ?>"
-						aria-label="<?php echo esc_attr( $noortemplates_dot_label ); ?>"
+						class="noorpdp-product-gallery-carousel__dot<?php echo 0 === $noorpdp_index ? ' is-active' : ''; ?>"
+						data-slide-index="<?php echo esc_attr( $noorpdp_index ); ?>"
+						aria-label="<?php echo esc_attr( $noorpdp_dot_label ); ?>"
 					></button>
 				<?php endforeach; ?>
 			</div>

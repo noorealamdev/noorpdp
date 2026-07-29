@@ -2,13 +2,12 @@
 /**
  * Product and product category Layout assignment UI.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Layouts;
+namespace NoorPDP\Layouts;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Licensing\Gate;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -40,8 +39,8 @@ class Meta_Box {
 	 */
 	public function register_meta_box() {
 		add_meta_box(
-			'noortemplates-layout',
-			__( 'Product Page Template', 'noortemplates' ),
+			'noorpdp-layout',
+			__( 'Product Page Template', 'noorpdp' ),
 			array( $this, 'render_meta_box' ),
 			'product',
 			'side',
@@ -77,7 +76,7 @@ class Meta_Box {
 	private function render_select( $name, $selected ) {
 		?>
 		<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" style="width:100%;">
-			<option value="0"><?php esc_html_e( '— Default (theme/WooCommerce) —', 'noortemplates' ); ?></option>
+			<option value="0"><?php esc_html_e( '— Default (theme/WooCommerce) —', 'noorpdp' ); ?></option>
 			<?php foreach ( $this->get_layouts() as $layout ) : ?>
 				<option value="<?php echo esc_attr( $layout->ID ); ?>" <?php selected( (int) $selected, $layout->ID ); ?>>
 					<?php echo esc_html( $layout->post_title ); ?>
@@ -94,67 +93,15 @@ class Meta_Box {
 	 * @return void
 	 */
 	public function render_meta_box( $post ) {
-		wp_nonce_field( 'noortemplates_layout_meta', 'noortemplates_layout_nonce' );
+		wp_nonce_field( 'noorpdp_layout_meta', 'noorpdp_layout_nonce' );
 
 		$selected = get_post_meta( $post->ID, Resolver::PRODUCT_META_KEY, true );
 
-		$this->render_select( 'noortemplates_layout_id', (int) $selected );
+		$this->render_select( 'noorpdp_layout_id', (int) $selected );
 		?>
 		<p class="description">
-			<?php esc_html_e( 'Replace this product\'s page with a NoorTemplates layout.', 'noortemplates' ); ?>
+			<?php esc_html_e( 'Replace this product\'s page with a NoorPDP layout.', 'noorpdp' ); ?>
 		</p>
-		<hr />
-		<?php if ( Gate::has_feature( 'split_test' ) ) : ?>
-			<?php
-			$split_enabled = '1' === get_post_meta( $post->ID, Split_Test::ENABLED_META_KEY, true );
-			$variant_b     = get_post_meta( $post->ID, Split_Test::VARIANT_B_META_KEY, true );
-			$ratio         = get_post_meta( $post->ID, Split_Test::RATIO_META_KEY, true );
-			?>
-			<p>
-				<label>
-					<input type="checkbox" name="noortemplates_split_enabled" value="1" <?php checked( $split_enabled ); ?> />
-					<?php esc_html_e( 'Split test against a second layout', 'noortemplates' ); ?>
-				</label>
-			</p>
-			<p>
-				<label for="noortemplates_layout_id_b"><?php esc_html_e( 'Variant B', 'noortemplates' ); ?></label>
-				<?php $this->render_select( 'noortemplates_layout_id_b', (int) $variant_b ); ?>
-			</p>
-			<p>
-				<label for="noortemplates_split_ratio"><?php esc_html_e( 'Traffic to Variant B (%)', 'noortemplates' ); ?></label>
-				<input
-					type="number"
-					name="noortemplates_split_ratio"
-					id="noortemplates_split_ratio"
-					min="1"
-					max="99"
-					value="<?php echo esc_attr( $ratio ? (int) $ratio : 50 ); ?>"
-					style="width:100%;"
-				/>
-			</p>
-			<p class="description">
-				<?php esc_html_e( 'Visitors are split between the layout above (Variant A) and Variant B, and stuck with a cookie. Results appear under NoorTemplates → Split Tests.', 'noortemplates' ); ?>
-			</p>
-		<?php else : ?>
-			<p>
-				<label>
-					<input type="checkbox" disabled="disabled" />
-					<?php esc_html_e( 'Split test against a second layout', 'noortemplates' ); ?>
-					<span style="display:inline-block;padding:1px 6px;margin-left:4px;background:#1c1c1c;border-radius:999px;color:#fff;font-size:10px;font-weight:600;text-transform:uppercase;vertical-align:middle;">
-						<?php esc_html_e( 'Pro', 'noortemplates' ); ?>
-					</span>
-				</label>
-			</p>
-			<p class="description">
-				<?php
-				printf(
-					/* translators: %s: "Upgrade to Pro" link */
-					esc_html__( 'Split testing requires NoorTemplates Pro. %s', 'noortemplates' ),
-					'<a href="' . esc_url( NOORTEMPLATES_CHECKOUT_URL ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Upgrade to Pro', 'noortemplates' ) . '</a>'
-				);
-				?>
-			</p>
-		<?php endif; ?>
 		<?php
 	}
 
@@ -166,8 +113,8 @@ class Meta_Box {
 	 */
 	public function save_meta_box( $post_id ) {
 		if (
-			! isset( $_POST['noortemplates_layout_nonce'] )
-			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['noortemplates_layout_nonce'] ) ), 'noortemplates_layout_meta' )
+			! isset( $_POST['noorpdp_layout_nonce'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['noorpdp_layout_nonce'] ) ), 'noorpdp_layout_meta' )
 		) {
 			return;
 		}
@@ -176,40 +123,13 @@ class Meta_Box {
 			return;
 		}
 
-		$layout_id = isset( $_POST['noortemplates_layout_id'] ) ? absint( $_POST['noortemplates_layout_id'] ) : 0;
+		$layout_id = isset( $_POST['noorpdp_layout_id'] ) ? absint( $_POST['noorpdp_layout_id'] ) : 0;
 
 		if ( $layout_id ) {
 			update_post_meta( $post_id, Resolver::PRODUCT_META_KEY, $layout_id );
 		} else {
 			delete_post_meta( $post_id, Resolver::PRODUCT_META_KEY );
 		}
-
-		// Without the split_test feature the fields are rendered disabled
-		// (so nothing is posted for them) — skip entirely rather than
-		// treat "not posted" as "user unchecked it", which would silently
-		// wipe an existing split-test configuration just because the
-		// license lapsed before someone next saved the product.
-		if ( ! Gate::has_feature( 'split_test' ) ) {
-			return;
-		}
-
-		if ( ! empty( $_POST['noortemplates_split_enabled'] ) ) {
-			update_post_meta( $post_id, Split_Test::ENABLED_META_KEY, '1' );
-		} else {
-			delete_post_meta( $post_id, Split_Test::ENABLED_META_KEY );
-		}
-
-		$variant_b = isset( $_POST['noortemplates_layout_id_b'] ) ? absint( $_POST['noortemplates_layout_id_b'] ) : 0;
-
-		if ( $variant_b ) {
-			update_post_meta( $post_id, Split_Test::VARIANT_B_META_KEY, $variant_b );
-		} else {
-			delete_post_meta( $post_id, Split_Test::VARIANT_B_META_KEY );
-		}
-
-		// Never trust the posted value to already be within range.
-		$ratio = isset( $_POST['noortemplates_split_ratio'] ) ? absint( $_POST['noortemplates_split_ratio'] ) : 50;
-		update_post_meta( $post_id, Split_Test::RATIO_META_KEY, max( 1, min( 99, $ratio ) ) );
 	}
 
 	/**
@@ -220,16 +140,16 @@ class Meta_Box {
 	 */
 	public function render_term_edit_field( $term ) {
 		$selected = get_term_meta( $term->term_id, Resolver::CATEGORY_META_KEY, true );
-		wp_nonce_field( 'noortemplates_term_layout_meta', 'noortemplates_term_layout_nonce' );
+		wp_nonce_field( 'noorpdp_term_layout_meta', 'noorpdp_term_layout_nonce' );
 		?>
 		<tr class="form-field">
 			<th scope="row">
-				<label for="noortemplates_layout_id"><?php esc_html_e( 'Default Product Page Template', 'noortemplates' ); ?></label>
+				<label for="noorpdp_layout_id"><?php esc_html_e( 'Default Product Page Template', 'noorpdp' ); ?></label>
 			</th>
 			<td>
-				<?php $this->render_select( 'noortemplates_layout_id', (int) $selected ); ?>
+				<?php $this->render_select( 'noorpdp_layout_id', (int) $selected ); ?>
 				<p class="description">
-					<?php esc_html_e( 'Used for products in this category that do not have their own template selected.', 'noortemplates' ); ?>
+					<?php esc_html_e( 'Used for products in this category that do not have their own template selected.', 'noorpdp' ); ?>
 				</p>
 			</td>
 		</tr>
@@ -242,11 +162,11 @@ class Meta_Box {
 	 * @return void
 	 */
 	public function render_term_add_field() {
-		wp_nonce_field( 'noortemplates_term_layout_meta', 'noortemplates_term_layout_nonce' );
+		wp_nonce_field( 'noorpdp_term_layout_meta', 'noorpdp_term_layout_nonce' );
 		?>
 		<div class="form-field">
-			<label for="noortemplates_layout_id"><?php esc_html_e( 'Default Product Page Template', 'noortemplates' ); ?></label>
-			<?php $this->render_select( 'noortemplates_layout_id', 0 ); ?>
+			<label for="noorpdp_layout_id"><?php esc_html_e( 'Default Product Page Template', 'noorpdp' ); ?></label>
+			<?php $this->render_select( 'noorpdp_layout_id', 0 ); ?>
 		</div>
 		<?php
 	}
@@ -259,8 +179,8 @@ class Meta_Box {
 	 */
 	public function save_term_field( $term_id ) {
 		if (
-			! isset( $_POST['noortemplates_term_layout_nonce'], $_POST['noortemplates_layout_id'] )
-			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['noortemplates_term_layout_nonce'] ) ), 'noortemplates_term_layout_meta' )
+			! isset( $_POST['noorpdp_term_layout_nonce'], $_POST['noorpdp_layout_id'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['noorpdp_term_layout_nonce'] ) ), 'noorpdp_term_layout_meta' )
 		) {
 			return;
 		}
@@ -269,7 +189,7 @@ class Meta_Box {
 			return;
 		}
 
-		$layout_id = absint( $_POST['noortemplates_layout_id'] );
+		$layout_id = absint( $_POST['noorpdp_layout_id'] );
 
 		if ( $layout_id ) {
 			update_term_meta( $term_id, Resolver::CATEGORY_META_KEY, $layout_id );

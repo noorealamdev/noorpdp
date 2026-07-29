@@ -7,10 +7,10 @@ export default function Edit() {
 		<div { ...useBlockProps() }>
 			<WooPlaceholder
 				icon="align-left"
-				label={ __( 'Product Short Description', 'noortemplates' ) }
+				label={ __( 'Product Short Description', 'noorpdp' ) }
 				instructions={ __(
 					"Displays the current product's short description. Preview appears on the product page.",
-					'noortemplates'
+					'noorpdp'
 				) }
 			/>
 		</div>

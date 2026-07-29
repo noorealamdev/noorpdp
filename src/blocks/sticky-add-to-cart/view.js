@@ -1,4 +1,4 @@
-const FORM_ID = 'noortemplates-product-form';
+const FORM_ID = 'noorpdp-product-form';
 
 /*
  * The sticky bar's Buy Now button lives outside form.cart (it's fixed to
@@ -11,14 +11,14 @@ const FORM_ID = 'noortemplates-product-form';
 function findProductForm() {
 	return (
 		document.querySelector(
-			'.wp-block-noortemplates-product-add-to-cart form.cart'
+			'.wp-block-noorpdp-product-add-to-cart form.cart'
 		) || document.querySelector( 'form.cart' )
 	);
 }
 
 function wireBuyNowButton( bar, form ) {
 	const button = bar.querySelector(
-		'.noortemplates-sticky-add-to-cart__button'
+		'.noorpdp-sticky-add-to-cart__button'
 	);
 
 	if ( ! button || ! form ) {
@@ -41,7 +41,7 @@ function wireBuyNowButton( bar, form ) {
  */
 function watchVisibility( bar ) {
 	const addToCartBlock = document.querySelector(
-		'.wp-block-noortemplates-product-add-to-cart'
+		'.wp-block-noorpdp-product-add-to-cart'
 	);
 
 	if ( addToCartBlock && 'IntersectionObserver' in window ) {
@@ -90,10 +90,10 @@ function watchVariationSync( bar, form ) {
 	}
 
 	const priceEl = bar.querySelector(
-		'.noortemplates-sticky-add-to-cart__price'
+		'.noorpdp-sticky-add-to-cart__price'
 	);
 	const imageEl = bar.querySelector(
-		'.noortemplates-sticky-add-to-cart__media img'
+		'.noorpdp-sticky-add-to-cart__media img'
 	);
 
 	const defaultPriceHtml = priceEl ? priceEl.innerHTML : '';
@@ -129,7 +129,7 @@ function watchVariationSync( bar, form ) {
 }
 
 document
-	.querySelectorAll( '.wp-block-noortemplates-sticky-add-to-cart' )
+	.querySelectorAll( '.wp-block-noorpdp-sticky-add-to-cart' )
 	.forEach( ( bar ) => {
 		const form = findProductForm();
 

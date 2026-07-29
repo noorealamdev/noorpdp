@@ -7,10 +7,10 @@ export default function Edit() {
 		<div { ...useBlockProps() }>
 			<WooPlaceholder
 				icon="cart"
-				label={ __( 'Product Add to Cart', 'noortemplates' ) }
+				label={ __( 'Product Add to Cart', 'noorpdp' ) }
 				instructions={ __(
 					"Displays the current product's add-to-cart form (quantity, variations, stock). Preview appears on the product page.",
-					'noortemplates'
+					'noorpdp'
 				) }
 			/>
 		</div>

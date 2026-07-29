@@ -7,10 +7,10 @@ export default function Edit() {
 		<div { ...useBlockProps() }>
 			<WooPlaceholder
 				icon="arrow-right-alt"
-				label={ __( 'Product Breadcrumbs', 'noortemplates' ) }
+				label={ __( 'Product Breadcrumbs', 'noorpdp' ) }
 				instructions={ __(
 					'Displays the breadcrumb trail for the current product. Preview appears on the product page.',
-					'noortemplates'
+					'noorpdp'
 				) }
 			/>
 		</div>

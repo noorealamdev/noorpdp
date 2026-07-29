@@ -1,4 +1,4 @@
-=== Noor Templates ===
+=== NoorPDP ===
 Contributors: noorealam
 Tags: woocommerce, product page, page builder, blocks, gutenberg
 Requires at least: 6.6
@@ -13,7 +13,7 @@ Build WooCommerce single product pages from premade templates, using blocks that
 
 == Description ==
 
-Noor Templates lets you redesign the WooCommerce single product page without touching a theme file:
+NoorPDP lets you redesign the WooCommerce single product page without touching a theme file:
 
 * Product Title, Rating, Price, Short Description, Add to Cart, Meta, Gallery, Tabs and Breadcrumbs blocks — each a thin wrapper around WooCommerce's own `woocommerce_template_single_*()` functions, so variations, stock handling and reviews keep working exactly as WooCommerce implements them
 * Product Grid and Related Products blocks for latest/related/upsell product listings
@@ -25,20 +25,20 @@ Noor Templates lets you redesign the WooCommerce single product page without tou
 == Installation ==
 
 1. Make sure WooCommerce is installed and active.
-2. Upload the plugin to `/wp-content/plugins/noortemplates`.
+2. Upload the plugin to `/wp-content/plugins/noorpdp`.
 3. Run `npm install && npm run build` inside the plugin directory (development installs only).
 4. Activate the plugin through the Plugins screen.
 5. Go to Products → Add New Product Layout, build a layout, then assign it to a product from the "Product Page Template" box on the product edit screen.
 
 == External services ==
 
-This plugin includes an optional "Cloud Templates" source that can fetch additional premade templates from a remote API. It is **disabled by default** and only activates if a site or another plugin explicitly defines the `NOORTEMPLATES_CLOUD_URL` constant (or hooks the `noortemplates/cloud_api_url` filter) with a real endpoint URL — out of the box, this plugin makes no external requests at all.
+This plugin includes an optional "Cloud Templates" source that can fetch additional premade templates from a remote API. It is **disabled by default** and only activates if a site or another plugin explicitly defines the `NOORPDP_CLOUD_URL` constant (or hooks the `noorpdp/cloud_api_url` filter) with a real endpoint URL — out of the box, this plugin makes no external requests at all.
 
 When enabled, the plugin sends a single `GET` request to the configured URL (no personal or site-identifying data included beyond standard HTTP headers) to retrieve a JSON list of templates, and caches the response in a transient for 12 hours.
 
 == Source Code ==
 
-The JavaScript in the `build/` directory is compiled from the human-readable source in `src/`. Full source, including the build tooling, is available at https://github.com/noorealamdev/noortemplates. To regenerate the compiled files:
+The JavaScript in the `build/` directory is compiled from the human-readable source in `src/`. Full source, including the build tooling, is available at https://github.com/noorealamdev/noorpdp. To regenerate the compiled files:
 
 `npm install && npm run build`
 

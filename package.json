@@ -1,11 +1,11 @@
 {
-	"name": "noortemplates",
+	"name": "noorpdp",
 	"version": "1.0.0",
 	"description": "A WooCommerce product page builder: blocks, layouts and templates for the single product page.",
 	"author": "Noor E Alam",
 	"license": "GPL-2.0-or-later",
 	"files": [
-		"noortemplates.php",
+		"noorpdp.php",
 		"readme.txt",
 		"includes",
 		"templates",

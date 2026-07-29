@@ -8,12 +8,12 @@ export default function save( { attributes } ) {
 		<div { ...blockProps }>
 			<RichText.Content
 				tagName="h2"
-				className="noortemplates-comparison-table__title"
+				className="noorpdp-comparison-table__title"
 				value={ title }
 			/>
 			<div
 				className={
-					'noortemplates-comparison-table__table' +
+					'noorpdp-comparison-table__table' +
 					( boxed ? ' is-boxed' : '' )
 				}
 				style={ boxed ? { maxWidth: boxedWidth } : undefined }

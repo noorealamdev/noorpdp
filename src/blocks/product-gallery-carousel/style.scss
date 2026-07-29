@@ -1,10 +1,10 @@
-.wp-block-noortemplates-product-gallery-carousel {
+.wp-block-noorpdp-product-gallery-carousel {
 
-	.noortemplates-product-gallery-carousel__stage {
+	.noorpdp-product-gallery-carousel__stage {
 		position: relative;
 	}
 
-	.noortemplates-product-gallery-carousel__viewport {
+	.noorpdp-product-gallery-carousel__viewport {
 		overflow-x: auto;
 		overflow-y: hidden;
 		scroll-snap-type: x mandatory;
@@ -21,23 +21,23 @@
 			scroll-snap-type: none;
 			user-select: none;
 
-			.noortemplates-product-gallery-carousel__slide {
+			.noorpdp-product-gallery-carousel__slide {
 				pointer-events: none;
 			}
 		}
 	}
 
-	.noortemplates-product-gallery-carousel__track {
+	.noorpdp-product-gallery-carousel__track {
 		display: flex;
 	}
 
-	.noortemplates-product-gallery-carousel__slide {
+	.noorpdp-product-gallery-carousel__slide {
 		flex: 0 0 100%;
 		width: 100%;
 		scroll-snap-align: start;
 	}
 
-	.noortemplates-product-gallery-carousel__image-wrap {
+	.noorpdp-product-gallery-carousel__image-wrap {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -47,7 +47,7 @@
 		border-radius: 12px;
 	}
 
-	.noortemplates-product-gallery-carousel__image {
+	.noorpdp-product-gallery-carousel__image {
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -59,7 +59,7 @@
 		user-select: none;
 	}
 
-	.noortemplates-product-gallery-carousel__arrow {
+	.noorpdp-product-gallery-carousel__arrow {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
@@ -103,14 +103,14 @@
 		}
 	}
 
-	.noortemplates-product-gallery-carousel__thumbs {
+	.noorpdp-product-gallery-carousel__thumbs {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
 		margin-top: 1rem;
 	}
 
-	.noortemplates-product-gallery-carousel__thumb {
+	.noorpdp-product-gallery-carousel__thumb {
 		flex: 0 0 auto;
 		width: 6.5rem;
 		height: 6.5rem;
@@ -134,14 +134,14 @@
 		}
 	}
 
-	.noortemplates-product-gallery-carousel__thumb-image {
+	.noorpdp-product-gallery-carousel__thumb-image {
 		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 
-	.noortemplates-product-gallery-carousel__dots {
+	.noorpdp-product-gallery-carousel__dots {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -149,7 +149,7 @@
 		margin-top: 0.75rem;
 	}
 
-	.noortemplates-product-gallery-carousel__dot {
+	.noorpdp-product-gallery-carousel__dot {
 		width: 8px;
 		height: 8px;
 		padding: 0;

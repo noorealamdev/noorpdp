@@ -1,4 +1,4 @@
-.wp-block-noortemplates-trust-badges {
+.wp-block-noorpdp-trust-badges {
 	// No hardcoded background/text-color/radius default here — same as
 	// Icon List. WordPress can't tell "cleared" from "never set" for a
 	// color attribute, so any baked-in default could never be fully
@@ -7,7 +7,7 @@
 	// own Inspector controls after inserting it, exactly like any other
 	// core block — at that point it's a real, clearable attribute value.
 
-	.noortemplates-trust-badges__list {
+	.noorpdp-trust-badges__list {
 		display: flex;
 		flex-wrap: wrap;
 		list-style: none;
@@ -20,7 +20,7 @@
 		}
 	}
 
-	.noortemplates-trust-badges__item {
+	.noorpdp-trust-badges__item {
 		position: relative;
 		flex: 1 1 0;
 		min-width: 7rem;
@@ -46,7 +46,7 @@
 
 	// Color/font-size are intentionally `inherit`, not hardcoded — this
 	// block supports typography/color controls on its own wrapper.
-	.noortemplates-trust-badges__icon {
+	.noorpdp-trust-badges__icon {
 		width: 1.75rem;
 		height: 1.75rem;
 		color: inherit;
@@ -58,7 +58,7 @@
 		}
 	}
 
-	.noortemplates-trust-badges__label {
+	.noorpdp-trust-badges__label {
 		font-size: inherit;
 		color: inherit;
 		font-weight: 700;
@@ -71,7 +71,7 @@
 	// Editor-only "remove badge" control — given its own explicit color
 	// rather than `inherit`, since it's a UI control, not part of the
 	// rendered badges, and shouldn't disappear against a light background.
-	.noortemplates-trust-badges__remove.components-button {
+	.noorpdp-trust-badges__remove.components-button {
 		position: absolute;
 		top: 0.25rem;
 		right: 0.25rem;

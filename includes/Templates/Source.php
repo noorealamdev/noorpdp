@@ -2,10 +2,10 @@
 /**
  * Template source contract.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Templates;
+namespace NoorPDP\Templates;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * Implement this to add templates from any origin (bundled files, a remote
  * cloud API, a Pro add-on, …) and register the instance via the
- * `noortemplates/template_sources` filter.
+ * `noorpdp/template_sources` filter.
  */
 interface Source {
 

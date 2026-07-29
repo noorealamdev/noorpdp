@@ -34,10 +34,10 @@ const v1 = {
 			<div { ...blockProps }>
 				<RichText.Content
 					tagName="h2"
-					className="noortemplates-faq__title"
+					className="noorpdp-faq__title"
 					value={ title }
 				/>
-				<div className="noortemplates-faq__accordion">
+				<div className="noorpdp-faq__accordion">
 					<InnerBlocks.Content />
 				</div>
 			</div>

@@ -2,12 +2,12 @@
 /**
  * Resolves which Product Layout applies to a given product.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Layouts;
+namespace NoorPDP\Layouts;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,17 +23,17 @@ class Resolver {
 	/**
 	 * Post meta key storing a product's chosen layout ID.
 	 */
-	const PRODUCT_META_KEY = '_noortemplates_layout_id';
+	const PRODUCT_META_KEY = '_noorpdp_layout_id';
 
 	/**
 	 * Term meta key storing a product category's default layout ID.
 	 */
-	const CATEGORY_META_KEY = 'noortemplates_layout_id';
+	const CATEGORY_META_KEY = 'noorpdp_layout_id';
 
 	/**
 	 * Option storing the site-wide default layout ID.
 	 */
-	const DEFAULT_OPTION = 'noortemplates_default_layout_id';
+	const DEFAULT_OPTION = 'noorpdp_default_layout_id';
 
 	/**
 	 * Returns the resolved Product Layout post for a product, or null.
@@ -58,12 +58,6 @@ class Resolver {
 
 		if ( $preview_id ) {
 			return $preview_id;
-		}
-
-		// Split_Test::has_active_test() is itself the Pro gate (see
-		// Licensing\Gate) — nothing extra needed here.
-		if ( Split_Test::instance()->has_active_test( $product_id ) ) {
-			return Split_Test::instance()->resolve_variant( $product_id );
 		}
 
 		$product_layout = (int) get_post_meta( $product_id, self::PRODUCT_META_KEY, true );

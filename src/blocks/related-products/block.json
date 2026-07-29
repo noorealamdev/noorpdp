@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/related-products",
+    "name": "noorpdp/related-products",
     "title": "Related Products",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "networking",
     "description": "Displays WooCommerce's related products for the current product.",
     "keywords": [
@@ -13,7 +13,7 @@
         "cross-sell"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "productsToShow": {
             "type": "number",

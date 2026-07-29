@@ -1,20 +1,20 @@
 function initGalleryCarousel( carousel ) {
 	const viewport = carousel.querySelector(
-		'.noortemplates-product-gallery-carousel__viewport'
+		'.noorpdp-product-gallery-carousel__viewport'
 	);
 	const slides = Array.from(
-		carousel.querySelectorAll( '.noortemplates-product-gallery-carousel__slide' )
+		carousel.querySelectorAll( '.noorpdp-product-gallery-carousel__slide' )
 	);
 	const navItems = Array.from(
 		carousel.querySelectorAll(
-			'.noortemplates-product-gallery-carousel__dot, .noortemplates-product-gallery-carousel__thumb'
+			'.noorpdp-product-gallery-carousel__dot, .noorpdp-product-gallery-carousel__thumb'
 		)
 	);
 	const prevButton = carousel.querySelector(
-		'.noortemplates-product-gallery-carousel__arrow--prev'
+		'.noorpdp-product-gallery-carousel__arrow--prev'
 	);
 	const nextButton = carousel.querySelector(
-		'.noortemplates-product-gallery-carousel__arrow--next'
+		'.noorpdp-product-gallery-carousel__arrow--next'
 	);
 
 	if ( ! viewport || ! slides.length ) {
@@ -225,5 +225,5 @@ function initGalleryCarousel( carousel ) {
 }
 
 document
-	.querySelectorAll( '.noortemplates-product-gallery-carousel' )
+	.querySelectorAll( '.noorpdp-product-gallery-carousel' )
 	.forEach( initGalleryCarousel );

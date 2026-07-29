@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/sticky-add-to-cart",
+    "name": "noorpdp/sticky-add-to-cart",
     "title": "Sticky Add to Cart Bar",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "cart",
     "description": "A bar fixed to the bottom of the screen with the product thumbnail, name, price and a Buy Now button — appears once the visitor scrolls past the main Add to Cart block.",
     "keywords": [
@@ -15,7 +15,7 @@
         "floating"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "badgeText": {
             "type": "string",

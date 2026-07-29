@@ -5,14 +5,14 @@
  * Modeled directly on NoorQuiz's Core\Licensing (see that plugin's
  * developer-guide.html): the free plugin never contains pro logic that's
  * physically removed — it's a single codebase that only exposes filter
- * points a separately-installed NoorTemplates Pro add-on hooks into to
+ * points a separately-installed NoorPDP Pro add-on hooks into to
  * unlock behavior. This keeps the core repo genuinely free-to-inspect and
  * the upgrade path additive rather than crippled.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Licensing;
+namespace NoorPDP\Licensing;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,19 +23,19 @@ defined( 'ABSPATH' ) || exit;
 class Gate {
 
 	/**
-	 * Whether an active NoorTemplates Pro license is present. Defaults to
-	 * `false` — the NoorTemplates Pro add-on plugin hooks
-	 * `noortemplates_is_pro` and returns true once it verifies a real
+	 * Whether an active NoorPDP Pro license is present. Defaults to
+	 * `false` — the NoorPDP Pro add-on plugin hooks
+	 * `noorpdp_is_pro` and returns true once it verifies a real
 	 * Freemius license, at which point every gate in this codebase opens.
 	 *
 	 * @return bool
 	 */
 	public static function is_pro() {
-		return (bool) apply_filters( 'noortemplates_is_pro', false );
+		return (bool) apply_filters( 'noorpdp_is_pro', false );
 	}
 
 	/**
-	 * Per-feature gate, e.g. `Gate::has_feature( 'split_test' )`. Defaults
+	 * Per-feature gate, e.g. `Gate::has_feature( 'some_feature' )`. Defaults
 	 * to the global Pro flag but lets Pro (or a future tiered license)
 	 * unlock/restrict individual features independently.
 	 *
@@ -43,7 +43,7 @@ class Gate {
 	 * @return bool
 	 */
 	public static function has_feature( $feature ) {
-		return (bool) apply_filters( "noortemplates_feature_{$feature}", self::is_pro() );
+		return (bool) apply_filters( "noorpdp_feature_{$feature}", self::is_pro() );
 	}
 
 	/**
@@ -53,9 +53,6 @@ class Gate {
 	 * @return string[]
 	 */
 	public static function feature_keys() {
-		return array(
-			'split_test',            // A/B split testing between two Product Layouts.
-			'hero_video_background', // Video background on the Hero block.
-		);
+		return array();
 	}
 }

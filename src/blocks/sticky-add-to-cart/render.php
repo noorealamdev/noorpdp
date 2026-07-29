@@ -2,7 +2,7 @@
 /**
  * Sticky Add to Cart Bar block server render.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  *
  * @var array $attributes Block attributes.
  */
@@ -21,16 +21,16 @@ if ( ! $product ) {
 }
 ?>
 <div <?php echo get_block_wrapper_attributes(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>>
-	<div class="noortemplates-sticky-add-to-cart__media">
+	<div class="noorpdp-sticky-add-to-cart__media">
 		<?php echo wp_kses_post( $product->get_image( 'thumbnail' ) ); ?>
 	</div>
-	<div class="noortemplates-sticky-add-to-cart__details">
-		<span class="noortemplates-sticky-add-to-cart__name"><?php echo esc_html( $product->get_name() ); ?></span>
-		<span class="noortemplates-sticky-add-to-cart__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+	<div class="noorpdp-sticky-add-to-cart__details">
+		<span class="noorpdp-sticky-add-to-cart__name"><?php echo esc_html( $product->get_name() ); ?></span>
+		<span class="noorpdp-sticky-add-to-cart__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 	</div>
-	<div class="noortemplates-sticky-add-to-cart__center">
+	<div class="noorpdp-sticky-add-to-cart__center">
 		<?php if ( ! empty( $attributes['badgeText'] ) ) : ?>
-			<span class="noortemplates-sticky-add-to-cart__badge"><?php echo esc_html( $attributes['badgeText'] ); ?></span>
+			<span class="noorpdp-sticky-add-to-cart__badge"><?php echo esc_html( $attributes['badgeText'] ); ?></span>
 		<?php endif; ?>
 		<?php
 		/**
@@ -40,7 +40,7 @@ if ( ! $product ) {
 		 *
 		 * @param \WC_Product $product The current product.
 		 */
-		do_action( 'noortemplates/sticky_add_to_cart_details', $product ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- intentional plugin-namespaced extensibility hook.
+		do_action( 'noorpdp/sticky_add_to_cart_details', $product ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- intentional plugin-namespaced extensibility hook.
 		?>
 	</div>
 	<?php
@@ -58,10 +58,10 @@ if ( ! $product ) {
 	<button
 		type="submit"
 		form=""
-		name="<?php echo esc_attr( \NoorTemplates\Blocks\Buy_Now::FIELD ); ?>"
+		name="<?php echo esc_attr( \NoorPDP\Blocks\Buy_Now::FIELD ); ?>"
 		value="1"
-		class="noortemplates-sticky-add-to-cart__button"
+		class="noorpdp-sticky-add-to-cart__button"
 	>
-		<?php esc_html_e( 'Buy Now', 'noortemplates' ); ?>
+		<?php esc_html_e( 'Buy Now', 'noorpdp' ); ?>
 	</button>
 </div>

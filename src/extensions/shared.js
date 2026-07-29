@@ -18,11 +18,11 @@ export const ANIMATION_DEFAULT = {
 export const ANIMATION_TYPES = [ 'fade-in', 'slide-up', 'zoom-in' ];
 
 /**
- * Whether a block name is extended by the NoorTemplates block engine.
+ * Whether a block name is extended by the NoorPDP block engine.
  *
- * @param {string} name Block name, e.g. "noortemplates/container".
+ * @param {string} name Block name, e.g. "noorpdp/container".
  * @return {boolean}
  */
 export function isExtendable( name ) {
-	return typeof name === 'string' && name.startsWith( 'noortemplates/' );
+	return typeof name === 'string' && name.startsWith( 'noorpdp/' );
 }

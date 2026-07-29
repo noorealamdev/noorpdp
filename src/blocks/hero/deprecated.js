@@ -15,13 +15,13 @@ const v1 = {
 		heading: {
 			type: 'string',
 			source: 'html',
-			selector: '.noortemplates-hero__heading',
+			selector: '.noorpdp-hero__heading',
 			default: 'Your Hero Heading',
 		},
 		subheading: {
 			type: 'string',
 			source: 'html',
-			selector: '.noortemplates-hero__subheading',
+			selector: '.noorpdp-hero__subheading',
 			default: '',
 		},
 		backgroundType: { type: 'string', default: 'image' },
@@ -81,7 +81,7 @@ const v1 = {
 			<div { ...blockProps }>
 				{ showVideo && (
 					<video
-						className="noortemplates-hero__bg-video"
+						className="noorpdp-hero__bg-video"
 						src={ backgroundVideo.url }
 						autoPlay
 						muted
@@ -91,7 +91,7 @@ const v1 = {
 				) }
 				{ showOverlay && (
 					<div
-						className="noortemplates-hero__overlay"
+						className="noorpdp-hero__overlay"
 						style={ {
 							backgroundColor: overlayColor,
 							opacity: overlayOpacity / 100,
@@ -100,7 +100,7 @@ const v1 = {
 				) }
 				<RichText.Content
 					tagName="h1"
-					className="noortemplates-hero__heading"
+					className="noorpdp-hero__heading"
 					style={
 						headingFontSize
 							? { fontSize: headingFontSize }
@@ -110,7 +110,7 @@ const v1 = {
 				/>
 				<RichText.Content
 					tagName="p"
-					className="noortemplates-hero__subheading"
+					className="noorpdp-hero__subheading"
 					style={
 						subheadingFontSize
 							? { fontSize: subheadingFontSize }
@@ -118,7 +118,7 @@ const v1 = {
 					}
 					value={ subheading }
 				/>
-				<div className="noortemplates-hero__actions">
+				<div className="noorpdp-hero__actions">
 					<InnerBlocks.Content />
 				</div>
 			</div>

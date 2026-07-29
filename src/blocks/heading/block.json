@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/heading",
+    "name": "noorpdp/heading",
     "title": "Advanced Heading",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "heading",
     "description": "A heading block with adjustable level, alignment, colors and typography.",
     "keywords": [
@@ -12,7 +12,7 @@
         "subtitle"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "content": {
             "type": "string",

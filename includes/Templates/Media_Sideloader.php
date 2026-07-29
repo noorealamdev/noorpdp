@@ -2,10 +2,10 @@
 /**
  * Sideloads template images into the site's own Media Library on import.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Templates;
+namespace NoorPDP\Templates;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,11 +27,11 @@ class Media_Sideloader {
 	 * Post meta key recording the original source URL an attachment was
 	 * sideloaded from, so a later import reuses it instead of duplicating it.
 	 */
-	const SOURCE_META_KEY = '_noortemplates_source_url';
+	const SOURCE_META_KEY = '_noorpdp_source_url';
 
 	/**
 	 * Marks a bundled-asset reference inside a template's `content`, e.g.
-	 * `noortemplates-bundled-asset:templates/library/assets/photo.jpg`. Not a
+	 * `noorpdp-bundled-asset:templates/library/assets/photo.jpg`. Not a
 	 * real URL scheme — a portable placeholder resolved to a path relative to
 	 * this plugin's own directory, so it works identically on every site
 	 * regardless of domain, unlike an absolute plugins_url() reference (which
@@ -39,7 +39,7 @@ class Media_Sideloader {
 	 * rendered as-is: rewrite_content() always replaces it before the content
 	 * reaches the editor.
 	 */
-	const BUNDLED_ASSET_SCHEME = 'noortemplates-bundled-asset:';
+	const BUNDLED_ASSET_SCHEME = 'noorpdp-bundled-asset:';
 
 	/**
 	 * Rewrites every external image URL in a template's content to point at
@@ -99,7 +99,7 @@ class Media_Sideloader {
 	/**
 	 * Finds every image reference in the content that isn't already local to
 	 * this site's own uploads directory — either a genuine remote URL, or
-	 * this plugin's own `noortemplates-bundled-asset:` placeholder.
+	 * this plugin's own `noorpdp-bundled-asset:` placeholder.
 	 *
 	 * @param string $content Serialized block HTML.
 	 * @return string[]
@@ -150,7 +150,7 @@ class Media_Sideloader {
 	/**
 	 * Resolves a bundled-asset reference (this plugin's own files) to its
 	 * filesystem path, so it can be read directly instead of requesting it
-	 * over HTTP — which, for a placeholder like `noortemplates-bundled-asset:`,
+	 * over HTTP — which, for a placeholder like `noorpdp-bundled-asset:`,
 	 * has no real host to even request from in the first place.
 	 *
 	 * @param string $url Source image reference.
@@ -159,15 +159,15 @@ class Media_Sideloader {
 	private static function local_file_for_url( $url ) {
 		if ( 0 === strpos( $url, self::BUNDLED_ASSET_SCHEME ) ) {
 			$relative = substr( $url, strlen( self::BUNDLED_ASSET_SCHEME ) );
-		} elseif ( 0 === strpos( $url, NOORTEMPLATES_URL ) ) {
+		} elseif ( 0 === strpos( $url, NOORPDP_URL ) ) {
 			// Back-compat: a template built against this exact site's own
 			// plugins_url() rather than the portable placeholder above.
-			$relative = substr( $url, strlen( NOORTEMPLATES_URL ) );
+			$relative = substr( $url, strlen( NOORPDP_URL ) );
 		} else {
 			return null;
 		}
 
-		$path = NOORTEMPLATES_DIR . $relative;
+		$path = NOORPDP_DIR . $relative;
 
 		return is_readable( $path ) ? $path : null;
 	}

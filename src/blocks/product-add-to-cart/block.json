@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-add-to-cart",
+    "name": "noorpdp/product-add-to-cart",
     "title": "Product Add to Cart",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "cart",
     "description": "Displays the WooCommerce add-to-cart form for the current product, including variations, quantity and stock handling.",
     "keywords": [
@@ -14,7 +14,7 @@
         "variations"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "supports": {
         "anchor": true,
         "html": false,

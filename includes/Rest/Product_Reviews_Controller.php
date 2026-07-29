@@ -2,13 +2,13 @@
 /**
  * Product Reviews pagination REST controller.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Rest;
+namespace NoorPDP\Rest;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Blocks\Product_Reviews_Renderer;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Blocks\Product_Reviews_Renderer;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,7 +23,7 @@ class Product_Reviews_Controller {
 	/**
 	 * REST namespace.
 	 */
-	const REST_NAMESPACE = 'noortemplates/v1';
+	const REST_NAMESPACE = 'noorpdp/v1';
 
 	/**
 	 * Hooks route registration.
@@ -92,14 +92,14 @@ class Product_Reviews_Controller {
 	 */
 	public function get_reviews_list( $request ) {
 		if ( ! class_exists( 'WooCommerce' ) ) {
-			return new \WP_Error( 'noortemplates_woocommerce_required', __( 'WooCommerce is required.', 'noortemplates' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'noorpdp_woocommerce_required', __( 'WooCommerce is required.', 'noorpdp' ), array( 'status' => 400 ) );
 		}
 
 		$product_id = absint( $request['product_id'] );
 		$product    = wc_get_product( $product_id );
 
 		if ( ! $product ) {
-			return new \WP_Error( 'noortemplates_invalid_product', __( 'Invalid product.', 'noortemplates' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'noorpdp_invalid_product', __( 'Invalid product.', 'noorpdp' ), array( 'status' => 404 ) );
 		}
 
 		$reviews = Product_Reviews_Renderer::get_reviews( $product_id, 0, 200 );
@@ -133,14 +133,14 @@ class Product_Reviews_Controller {
 	 */
 	public function get_reviews( $request ) {
 		if ( ! class_exists( 'WooCommerce' ) ) {
-			return new \WP_Error( 'noortemplates_woocommerce_required', __( 'WooCommerce is required.', 'noortemplates' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'noorpdp_woocommerce_required', __( 'WooCommerce is required.', 'noorpdp' ), array( 'status' => 400 ) );
 		}
 
 		$product_id = absint( $request['product_id'] );
 		$product    = wc_get_product( $product_id );
 
 		if ( ! $product ) {
-			return new \WP_Error( 'noortemplates_invalid_product', __( 'Invalid product.', 'noortemplates' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'noorpdp_invalid_product', __( 'Invalid product.', 'noorpdp' ), array( 'status' => 404 ) );
 		}
 
 		$offset   = absint( $request->get_param( 'offset' ) );

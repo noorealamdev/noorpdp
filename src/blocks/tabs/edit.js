@@ -11,8 +11,8 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { plus } from '@wordpress/icons';
 
 const TEMPLATE = [
-	[ 'noortemplates/tab', { title: 'Tab 1' } ],
-	[ 'noortemplates/tab', { title: 'Tab 2' } ],
+	[ 'noorpdp/tab', { title: 'Tab 1' } ],
+	[ 'noorpdp/tab', { title: 'Tab 2' } ],
 ];
 
 export default function Edit( { clientId, attributes, setAttributes } ) {
@@ -45,16 +45,16 @@ export default function Edit( { clientId, attributes, setAttributes } ) {
 		style: boxed ? { maxWidth: boxedWidth } : undefined,
 	} );
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'noortemplates-tabs__panels' },
+		{ className: 'noorpdp-tabs__panels' },
 		{
-			allowedBlocks: [ 'noortemplates/tab' ],
+			allowedBlocks: [ 'noorpdp/tab' ],
 			template: TEMPLATE,
 			renderAppender: false,
 		}
 	);
 
 	const addTab = () => {
-		const tab = createBlock( 'noortemplates/tab', {
+		const tab = createBlock( 'noorpdp/tab', {
 			title: `Tab ${ tabs.length + 1 }`,
 		} );
 		insertBlock( tab, tabs.length, clientId );
@@ -68,26 +68,26 @@ export default function Edit( { clientId, attributes, setAttributes } ) {
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -99,13 +99,13 @@ export default function Edit( { clientId, attributes, setAttributes } ) {
 					) }
 				</PanelBody>
 			</InspectorControls>
-			<div className="noortemplates-tabs__list">
+			<div className="noorpdp-tabs__list">
 				{ tabs.map( ( tab ) => (
 					/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
 					<div
 						key={ tab.clientId }
 						className={
-							'noortemplates-tabs__tab' +
+							'noorpdp-tabs__tab' +
 							( tab.clientId === currentId ? ' is-active' : '' )
 						}
 						onClick={ () => selectBlock( tab.clientId ) }
@@ -118,16 +118,16 @@ export default function Edit( { clientId, attributes, setAttributes } ) {
 									title: value,
 								} )
 							}
-							placeholder={ __( 'Tab', 'noortemplates' ) }
+							placeholder={ __( 'Tab', 'noorpdp' ) }
 							allowedFormats={ [] }
 							withoutInteractiveFormatting
 						/>
 					</div>
 				) ) }
 				<Button
-					className="noortemplates-tabs__add"
+					className="noorpdp-tabs__add"
 					icon={ plus }
-					label={ __( 'Add tab', 'noortemplates' ) }
+					label={ __( 'Add tab', 'noorpdp' ) }
 					onClick={ addTab }
 				/>
 			</div>

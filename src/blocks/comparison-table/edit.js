@@ -16,15 +16,15 @@ const TABLE_TEMPLATE = [
 				{
 					cells: [
 						{
-							content: __( 'Feature', 'noortemplates' ),
+							content: __( 'Feature', 'noorpdp' ),
 							tag: 'th',
 						},
 						{
-							content: __( 'Basic', 'noortemplates' ),
+							content: __( 'Basic', 'noorpdp' ),
 							tag: 'th',
 						},
 						{
-							content: __( 'Premium', 'noortemplates' ),
+							content: __( 'Premium', 'noorpdp' ),
 							tag: 'th',
 						},
 					],
@@ -34,7 +34,7 @@ const TABLE_TEMPLATE = [
 				{
 					cells: [
 						{
-							content: __( 'Free shipping', 'noortemplates' ),
+							content: __( 'Free shipping', 'noorpdp' ),
 							tag: 'td',
 						},
 						{ content: '✕', tag: 'td' },
@@ -44,7 +44,7 @@ const TABLE_TEMPLATE = [
 				{
 					cells: [
 						{
-							content: __( 'Priority support', 'noortemplates' ),
+							content: __( 'Priority support', 'noorpdp' ),
 							tag: 'td',
 						},
 						{ content: '✕', tag: 'td' },
@@ -56,7 +56,7 @@ const TABLE_TEMPLATE = [
 						{
 							content: __(
 								'Extended warranty',
-								'noortemplates'
+								'noorpdp'
 							),
 							tag: 'td',
 						},
@@ -75,7 +75,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className:
-				'noortemplates-comparison-table__table' +
+				'noorpdp-comparison-table__table' +
 				( boxed ? ' is-boxed' : '' ),
 			style: boxed ? { maxWidth: boxedWidth } : undefined,
 		},
@@ -89,26 +89,26 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
 					{ boxed && (
 						<RangeControl
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -122,10 +122,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<RichText
 				tagName="h2"
-				className="noortemplates-comparison-table__title"
+				className="noorpdp-comparison-table__title"
 				value={ title }
 				onChange={ ( value ) => setAttributes( { title: value } ) }
-				placeholder={ __( 'Compare Options', 'noortemplates' ) }
+				placeholder={ __( 'Compare Options', 'noorpdp' ) }
 			/>
 			<div { ...innerBlocksProps } />
 		</div>

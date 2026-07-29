@@ -1,8 +1,8 @@
-.wp-block-noortemplates-feature-cards {
+.wp-block-noorpdp-feature-cards {
 
-	.noortemplates-feature-cards__list {
+	.noorpdp-feature-cards__list {
 		display: grid;
-		grid-template-columns: repeat(var(--noortemplates-feature-cards-columns, 1), 1fr);
+		grid-template-columns: repeat(var(--noorpdp-feature-cards-columns, 1), 1fr);
 		gap: 1.25rem;
 
 		&.is-boxed {
@@ -16,12 +16,12 @@
 	// review-carousel, etc.).
 	@media (max-width: 599px) {
 
-		.noortemplates-feature-cards__list {
+		.noorpdp-feature-cards__list {
 			grid-template-columns: 1fr;
 		}
 	}
 
-	.noortemplates-feature-cards__item {
+	.noorpdp-feature-cards__item {
 		position: relative;
 		box-sizing: border-box;
 	}
@@ -29,14 +29,14 @@
 	// Color intentionally `inherit`, not hardcoded — the block's own Color
 	// support applies on the wrapper, and a directly-targeted rule here
 	// would always beat that inherited value.
-	.noortemplates-feature-cards__heading {
+	.noorpdp-feature-cards__heading {
 		margin: 0 0 0.5rem;
 		color: inherit;
 		font-size: 1.15em;
 		font-weight: 700;
 	}
 
-	.noortemplates-feature-cards__text {
+	.noorpdp-feature-cards__text {
 		color: inherit;
 		font-size: 0.9em;
 		line-height: 1.5;
@@ -46,7 +46,7 @@
 	// Editor-only "remove card" control — given its own explicit color
 	// rather than `inherit`, since it's a UI control, not part of the
 	// rendered cards, and shouldn't disappear against a dark card background.
-	.noortemplates-feature-cards__remove.components-button {
+	.noorpdp-feature-cards__remove.components-button {
 		position: absolute;
 		top: 0.5rem;
 		right: 0.5rem;

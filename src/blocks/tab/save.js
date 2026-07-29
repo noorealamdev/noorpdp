@@ -4,10 +4,10 @@ export default function save( { attributes } ) {
 	const { uid } = attributes;
 
 	const blockProps = useBlockProps.save( {
-		id: `noortemplates-tab-panel-${ uid }`,
-		className: 'noortemplates-tabs__panel',
+		id: `noorpdp-tab-panel-${ uid }`,
+		className: 'noorpdp-tabs__panel',
 		role: 'tabpanel',
-		'aria-labelledby': `noortemplates-tab-${ uid }`,
+		'aria-labelledby': `noorpdp-tab-${ uid }`,
 		'data-wp-context': JSON.stringify( { tabId: uid } ),
 		'data-wp-bind--hidden': '!state.isSelected',
 	} );

@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-category",
+    "name": "noorpdp/product-category",
     "title": "Product Category",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "category",
     "description": "Displays the current WooCommerce product's category as a small label — useful right above the Product Title.",
     "keywords": [
@@ -14,7 +14,7 @@
         "label"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "supports": {
         "anchor": true,
         "html": false,

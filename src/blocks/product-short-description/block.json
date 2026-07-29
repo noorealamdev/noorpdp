@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-short-description",
+    "name": "noorpdp/product-short-description",
     "title": "Product Short Description",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "align-left",
     "description": "Displays the current WooCommerce product's short description (excerpt).",
     "keywords": [
@@ -13,7 +13,7 @@
         "summary"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "supports": {
         "anchor": true,
         "html": false,

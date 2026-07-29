@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "noortemplates/product-reviews",
+	"name": "noorpdp/product-reviews",
 	"title": "Product Reviews",
-	"category": "noortemplates",
+	"category": "noorpdp",
 	"icon": "star-filled",
 	"description": "A rating summary with a star breakdown and a responsive grid of the current WooCommerce product's reviews, rendered dynamically so it always stays up to date.",
 	"keywords": [ "woocommerce", "product", "reviews", "ratings", "testimonials" ],
 	"version": "1.0.0",
-	"textdomain": "noortemplates",
+	"textdomain": "noorpdp",
 	"attributes": {
 		"reviewsToShow": {
 			"type": "number",

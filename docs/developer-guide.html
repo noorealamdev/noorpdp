@@ -1,5 +1,5 @@
-<title>NoorTemplates Developer Guide</title>
-<meta name="description" content="Architecture, codebase map, and extension guide for NoorTemplates — including how the Pro companion plugin actually works." />
+<title>NoorPDP Developer Guide</title>
+<meta name="description" content="Architecture, codebase map, and extension guide for NoorPDP — including how the Pro companion plugin actually works." />
 <style>
   :root {
     --bg: #f7f7fb;
@@ -279,7 +279,7 @@
 <div class="layout">
   <nav class="sidebar" id="sidebar" aria-label="Table of contents">
     <div class="brand">
-      <span class="brand-mark">NoorTemplates</span>
+      <span class="brand-mark">NoorPDP</span>
       <span class="brand-version">v1.1.0</span>
     </div>
     <p class="brand-tag">Developer Guide</p>
@@ -291,7 +291,6 @@
         <li><a href="#codebase-map">Codebase map</a></li>
         <li><a href="#boot-sequence">Boot sequence</a></li>
         <li><a href="#layout-system">The Layout system</a></li>
-        <li><a href="#split-testing">Split testing engine</a></li>
         <li><a href="#templates-system">Templates &amp; Patterns system</a></li>
       </ul>
     </div>
@@ -302,12 +301,11 @@
         <li><a href="#rest-api">REST API</a></li>
         <li><a href="#hooks">Hooks reference</a></li>
         <li><a href="#licensing">Licensing &amp; the Pro gate</a></li>
-        <li><a href="#lock-a-feature">Worked example: locking a feature</a></li>
       </ul>
     </div>
 
     <div class="nav-group">
-      <p class="nav-eyebrow">Extending NoorTemplates</p>
+      <p class="nav-eyebrow">Extending NoorPDP</p>
       <ul>
         <li><a href="#extension-points">Extension points at a glance</a></li>
         <li><a href="#pro-addon">Building a companion add-on</a></li>
@@ -329,48 +327,48 @@
   <main class="content">
     <div class="doc-title-block">
       <p class="doc-eyebrow">Developer Guide</p>
-      <h1 class="doc-title">NoorTemplates architecture &amp; extension guide</h1>
+      <h1 class="doc-title">NoorPDP architecture &amp; extension guide</h1>
       <p class="doc-lede">How the plugin is put together, how a WooCommerce product page actually gets rendered, and how to extend it safely — including exactly how the Pro companion plugin unlocks things.</p>
     </div>
 
     <section class="doc-section" id="overview">
       <h2>Overview</h2>
-      <p>NoorTemplates builds WooCommerce single-product pages out of Gutenberg blocks. A "Layout" is just a normal WordPress post (custom post type <code>noortemplates_layout</code>) whose block content wraps WooCommerce's own rendering — title, price, gallery, add-to-cart, reviews — each as its own block. Nothing is hand-coded per theme; a Layout is resolved fresh on every request and swapped in for the product template.</p>
+      <p>NoorPDP builds WooCommerce single-product pages out of Gutenberg blocks. A "Layout" is just a normal WordPress post (custom post type <code>noorpdp_layout</code>) whose block content wraps WooCommerce's own rendering — title, price, gallery, add-to-cart, reviews — each as its own block. Nothing is hand-coded per theme; a Layout is resolved fresh on every request and swapped in for the product template.</p>
       <p>Three architectural decisions shape almost everything else in the codebase:</p>
       <ul>
         <li><strong>A Layout is content, not a template file.</strong> Store owners build it in the ordinary block editor, the same surface they already know. <code>Layouts\Resolver</code> decides which Layout post applies to which product at request time (see <a href="#layout-system">The Layout system</a>) — there's no per-product PHP template to hand-edit.</li>
-        <li><strong>Free/Pro is one codebase plus one filter, not two builds.</strong> <code>Licensing\Gate</code> is a plain static class whose <code>is_pro()</code>/<code>has_feature()</code> methods are pure filter lookups, defaulting to <code>false</code>. Nothing Pro-only is physically stripped from the free plugin — a separate companion plugin, <strong>NoorTemplates Pro</strong>, hooks those filters once a real license is active. See <a href="#licensing">Licensing &amp; the Pro gate</a>.</li>
+        <li><strong>Free/Pro is one codebase plus one filter, not two builds.</strong> <code>Licensing\Gate</code> is a plain static class whose <code>is_pro()</code>/<code>has_feature()</code> methods are pure filter lookups, defaulting to <code>false</code>. Nothing Pro-only is physically stripped from the free plugin — a separate companion plugin, <strong>NoorPDP Pro</strong>, hooks those filters once a real license is active. See <a href="#licensing">Licensing &amp; the Pro gate</a>.</li>
         <li><strong>Overriding the product template never breaks WooCommerce's own hooks.</strong> The override happens at the whole-template level (<code>template_include</code>), and the fallback template still fires every one of WooCommerce's structural actions (<code>woocommerce_before_single_product</code>, etc.) in their normal positions — so themes and other plugins hooked to those actions keep working around a Layout exactly as they would around WooCommerce's own template.</li>
       </ul>
       <div class="arch">
-        <div class="arch-row"><div class="arch-box root"><strong>noortemplates.php</strong> constants, autoloader, activation hooks, boots on <code style="background:rgba(255,255,255,.15);border-color:transparent;color:#fff;">plugins_loaded</code></div></div>
+        <div class="arch-row"><div class="arch-box root"><strong>noorpdp.php</strong> constants, autoloader, activation hooks, boots on <code style="background:rgba(255,255,255,.15);border-color:transparent;color:#fff;">plugins_loaded</code></div></div>
         <div class="arch-arrow">&#8595;</div>
-        <div class="arch-row"><div class="arch-box core"><strong>Plugin</strong> singleton orchestrator — wires every service below, fires <code>noortemplates/loaded</code></div></div>
+        <div class="arch-row"><div class="arch-box core"><strong>Plugin</strong> singleton orchestrator — wires every service below, fires <code>noorpdp/loaded</code></div></div>
         <div class="arch-arrow">&#8595;</div>
         <div class="arch-row">
-          <div class="arch-box"><strong>Layouts</strong><br />Resolver, Meta Box, Split Test, Template Override</div>
+          <div class="arch-box"><strong>Layouts</strong><br />Resolver, Meta Box, Template Override</div>
           <div class="arch-box"><strong>Blocks</strong><br />29 blocks + cross-cutting Extensions (visibility/animation)</div>
-          <div class="arch-box"><strong>REST</strong><br />Templates + Product Reviews, under <code>noortemplates/v1</code></div>
+          <div class="arch-box"><strong>REST</strong><br />Templates + Product Reviews, under <code>noorpdp/v1</code></div>
         </div>
         <div class="arch-row">
-          <div class="arch-box"><strong>Admin</strong><br />Dashboard, Split Tests page</div>
+          <div class="arch-box"><strong>Admin</strong><br />Dashboard</div>
           <div class="arch-box"><strong>Templates library</strong><br />Repository aggregating Local + Cloud sources</div>
-          <div class="arch-box"><strong>Licensing</strong><br />Gate (filter-based) + NoorTemplates Pro add-on</div>
+          <div class="arch-box"><strong>Licensing</strong><br />Gate (filter-based) + NoorPDP Pro add-on</div>
         </div>
       </div>
     </section>
 
     <section class="doc-section" id="codebase-map">
       <h2>Codebase map</h2>
-      <div class="tree">noortemplates/
-├── noortemplates.php          <span class="note"># bootstrap: constants, autoloader, activation hooks, noortemplates() accessor</span>
+      <div class="tree">noorpdp/
+├── noorpdp.php          <span class="note"># bootstrap: constants, autoloader, activation hooks, noorpdp() accessor</span>
 ├── includes/
-│   ├── Install.php            <span class="note"># activation/deactivation, versioned migrations, split-test stats table</span>
-│   ├── Plugin.php              <span class="note"># singleton orchestrator — wires every service, fires noortemplates/loaded</span>
-│   ├── <span class="dir">Admin/</span>                <span class="note"># Dashboard (settings + default layout), Split_Tests_Page</span>
+│   ├── Install.php            <span class="note"># activation/deactivation, versioned migrations</span>
+│   ├── Plugin.php              <span class="note"># singleton orchestrator — wires every service, fires noorpdp/loaded</span>
+│   ├── <span class="dir">Admin/</span>                <span class="note"># Dashboard (settings + default layout)</span>
 │   ├── <span class="dir">Assets/</span>                <span class="note"># Manager — enqueues editor + front-end scripts</span>
 │   ├── <span class="dir">Blocks/</span>                <span class="note"># Manager (auto-discovery + registration), Extensions, Interactivity, Buy_Now</span>
-│   ├── <span class="dir">Layouts/</span>               <span class="note"># Post_Type, Resolver, Meta_Box, Template_Override, Split_Test(_Stats), Duplicate, Preview</span>
+│   ├── <span class="dir">Layouts/</span>               <span class="note"># Post_Type, Resolver, Meta_Box, Template_Override, Duplicate, Preview</span>
 │   ├── <span class="dir">Licensing/</span>             <span class="note"># Gate — the free/pro filter gate</span>
 │   ├── <span class="dir">Patterns/</span>               <span class="note"># Manager — scans templates/library/*.json, registers block patterns</span>
 │   ├── <span class="dir">Rest/</span>                   <span class="note"># Templates_Controller, Product_Reviews_Controller</span>
@@ -379,36 +377,35 @@
 ├── src/
 │   ├── <span class="dir">blocks/</span>                 <span class="note"># 29 blocks' source (block.json, edit.js, save.js/render.php, view.js)</span>
 │   ├── <span class="dir">library/</span>                <span class="note"># Template Library editor app (toolbar modal, export/import JSON)</span>
-│   ├── <span class="dir">extensions/</span>              <span class="note"># Visibility/Animation panel applied to every NoorTemplates block</span>
-│   └── <span class="dir">utils/</span>                   <span class="note"># icon-picker, pro-control, licensing, useUniqueId, WooPlaceholder</span>
+│   ├── <span class="dir">extensions/</span>              <span class="note"># Visibility/Animation panel applied to every NoorPDP block</span>
+│   └── <span class="dir">utils/</span>                   <span class="note"># icon-picker, licensing, useUniqueId, WooPlaceholder</span>
 ├── templates/
 │   ├── single-product-layout.php  <span class="note"># fallback template a resolved Layout renders through</span>
 │   └── <span class="dir">library/</span>*.json           <span class="note"># bundled premade Layout/section templates</span>
 └── build/                     <span class="note"># compiled JS/CSS — ships in the plugin, src/ does not</span></div>
-      <p>Everything under <code>includes/</code> is PSR-4 autoloaded under the <code>NoorTemplates\</code> namespace by <code>includes/Autoloader.php</code>, which maps <code>NoorTemplates\Sub\ClassName</code> to <code>includes/Sub/ClassName.php</code> and guards each <code>require</code> with <code>is_readable()</code> — safe to call <code>class_exists()</code> against a class whose file doesn't exist, with no fatal error.</p>
+      <p>Everything under <code>includes/</code> is PSR-4 autoloaded under the <code>NoorPDP\</code> namespace by <code>includes/Autoloader.php</code>, which maps <code>NoorPDP\Sub\ClassName</code> to <code>includes/Sub/ClassName.php</code> and guards each <code>require</code> with <code>is_readable()</code> — safe to call <code>class_exists()</code> against a class whose file doesn't exist, with no fatal error.</p>
     </section>
 
     <section class="doc-section" id="boot-sequence">
       <h2>Boot sequence</h2>
       <ol class="steps">
-        <li><strong><code>plugins_loaded</code></strong> &mdash; <code>noortemplates()</code> resolves <code>Plugin::instance()</code>, which constructs the singleton (protected constructor, only reachable through the <code>Singleton</code> trait).</li>
+        <li><strong><code>plugins_loaded</code></strong> &mdash; <code>noorpdp()</code> resolves <code>Plugin::instance()</code>, which constructs the singleton (protected constructor, only reachable through the <code>Singleton</code> trait).</li>
         <li><strong>WooCommerce presence is checked first.</strong> If <code>class_exists( 'WooCommerce' )</code> is false, an admin notice is hooked and the constructor <strong>returns immediately</strong> &mdash; nothing else in the plugin boots at all without WooCommerce active.</li>
-        <li><strong><code>init_services()</code> instantiates every service</strong>, in this order: <code>Install</code>, <code>Blocks\Manager</code>, <code>Blocks\Interactivity</code>, <code>Blocks\Extensions</code>, <code>Blocks\Buy_Now</code>, <code>Patterns\Manager</code>, <code>Assets\Manager</code>, <code>Rest\Templates_Controller</code>, <code>Rest\Product_Reviews_Controller</code>, <code>Layouts\Post_Type</code>, <code>Layouts\Meta_Box</code>, <code>Layouts\Template_Override</code>, <code>Layouts\Duplicate</code>, <code>Layouts\Preview</code>, <code>Layouts\Split_Test</code> &mdash; then, only <code>if ( is_admin() )</code>: <code>Admin\Dashboard</code> and <code>Admin\Split_Tests_Page</code>.</li>
+        <li><strong><code>init_services()</code> instantiates every service</strong>, in this order: <code>Install</code>, <code>Blocks\Manager</code>, <code>Blocks\Interactivity</code>, <code>Blocks\Extensions</code>, <code>Blocks\Buy_Now</code>, <code>Patterns\Manager</code>, <code>Assets\Manager</code>, <code>Rest\Templates_Controller</code>, <code>Rest\Product_Reviews_Controller</code>, <code>Layouts\Post_Type</code>, <code>Layouts\Meta_Box</code>, <code>Layouts\Template_Override</code>, <code>Layouts\Duplicate</code>, <code>Layouts\Preview</code> &mdash; then, only <code>if ( is_admin() )</code>: <code>Admin\Dashboard</code>.</li>
         <li><strong>Every service is a singleton</strong> constructed via its own <code>::instance()</code>, each registering its own hooks in its constructor rather than being wired externally &mdash; there's no central "add_action" list to maintain in <code>Plugin</code> itself.</li>
-        <li><strong><code>do_action( 'noortemplates/loaded', $this )</code> fires</strong> once every service above exists &mdash; the hook a Pro or third-party add-on should use to register its own services, rather than hooking <code>plugins_loaded</code> directly and risking a load-order race.</li>
+        <li><strong><code>do_action( 'noorpdp/loaded', $this )</code> fires</strong> once every service above exists &mdash; the hook a Pro or third-party add-on should use to register its own services, rather than hooking <code>plugins_loaded</code> directly and risking a load-order race.</li>
         <li><strong><code>init</code> handles textdomain, migrations, and registration</strong> that must wait for other plugins to have finished their own <code>plugins_loaded</code>: <code>Plugin::load_textdomain()</code>, <code>Install::maybe_upgrade()</code> (priority 5), <code>Layouts\Post_Type::register()</code>, <code>Blocks\Manager::register_blocks()</code>, <code>Patterns\Manager::register_patterns()</code>.</li>
       </ol>
     </section>
 
     <section class="doc-section" id="layout-system">
       <h2>The Layout system</h2>
-      <p>A Layout is a post of type <code>noortemplates_layout</code>, edited in the ordinary block editor. Nothing renders it directly &mdash; on every product-page request, <code>Layouts\Resolver::get_layout_id()</code> decides which Layout (if any) applies, checking each of these in order and stopping at the first match:</p>
+      <p>A Layout is a post of type <code>noorpdp_layout</code>, edited in the ordinary block editor. Nothing renders it directly &mdash; on every product-page request, <code>Layouts\Resolver::get_layout_id()</code> decides which Layout (if any) applies, checking each of these in order and stopping at the first match:</p>
       <ol class="steps">
-        <li><strong>Preview override</strong> &mdash; a nonce-verified <code>?noortemplates_preview=ID</code> query var from the Layout list's "Preview" row action. Works even for an unpublished Layout, gated by <code>edit_post</code> on that specific post.</li>
-        <li><strong>Active split test</strong> &mdash; if <code>Split_Test::has_active_test( $product_id )</code>, the visitor's bucketed variant's layout wins (see <a href="#split-testing">Split testing engine</a>).</li>
-        <li><strong>Product-level choice</strong> &mdash; post meta <code>_noortemplates_layout_id</code>, set from the "Product Page Template" meta box on the product edit screen, if it points at a published Layout.</li>
-        <li><strong>Category-level default</strong> &mdash; term meta <code>noortemplates_layout_id</code> on the product's <code>product_cat</code> terms, first match wins.</li>
-        <li><strong>Site-wide default</strong> &mdash; option <code>noortemplates_default_layout_id</code>, set on the NoorTemplates Dashboard admin page.</li>
+        <li><strong>Preview override</strong> &mdash; a nonce-verified <code>?noorpdp_preview=ID</code> query var from the Layout list's "Preview" row action. Works even for an unpublished Layout, gated by <code>edit_post</code> on that specific post.</li>
+        <li><strong>Product-level choice</strong> &mdash; post meta <code>_noorpdp_layout_id</code>, set from the "Product Page Template" meta box on the product edit screen, if it points at a published Layout.</li>
+        <li><strong>Category-level default</strong> &mdash; term meta <code>noorpdp_layout_id</code> on the product's <code>product_cat</code> terms, first match wins.</li>
+        <li><strong>Site-wide default</strong> &mdash; option <code>noorpdp_default_layout_id</code>, set on the NoorPDP Dashboard admin page.</li>
         <li><strong>Nothing resolves</strong> &mdash; falls through to <code>0</code>, and the product page renders exactly as WooCommerce/the active theme would without this plugin at all.</li>
       </ol>
       <h3>How the swap actually happens</h3>
@@ -420,42 +417,10 @@
       </div>
       <div class="callout tip">
         <span class="callout-icon">&#9432;</span>
-        <p>Because every other WooCommerce structural hook still fires in its normal position, third-party plugins that hook <code>woocommerce_before_single_product</code> etc. (structured data, "recently viewed" trackers, upsell widgets) keep working identically around a NoorTemplates Layout &mdash; the override is a whole-template swap via <code>template_include</code>, never a <code>the_content</code> filter.</p>
+        <p>Because every other WooCommerce structural hook still fires in its normal position, third-party plugins that hook <code>woocommerce_before_single_product</code> etc. (structured data, "recently viewed" trackers, upsell widgets) keep working identically around a NoorPDP Layout &mdash; the override is a whole-template swap via <code>template_include</code>, never a <code>the_content</code> filter.</p>
       </div>
       <h3>The "Product Page Template" meta box</h3>
-      <p><code>Layouts\Meta_Box</code> adds a side meta box to the Product edit screen: a dropdown of every published Layout (plus "— Default (theme/WooCommerce) —"), saved to <code>_noortemplates_layout_id</code> on <code>save_post_product</code>. It also adds a "Default Product Page Template" field to the product category add/edit screens, saved as term meta and requiring <code>manage_product_terms</code>. If Split Testing is licensed (see below), the same meta box grows a second section for configuring a test.</p>
-    </section>
-
-    <section class="doc-section" id="split-testing">
-      <h2>Split testing engine</h2>
-      <p><code>Layouts\Split_Test</code> lets a product's page A/B test between two Layouts. Every entry point funnels through one gate: <code>has_active_test( $product_id )</code> requires <code>Gate::has_feature('split_test')</code> <strong>and</strong> <code>_noortemplates_split_enabled === '1'</code> <strong>and</strong> both variants pointing at published Layouts.</p>
-      <h3>Storage</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Meta key</th><th>Where</th><th>Purpose</th></tr></thead>
-          <tbody>
-            <tr><td><code>_noortemplates_layout_id</code></td><td>product post meta</td><td>Variant A's layout (the same key the non-test meta box uses).</td></tr>
-            <tr><td><code>_noortemplates_layout_id_b</code></td><td>product post meta</td><td>Variant B's layout.</td></tr>
-            <tr><td><code>_noortemplates_split_enabled</code></td><td>product post meta</td><td><code>'1'</code> while the test is running.</td></tr>
-            <tr><td><code>_noortemplates_split_ratio</code></td><td>product post meta</td><td>% of traffic sent to Variant B (1&ndash;99, default 50).</td></tr>
-            <tr><td><code>_noortemplates_split_logged</code></td><td>order meta</td><td>Guards a purchase against being logged twice across thank-you-page reloads.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <h3>Bucketing (<code>resolve_variant()</code>)</h3>
-      <p>Reads cookie <code>noortemplates_split_{product_id}</code>. If it already holds a valid <code>a</code>/<code>b</code> value, that variant is reused (sticky bucketing across visits) with no re-logging. Otherwise a fresh roll (<code>wp_rand(1,100) &lt;= ratio ? 'b' : 'a'</code>) picks a variant, sets the cookie for 30 days via <code>wc_setcookie()</code>, and logs an <code>impression</code>. The result is memoized per product per request, since <code>Resolver::get_layout_id()</code> is called more than once per pageview.</p>
-      <h3>Conversion logging</h3>
-      <ul>
-        <li><strong><code>woocommerce_add_to_cart</code></strong> logs an <code>add_to_cart</code> metric for the visitor's existing cookie variant (a visitor with no cookie yet is not force-bucketed just to log this).</li>
-        <li><strong><code>woocommerce_thankyou</code></strong> logs a <code>purchase</code> metric per order line item under an active test, guarded by the <code>_noortemplates_split_logged</code> order meta flag.</li>
-      </ul>
-      <p>Counters live in a dedicated table, <code>{$wpdb->prefix}noortemplates_split_stats</code> (columns: product_id, variant, metric, count; unique key on the three), created via <code>dbDelta()</code> on activation. <code>Split_Test_Stats::increment()</code> is an atomic <code>INSERT ... ON DUPLICATE KEY UPDATE count = count + 1</code>.</p>
-      <div class="callout warn">
-        <span class="callout-icon">&#9888;</span>
-        <p>There is no statistical-significance calculation and no date bucketing &mdash; the Split Tests admin page shows raw impression/add-to-cart/purchase counts and a plain conversion percentage. Treat it as a counter, not a significance test.</p>
-      </div>
-      <h3>Declaring a winner</h3>
-      <p><code>Admin\Split_Tests_Page</code> ("NoorTemplates → Split Tests", <code>manage_options</code>) lists every product with an active test and its two variants' stats side by side. "Declare winner" on either variant copies that variant's layout into <code>_noortemplates_layout_id</code>, then deletes the B/enabled/ratio meta keys and resets the stats table for that product &mdash; ending the test and leaving only the winning Layout assigned normally. "Reset" clears counters without ending the test.</p>
+      <p><code>Layouts\Meta_Box</code> adds a side meta box to the Product edit screen: a dropdown of every published Layout (plus "— Default (theme/WooCommerce) —"), saved to <code>_noorpdp_layout_id</code> on <code>save_post_product</code>. It also adds a "Default Product Page Template" field to the product category add/edit screens, saved as term meta and requiring <code>manage_product_terms</code>.</p>
     </section>
 
     <section class="doc-section" id="templates-system">
@@ -469,24 +434,24 @@
     "type": "layout",
     "category": "bold",
     "is_pro": true,
-    "content": "&lt;!-- wp:noortemplates/product-title /--&gt;…"
+    "content": "&lt;!-- wp:noorpdp/product-title /--&gt;…"
 }</code></pre>
       </div>
       <p><code>type</code> is required (<code>layout</code> or <code>section</code>); <code>description</code>, <code>category</code>, and <code>is_pro</code> are optional (<code>category</code> falls back to <code>type</code>, <code>is_pro</code> falls back to <code>false</code>). <code>content</code> always ships in full &mdash; this is a single codebase, nothing is stripped for a "Free" build. A thumbnail is auto-detected from <code>{dir}/thumbnails/{filename}.{png,jpg,webp}</code>, no JSON field needed.</p>
-      <p><code>Patterns\Manager</code> scans every configured directory (<code>get_pattern_dirs()</code>, filterable via <code>noortemplates/pattern_dirs</code> &mdash; see below), caching the parsed result per-request and in a 1-day transient invalidated by an mtime fingerprint over every template + thumbnail file. Registration as native block patterns only happens where patterns are actually consulted (<code>is_admin()</code>, ajax, REST, or the <code>noortemplates/patterns_are_needed</code> filter) &mdash; skipped on plain front-end requests.</p>
+      <p><code>Patterns\Manager</code> scans every configured directory (<code>get_pattern_dirs()</code>, filterable via <code>noorpdp/pattern_dirs</code> &mdash; see below), caching the parsed result per-request and in a 1-day transient invalidated by an mtime fingerprint over every template + thumbnail file. Registration as native block patterns only happens where patterns are actually consulted (<code>is_admin()</code>, ajax, REST, or the <code>noorpdp/patterns_are_needed</code> filter) &mdash; skipped on plain front-end requests.</p>
       <div class="callout warn">
         <span class="callout-icon">&#9888;</span>
         <p><strong>Any directory other than the plugin's own <code>templates/library/</code> has every template in it force-set to <code>is_pro = true</code></strong>, regardless of that JSON's own <code>is_pro</code> field. That folder only exists on a site because some add-on contributed it, so nothing in it is ever free by definition &mdash; see <a href="#licensing">Licensing &amp; the Pro gate</a>.</p>
       </div>
       <h3>Where a directory can come from</h3>
-      <p>The base directory list is just <code>array( NOORTEMPLATES_DIR . 'templates/library' )</code>, run through <code>apply_filters( 'noortemplates/pattern_dirs', $dirs )</code>. <strong>NoorTemplates Pro</strong> is the one real example today &mdash; it appends its own <code>templates/</code> folder (see <a href="#pro-addon">Building a companion add-on</a>).</p>
+      <p>The base directory list is just <code>array( NOORPDP_DIR . 'templates/library' )</code>, run through <code>apply_filters( 'noorpdp/pattern_dirs', $dirs )</code>. <strong>NoorPDP Pro</strong> is the one real example today &mdash; it appends its own <code>templates/</code> folder (see <a href="#pro-addon">Building a companion add-on</a>).</p>
       <h3>Source aggregation (<code>Templates\Repository</code>)</h3>
       <p>The REST layer doesn't talk to <code>Patterns\Manager</code> directly &mdash; it goes through <code>Templates\Repository</code>, which merges every registered <code>Source</code>:</p>
       <div class="card-grid">
         <div class="card"><h4>Local_Source</h4><p>Wraps <code>Patterns\Manager</code> &mdash; the bundled (+ Pro add-on) JSON templates above. Implements <code>Lazy_Source</code> (fetches full content on demand).</p></div>
-        <div class="card"><h4>Cloud_Source</h4><p>Fetches a JSON array of templates from a remote URL (<code>NOORTEMPLATES_CLOUD_URL</code> or the <code>noortemplates/cloud_api_url</code> filter), transient-cached 12h on success / 5min on failure. Inactive if no URL is configured.</p></div>
+        <div class="card"><h4>Cloud_Source</h4><p>Fetches a JSON array of templates from a remote URL (<code>NOORPDP_CLOUD_URL</code> or the <code>noorpdp/cloud_api_url</code> filter), transient-cached 12h on success / 5min on failure. Inactive if no URL is configured.</p></div>
       </div>
-      <p>Sources are filterable via <code>noortemplates/template_sources</code>. On a name collision, the first source wins (bundled beats remote). The final merged, filterable-by-args collection is exposed via <code>noortemplates/library_templates</code>.</p>
+      <p>Sources are filterable via <code>noorpdp/template_sources</code>. On a name collision, the first source wins (bundled beats remote). The final merged, filterable-by-args collection is exposed via <code>noorpdp/library_templates</code>.</p>
     </section>
 
     <hr class="divider" />
@@ -494,14 +459,14 @@
     <section class="doc-section" id="rest-api">
       <p class="doc-eyebrow-section">Reference</p>
       <h2>REST API</h2>
-      <p>Every route lives under the <code>noortemplates/v1</code> namespace.</p>
+      <p>Every route lives under the <code>noorpdp/v1</code> namespace.</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Method</th><th>Route</th><th>Controller</th><th>Capability</th><th>Purpose</th></tr></thead>
           <tbody>
             <tr><td><span class="method get">GET</span></td><td><code>/templates</code></td><td>Templates_Controller</td><td>edit_posts</td><td>List template-library metadata, filterable by <code>type</code>/<code>category</code>/<code>search</code>.</td></tr>
             <tr><td><span class="method post">POST</span></td><td><code>/templates/sync</code></td><td>Templates_Controller</td><td>manage_options</td><td>Flush every source's cache and re-fetch.</td></tr>
-            <tr><td><span class="method get">GET</span></td><td><code>/templates/{name}</code></td><td>Templates_Controller</td><td>edit_posts</td><td>Full template incl. content. 404 if unknown; 403 <code>noortemplates_pro_required</code> if <code>is_pro</code> and unlicensed.</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/templates/{name}</code></td><td>Templates_Controller</td><td>edit_posts</td><td>Full template incl. content. 404 if unknown; 403 <code>noorpdp_pro_required</code> if <code>is_pro</code> and unlicensed.</td></tr>
             <tr><td><span class="method get">GET</span></td><td><code>/product-reviews/{id}</code></td><td>Product_Reviews_Controller</td><td>public</td><td>Paginated rendered HTML of a product's reviews, for the Product Reviews block's "Load more".</td></tr>
             <tr><td><span class="method get">GET</span></td><td><code>/product-reviews/{id}/list</code></td><td>Product_Reviews_Controller</td><td>edit_posts</td><td>Raw review data for the Review Carousel block's editor-side picker.</td></tr>
           </tbody>
@@ -516,15 +481,15 @@
         <table>
           <thead><tr><th>Filter</th><th>Signature</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td><code>noortemplates_is_pro</code></td><td><code>( bool $is_pro = false )</code></td><td>The global Pro/Free gate — see <a href="#licensing">Licensing</a>.</td></tr>
-            <tr><td><code>noortemplates_feature_{feature}</code></td><td><code>( bool $enabled = self::is_pro() )</code></td><td>Per-feature gate, defaults to the global flag. See <code>Gate::feature_keys()</code>.</td></tr>
-            <tr><td><code>noortemplates/pattern_dirs</code></td><td><code>( string[] $dirs )</code></td><td>Directories scanned for bundled JSON templates.</td></tr>
-            <tr><td><code>noortemplates/block_dirs</code></td><td><code>( string[] $dirs )</code></td><td>Block directories to register (each must contain a <code>block.json</code>).</td></tr>
-            <tr><td><code>noortemplates/disabled_blocks</code></td><td><code>( string[] $disabled )</code></td><td>Block names to skip registering.</td></tr>
-            <tr><td><code>noortemplates/template_sources</code></td><td><code>( Source[] $sources )</code></td><td>Registered template <code>Source</code> implementations.</td></tr>
-            <tr><td><code>noortemplates/library_templates</code></td><td><code>( array[] $templates )</code></td><td>Final merged template collection, after aggregation, before args-filtering.</td></tr>
-            <tr><td><code>noortemplates/cloud_api_url</code></td><td><code>( string $url )</code></td><td>Remote template API URL; empty disables the Cloud source.</td></tr>
-            <tr><td><code>noortemplates/patterns_are_needed</code></td><td><code>( bool $needed = false )</code></td><td>Whether to register block patterns on requests that are neither admin, ajax, nor REST.</td></tr>
+            <tr><td><code>noorpdp_is_pro</code></td><td><code>( bool $is_pro = false )</code></td><td>The global Pro/Free gate — see <a href="#licensing">Licensing</a>.</td></tr>
+            <tr><td><code>noorpdp_feature_{feature}</code></td><td><code>( bool $enabled = self::is_pro() )</code></td><td>Per-feature gate, defaults to the global flag. See <code>Gate::feature_keys()</code>.</td></tr>
+            <tr><td><code>noorpdp/pattern_dirs</code></td><td><code>( string[] $dirs )</code></td><td>Directories scanned for bundled JSON templates.</td></tr>
+            <tr><td><code>noorpdp/block_dirs</code></td><td><code>( string[] $dirs )</code></td><td>Block directories to register (each must contain a <code>block.json</code>).</td></tr>
+            <tr><td><code>noorpdp/disabled_blocks</code></td><td><code>( string[] $disabled )</code></td><td>Block names to skip registering.</td></tr>
+            <tr><td><code>noorpdp/template_sources</code></td><td><code>( Source[] $sources )</code></td><td>Registered template <code>Source</code> implementations.</td></tr>
+            <tr><td><code>noorpdp/library_templates</code></td><td><code>( array[] $templates )</code></td><td>Final merged template collection, after aggregation, before args-filtering.</td></tr>
+            <tr><td><code>noorpdp/cloud_api_url</code></td><td><code>( string $url )</code></td><td>Remote template API URL; empty disables the Cloud source.</td></tr>
+            <tr><td><code>noorpdp/patterns_are_needed</code></td><td><code>( bool $needed = false )</code></td><td>Whether to register block patterns on requests that are neither admin, ajax, nor REST.</td></tr>
           </tbody>
         </table>
       </div>
@@ -533,8 +498,8 @@
         <table>
           <thead><tr><th>Action</th><th>Signature</th><th>Fires</th></tr></thead>
           <tbody>
-            <tr><td><code>noortemplates/loaded</code></td><td><code>( Plugin $plugin )</code></td><td>After every core service has booted — see <a href="#pro-addon">Building a companion add-on</a>.</td></tr>
-            <tr><td><code>noortemplates/upgraded</code></td><td><code>( string $previous_version )</code></td><td>After version migrations are applied (empty string on first install).</td></tr>
+            <tr><td><code>noorpdp/loaded</code></td><td><code>( Plugin $plugin )</code></td><td>After every core service has booted — see <a href="#pro-addon">Building a companion add-on</a>.</td></tr>
+            <tr><td><code>noorpdp/upgraded</code></td><td><code>( string $previous_version )</code></td><td>After version migrations are applied (empty string on first install).</td></tr>
           </tbody>
         </table>
       </div>
@@ -544,8 +509,6 @@
           <thead><tr><th>Hook</th><th>Consumer</th><th>Priority</th><th>Purpose</th></tr></thead>
           <tbody>
             <tr><td><code>template_include</code></td><td><code>Layouts\Template_Override</code></td><td>100</td><td>Swaps in the fallback template when a Layout resolves — see <a href="#layout-system">The Layout system</a>.</td></tr>
-            <tr><td><code>woocommerce_add_to_cart</code></td><td><code>Layouts\Split_Test</code></td><td>default</td><td>Logs an add-to-cart conversion.</td></tr>
-            <tr><td><code>woocommerce_thankyou</code></td><td><code>Layouts\Split_Test</code></td><td>default</td><td>Logs purchase conversions per order line.</td></tr>
             <tr><td><code>woocommerce_add_to_cart_redirect</code></td><td><code>Blocks\Buy_Now</code></td><td>default</td><td>Redirects to checkout when the Buy Now button was used.</td></tr>
           </tbody>
         </table>
@@ -560,31 +523,32 @@
         <pre><code class="lang-php">class Gate {
 
     public static function is_pro() {
-        return (bool) apply_filters( 'noortemplates_is_pro', false );
+        return (bool) apply_filters( 'noorpdp_is_pro', false );
     }
 
     public static function has_feature( $feature ) {
-        return (bool) apply_filters( "noortemplates_feature_{$feature}", self::is_pro() );
+        return (bool) apply_filters( "noorpdp_feature_{$feature}", self::is_pro() );
     }
 
     public static function feature_keys() {
-        return array(
-            'split_test',            // A/B split testing between two Product Layouts.
-            'hero_video_background', // Video background on the Hero block.
-        );
+        return array();
     }
 }</code></pre>
       </div>
-      <p><code>is_pro()</code> defaults <code>false</code> — the real, permanent Free behavior. Nothing Pro-only is physically removed from this codebase; every gate is a filter that a separate add-on can flip. <code>has_feature($key)</code> defaults to the global flag but lets a future tiered license override one feature independently, without changing any call site.</p>
-      <h3>How NoorTemplates Pro unlocks things</h3>
-      <p>NoorTemplates Pro (a separate, sibling plugin, <code>Requires Plugins: noortemplates</code>) never touches this plugin's internals directly — it only hooks the two extension points built for this purpose:</p>
+      <p><code>is_pro()</code> defaults <code>false</code> — the real, permanent Free behavior. <code>has_feature($key)</code> defaults to the global flag but lets a future tiered license override one feature independently, without changing any call site. <code>feature_keys()</code> is currently empty — see the callout below for why, before adding anything to it.</p>
+      <div class="callout warn">
+        <span class="callout-icon">&#9888;</span>
+        <p><strong>This class must never be used to lock code that ships in this WP.org-hosted free plugin.</strong> The first submission was rejected under WP.org's Guideline 5 (Trialware) for exactly that: Split Testing and the Hero block's video background were fully implemented here but gated behind <code>Gate::has_feature()</code>, defaulting to disabled — WP.org's own words: "Even if the locked feature is present in the code 'just in case the user upgrades,' it's still not allowed," even as a dimmed/disabled upsell control. Both features were removed from this codebase (Hero's video background was simply unlocked for everyone instead, since it was a client-only static-block control with nothing server-side to re-gate). <code>has_feature()</code>/<code>feature_keys()</code> only remain valid for gating code that lives entirely in the separate <strong>NoorPDP Pro</strong> plugin — never for anything physically shipped here.</p>
+      </div>
+      <h3>How NoorPDP Pro unlocks things</h3>
+      <p>NoorPDP Pro (a separate, sibling plugin, <code>Requires Plugins: noorpdp</code>) never touches this plugin's internals directly — it only hooks the two extension points built for this purpose:</p>
       <div class="code-block">
-        <div class="code-label">noortemplates-pro/includes/Plugin.php</div>
+        <div class="code-label">noorpdp-pro/includes/Plugin.php</div>
         <pre><code class="lang-php">class Plugin {
 
     public static function init() {
-        add_filter( 'noortemplates_is_pro', array( __CLASS__, 'is_pro' ) );
-        add_filter( 'noortemplates/pattern_dirs', array( __CLASS__, 'add_template_dir' ) );
+        add_filter( 'noorpdp_is_pro', array( __CLASS__, 'is_pro' ) );
+        add_filter( 'noorpdp/pattern_dirs', array( __CLASS__, 'add_template_dir' ) );
     }
 
     public static function is_pro() {
@@ -592,165 +556,83 @@
     }
 
     public static function add_template_dir( $dirs ) {
-        $dirs[] = NOORTEMPLATES_PRO_DIR . 'templates';
+        $dirs[] = NOORPDP_PRO_DIR . 'templates';
         return $dirs;
     }
 }</code></pre>
       </div>
-      <p><code>nt_pro_fs()</code> is the vendored Freemius SDK's accessor (initialized in <code>noortemplates-pro/includes/freemius-bootstrap.php</code> against the plugin's own Freemius product). <code>can_use_premium_code()</code> is Freemius's own check for "this site has a valid license or active trial." The moment that's true, <code>Gate::is_pro()</code> flips to <code>true</code> everywhere in the free plugin — cascading through <code>has_feature()</code> to unlock Split Testing and the Hero video background, and through <code>Rest\Templates_Controller</code> to start serving Pro-tier template content.</p>
+      <p><code>nt_pro_fs()</code> is the vendored Freemius SDK's accessor (initialized in <code>noorpdp-pro/includes/freemius-bootstrap.php</code> against the plugin's own Freemius product). <code>can_use_premium_code()</code> is Freemius's own check for "this site has a valid license or active trial." The moment that's true, <code>Gate::is_pro()</code> flips to <code>true</code> everywhere in the free plugin — currently that only affects <code>Rest\Templates_Controller</code>/<code>Patterns\Manager</code>, which refuse to serve Pro-tier template content contributed by <code>noorpdp-pro</code>'s own <code>templates/</code> directory (added via the <code>noorpdp/pattern_dirs</code> filter above) unless licensed. That content physically lives only in the Pro plugin, never in this one — see the callout below for why that distinction matters.</p>
       <div class="callout tip">
         <span class="callout-icon">&#9432;</span>
         <p>This mirrors the sibling plugin NoorQuiz's own <code>Core\Licensing</code> design: the free plugin only ever exposes filter points, and a Pro add-on's entire job is hooking them with a real license check — nothing in the free codebase needs to know Freemius (or any licensing vendor) exists.</p>
       </div>
       <div class="callout warn">
         <span class="callout-icon">&#9888;</span>
-        <p><code>ProControl</code> (the editor-side "PRO" badge component, see the Hero block's video background control) is <strong>UX only</strong>. It dims/labels a control in the block editor, but a determined user could still set a gated attribute directly — via the REST API, an imported JSON template, or hand-edited block markup. Every real gate has to be enforced again at the point the value is actually served or rendered: <code>Rest\Templates_Controller::get_template()</code> refuses Pro content server-side regardless of what the editor UI allowed; <code>Split_Test::has_active_test()</code> is the single choke-point every other Split Test code path calls through. A block that only checks <code>Gate</code> in its own <code>edit.js</code> and nowhere else is not actually gated.</p>
+        <p><strong>The only WP.org-compliant way to gate a feature is to keep its implementation entirely out of this repo.</strong> The Pro-templates pattern above (content lives only in <code>noorpdp-pro/templates/</code>, contributed via a filter) is correct. Gating a feature that's <em>physically present</em> in this free plugin behind <code>Gate::has_feature()</code> — even just dimming/disabling its UI — is not, regardless of how solid the server-side enforcement is. See the callout in <a href="#licensing">Licensing &amp; the Pro gate</a> above for what happened the one time this codebase did that.</p>
       </div>
-    </section>
-
-    <section class="doc-section" id="lock-a-feature">
-      <h2>Worked example: locking a feature</h2>
-      <p>Split Testing is the clearest real example in this codebase of a feature gated <em>correctly</em> — at every point it's actually reachable, not just in one obvious spot. Three steps, in order.</p>
-
-      <h3>1. Register the feature key</h3>
-      <p>Every gated feature gets one entry in <code>Gate::feature_keys()</code> — purely a registry/documentation list (nothing reads it to enforce anything), so admin UI, docs, and other developers can see at a glance what's gateable:</p>
-      <div class="code-block">
-        <div class="code-label">includes/Licensing/Gate.php</div>
-        <pre><code class="lang-php">public static function feature_keys() {
-    return array(
-        'split_test',            // A/B split testing between two Product Layouts.
-        'hero_video_background', // Video background on the Hero block.
-    );
-}</code></pre>
-      </div>
-      <p>This is the only step that's just bookkeeping. The next two are where the feature actually becomes locked.</p>
-
-      <h3>2. Gate the one real choke point — server-side, not the UI</h3>
-      <p>Find the single place in PHP where the feature's behavior actually happens, and check <code>Gate::has_feature()</code> there. For Split Testing, that's <code>Split_Test::has_active_test()</code> — every other Split Test code path (bucketing visitors, logging conversions, the results admin page) calls through this one method, so gating it here is enough to disable the feature's real effect everywhere at once:</p>
-      <div class="code-block">
-        <div class="code-label">includes/Layouts/Split_Test.php</div>
-        <pre><code class="lang-php">public function has_active_test( $product_id ) {
-    if ( ! Gate::has_feature( 'split_test' ) ) {
-        return false;
-    }
-
-    if ( '1' !== get_post_meta( $product_id, self::ENABLED_META_KEY, true ) ) {
-        return false;
-    }
-
-    $variant_a = (int) get_post_meta( $product_id, Resolver::PRODUCT_META_KEY, true );
-    $variant_b = (int) get_post_meta( $product_id, self::VARIANT_B_META_KEY, true );
-
-    return $this->is_published_layout( $variant_a ) && $this->is_published_layout( $variant_b );
-}</code></pre>
-      </div>
-      <div class="callout tip">
-        <span class="callout-icon">&#9432;</span>
-        <p>Do this step <strong>first</strong>, before touching any UI. If the real behavior is already refused server-side when unlicensed, a half-finished or even entirely missing admin UI can never accidentally leak the feature — the worst case is a confusing UI, not a bypassed gate.</p>
-      </div>
-
-      <h3>3. Gate the UI that configures/uses it</h3>
-      <p>Once the real gate exists, make the *admin experience* match it — show what's possible as an upsell rather than just hiding it. The "Product Page Template" meta box renders one of two branches depending on <code>Gate::has_feature('split_test')</code>: the real controls, or a disabled checkbox with a "Pro" badge and an upgrade link:</p>
-      <div class="code-block">
-        <div class="code-label">includes/Layouts/Meta_Box.php</div>
-        <pre><code class="lang-php">&lt;?php if ( Gate::has_feature( 'split_test' ) ) : ?&gt;
-    &lt;!-- the real checkbox, Variant B picker, traffic-split field --&gt;
-&lt;?php else : ?&gt;
-    &lt;p&gt;
-        &lt;label&gt;
-            &lt;input type="checkbox" disabled="disabled" /&gt;
-            Split test against a second layout
-            &lt;span style="...badge styles..."&gt;Pro&lt;/span&gt;
-        &lt;/label&gt;
-    &lt;/p&gt;
-    &lt;p class="description"&gt;
-        Split testing requires NoorTemplates Pro.
-        &lt;a href="&lt;?php echo esc_url( NOORTEMPLATES_CHECKOUT_URL ); ?&gt;"&gt;Upgrade to Pro&lt;/a&gt;
-    &lt;/p&gt;
-&lt;?php endif; ?&gt;</code></pre>
-      </div>
-      <p>The save handler applies the same check — <strong>skipping</strong> the save entirely when unlicensed, rather than treating "fields were disabled so nothing was posted" as "the user unchecked it":</p>
-      <div class="code-block">
-        <div class="code-label">includes/Layouts/Meta_Box.php</div>
-        <pre><code class="lang-php">// Without the split_test feature the fields are rendered disabled
-// (so nothing is posted for them) — skip entirely rather than
-// treat "not posted" as "user unchecked it", which would silently
-// wipe an existing split-test configuration just because the
-// license lapsed before someone next saved the product.
-if ( ! Gate::has_feature( 'split_test' ) ) {
-    return;
-}</code></pre>
-      </div>
-      <div class="callout warn">
-        <span class="callout-icon">&#9888;</span>
-        <p>That last detail matters as much as the gate itself: a lapsed license must never silently delete a merchant's existing configuration. Locking a feature means blocking new use of it, not destroying what was already there.</p>
-      </div>
-
-      <h3>Applying this to a JS-only (block editor) feature</h3>
-      <p>The Hero video background follows the identical three steps, just with an editor-side UI instead of a PHP admin screen: <code>hero_video_background</code> is registered in <code>feature_keys()</code>, the video-upload control is wrapped in <code>&lt;ProControl feature="hero_video_background"&gt;</code> (step 3's equivalent), and — because Hero is a <em>static</em> block with no PHP render step — there is currently <strong>no step 2</strong> for it. That gap is called out explicitly in <a href="#conventions">Conventions &amp; gotchas</a>: it's editor-UX-only until a real server-side check is added (a <code>render_block</code> filter, most likely), which is exactly the kind of gap step 2 exists to close for any feature that does have a real PHP-reachable choke point.</p>
     </section>
 
     <hr class="divider" />
 
     <section class="doc-section" id="extension-points">
-      <p class="doc-eyebrow-section">Extending NoorTemplates</p>
+      <p class="doc-eyebrow-section">Extending NoorPDP</p>
       <h2>Extension points at a glance</h2>
-      <p>Every extension point follows the same shape: a filter that returns an array (or a boolean), into which your own plugin pushes one more entry. Nothing requires editing NoorTemplates' own files.</p>
+      <p>Every extension point follows the same shape: a filter that returns an array (or a boolean), into which your own plugin pushes one more entry. Nothing requires editing NoorPDP's own files.</p>
       <div class="card-grid">
-        <div class="card"><h4>New block<span class="chip">filter</span></h4><p>Add a directory containing a <code>block.json</code> to <code>noortemplates/block_dirs</code>. <code>Blocks\Manager</code> auto-discovers and registers it the same way it registers the 29 built-in blocks.</p></div>
-        <div class="card"><h4>New bundled template<span class="chip">filter</span></h4><p>Add your own directory to <code>noortemplates/pattern_dirs</code>, matching the JSON shape in <a href="#templates-system">Templates &amp; Patterns system</a>. Every template found there is automatically treated as Pro-tier.</p></div>
-        <div class="card"><h4>New template source<span class="chip">filter + class</span></h4><p>Implement <code>Templates\Source</code> (or <code>Lazy_Source</code> for on-demand content) and add it via <code>noortemplates/template_sources</code> — same shape as the bundled <code>Cloud_Source</code>.</p></div>
-        <div class="card"><h4>Gate a new Pro feature<span class="chip">filter</span></h4><p>Add a key to <code>Gate::feature_keys()</code>, call <code>Gate::has_feature('your_key')</code> at the one real point the feature is used (server-side, not just in editor JS), and hook <code>noortemplates_feature_your_key</code> (or just <code>noortemplates_is_pro</code>) from your add-on.</p></div>
-        <div class="card"><h4>Disable a block<span class="chip">filter</span></h4><p>Add its name to <code>noortemplates/disabled_blocks</code> — the same filter the Dashboard's block-toggle settings write to.</p></div>
-        <div class="card"><h4>Full companion add-on<span class="chip">filter + plugin</span></h4><p>Hook <code>noortemplates/loaded</code> from a separate plugin to register your own services once NoorTemplates has fully booted — see below.</p></div>
+        <div class="card"><h4>New block<span class="chip">filter</span></h4><p>Add a directory containing a <code>block.json</code> to <code>noorpdp/block_dirs</code>. <code>Blocks\Manager</code> auto-discovers and registers it the same way it registers the 29 built-in blocks.</p></div>
+        <div class="card"><h4>New bundled template<span class="chip">filter</span></h4><p>Add your own directory to <code>noorpdp/pattern_dirs</code>, matching the JSON shape in <a href="#templates-system">Templates &amp; Patterns system</a>. Every template found there is automatically treated as Pro-tier.</p></div>
+        <div class="card"><h4>New template source<span class="chip">filter + class</span></h4><p>Implement <code>Templates\Source</code> (or <code>Lazy_Source</code> for on-demand content) and add it via <code>noorpdp/template_sources</code> — same shape as the bundled <code>Cloud_Source</code>.</p></div>
+        <div class="card"><h4>Gate an add-on's own feature<span class="chip">filter</span></h4><p><code>Gate::has_feature('your_key')</code>/<code>noorpdp_feature_your_key</code> exist for an add-on to gate a feature <em>it</em> implements and ships in its own plugin — never for locking code that physically lives in this free plugin. See the warning in <a href="#licensing">Licensing &amp; the Pro gate</a>.</p></div>
+        <div class="card"><h4>Disable a block<span class="chip">filter</span></h4><p>Add its name to <code>noorpdp/disabled_blocks</code> — the same filter the Dashboard's block-toggle settings write to.</p></div>
+        <div class="card"><h4>Full companion add-on<span class="chip">filter + plugin</span></h4><p>Hook <code>noorpdp/loaded</code> from a separate plugin to register your own services once NoorPDP has fully booted — see below.</p></div>
       </div>
     </section>
 
     <section class="doc-section" id="pro-addon">
       <h2>Building a companion add-on</h2>
-      <p>NoorTemplates Pro is a real, working example of this pattern — not a hypothetical. It's a separate plugin folder, <code>noortemplates-pro</code>, that does nothing but vendor the Freemius SDK and hook two filters.</p>
+      <p>NoorPDP Pro is a real, working example of this pattern — not a hypothetical. It's a separate plugin folder, <code>noorpdp-pro</code>, that does nothing but vendor the Freemius SDK and hook two filters.</p>
 
       <h3>1. Plugin skeleton</h3>
-      <p>A companion plugin, not a modification of NoorTemplates itself — <code>Requires Plugins</code> lets WordPress core handle the dependency check (deactivation/warning if the free plugin is missing) with no custom code.</p>
+      <p>A companion plugin, not a modification of NoorPDP itself — <code>Requires Plugins</code> lets WordPress core handle the dependency check (deactivation/warning if the free plugin is missing) with no custom code.</p>
       <div class="code-block">
-        <div class="code-label">noortemplates-pro.php</div>
+        <div class="code-label">noorpdp-pro.php</div>
         <pre><code class="lang-php">&lt;?php
 /**
- * Plugin Name:       NoorTemplates Pro
- * Description:       Unlocks Pro templates and Pro features for NoorTemplates.
- * Requires Plugins:  noortemplates
+ * Plugin Name:       NoorPDP Pro
+ * Description:       Unlocks Pro templates and Pro features for NoorPDP.
+ * Requires Plugins:  noorpdp
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NOORTEMPLATES_PRO_DIR', plugin_dir_path( __FILE__ ) );
+define( 'NOORPDP_PRO_DIR', plugin_dir_path( __FILE__ ) );
 
-require_once NOORTEMPLATES_PRO_DIR . 'includes/freemius-bootstrap.php';
+require_once NOORPDP_PRO_DIR . 'includes/freemius-bootstrap.php';
 
-require_once NOORTEMPLATES_PRO_DIR . 'includes/Autoloader.php';
-\NoorTemplatesPro\Autoloader::register();
+require_once NOORPDP_PRO_DIR . 'includes/Autoloader.php';
+\NoorPDPPro\Autoloader::register();
 
-add_action( 'plugins_loaded', array( '\NoorTemplatesPro\Plugin', 'init' ) );</code></pre>
+add_action( 'plugins_loaded', array( '\NoorPDPPro\Plugin', 'init' ) );</code></pre>
       </div>
 
       <h3>2. Hook the two filters</h3>
-      <p>Shown in full in <a href="#licensing">Licensing &amp; the Pro gate</a> above — <code>noortemplates_is_pro</code> to unlock every <code>Gate::has_feature()</code> check at once, and <code>noortemplates/pattern_dirs</code> to contribute the add-on's own <code>templates/</code> folder so real Pro template content physically lives in the Pro plugin, never in the free one.</p>
+      <p>Shown in full in <a href="#licensing">Licensing &amp; the Pro gate</a> above — <code>noorpdp_is_pro</code> to unlock every <code>Gate::has_feature()</code> check at once, and <code>noorpdp/pattern_dirs</code> to contribute the add-on's own <code>templates/</code> folder so real Pro template content physically lives in the Pro plugin, never in the free one.</p>
 
       <h3>3. A more targeted alternative: hook a single feature</h3>
-      <p>If an add-on should unlock <em>one</em> feature rather than everything, hook the feature-specific filter instead of the global one:</p>
+      <p><code>Gate::feature_keys()</code> is currently empty (see <a href="#licensing">Licensing &amp; the Pro gate</a> for why), but the mechanism stays available for an add-on gating a feature <em>it</em> ships itself. If an add-on should unlock <em>one</em> such feature rather than everything, it hooks the feature-specific filter instead of the global one:</p>
       <div class="code-block">
         <div class="code-label">PHP</div>
-        <pre><code class="lang-php">add_filter( 'noortemplates_feature_split_test', function () {
+        <pre><code class="lang-php">add_filter( 'noorpdp_feature_your_key', function () {
     return my_addon_has_a_valid_license();
 } );</code></pre>
       </div>
-      <p>This leaves <code>Gate::is_pro()</code> itself untouched (so templates and every other feature stay gated normally) while unlocking just Split Testing.</p>
+      <p>This leaves <code>Gate::is_pro()</code> itself untouched (so templates and any other global gate stay unaffected) while unlocking just that one feature.</p>
 
-      <h3>4. Registering your own service once NoorTemplates has booted</h3>
-      <p>For anything beyond the two filters above — a new admin page, a new block, a background job — hook <code>noortemplates/loaded</code> rather than <code>plugins_loaded</code>, so every core service is guaranteed to already exist:</p>
+      <h3>4. Registering your own service once NoorPDP has booted</h3>
+      <p>For anything beyond the two filters above — a new admin page, a new block, a background job — hook <code>noorpdp/loaded</code> rather than <code>plugins_loaded</code>, so every core service is guaranteed to already exist:</p>
       <div class="code-block">
         <div class="code-label">PHP</div>
-        <pre><code class="lang-php">add_action( 'noortemplates/loaded', function ( \NoorTemplates\Plugin $plugin ) {
+        <pre><code class="lang-php">add_action( 'noorpdp/loaded', function ( \NoorPDP\Plugin $plugin ) {
     \My_Addon\Service::instance();
 } );</code></pre>
       </div>
@@ -762,7 +644,7 @@ add_action( 'plugins_loaded', array( '\NoorTemplatesPro\Plugin', 'init' ) );</co
       <h3>A new block</h3>
       <div class="code-block">
         <div class="code-label">PHP</div>
-        <pre><code class="lang-php">add_filter( 'noortemplates/block_dirs', function ( array $dirs ) {
+        <pre><code class="lang-php">add_filter( 'noorpdp/block_dirs', function ( array $dirs ) {
     $dirs[] = __DIR__ . '/build/blocks/my-block';
     return $dirs;
 } );</code></pre>
@@ -772,7 +654,7 @@ add_action( 'plugins_loaded', array( '\NoorTemplatesPro\Plugin', 'init' ) );</co
       <h3>A new bundled template</h3>
       <div class="code-block">
         <div class="code-label">PHP</div>
-        <pre><code class="lang-php">add_filter( 'noortemplates/pattern_dirs', function ( array $dirs ) {
+        <pre><code class="lang-php">add_filter( 'noorpdp/pattern_dirs', function ( array $dirs ) {
     $dirs[] = __DIR__ . '/templates';
     return $dirs;
 } );</code></pre>
@@ -782,7 +664,7 @@ add_action( 'plugins_loaded', array( '\NoorTemplatesPro\Plugin', 'init' ) );</co
       <h3>A new remote template source</h3>
       <div class="code-block">
         <div class="code-label">PHP</div>
-        <pre><code class="lang-php">use NoorTemplates\Templates\Lazy_Source;
+        <pre><code class="lang-php">use NoorPDP\Templates\Lazy_Source;
 
 class MyRemoteSource implements Lazy_Source {
     public function get_id() {
@@ -798,7 +680,7 @@ class MyRemoteSource implements Lazy_Source {
     }
 }
 
-add_filter( 'noortemplates/template_sources', function ( array $sources ) {
+add_filter( 'noorpdp/template_sources', function ( array $sources ) {
     $sources[] = new MyRemoteSource();
     return $sources;
 } );</code></pre>
@@ -810,7 +692,7 @@ add_filter( 'noortemplates/template_sources', function ( array $sources ) {
     <section class="doc-section" id="dev-environment">
       <p class="doc-eyebrow-section">Working in this codebase</p>
       <h2>Development environment</h2>
-      <p>You need a working WordPress site with WooCommerce active — NoorTemplates refuses to boot without it (see <a href="#boot-sequence">Boot sequence</a>), so there's no way to work on it against a bare WordPress install.</p>
+      <p>You need a working WordPress site with WooCommerce active — NoorPDP refuses to boot without it (see <a href="#boot-sequence">Boot sequence</a>), so there's no way to work on it against a bare WordPress install.</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Requirement</th><th>Notes</th></tr></thead>
@@ -824,20 +706,20 @@ add_filter( 'noortemplates/template_sources', function ( array $sources ) {
         </table>
       </div>
       <ol class="steps">
-        <li><strong>Place the plugin</strong> at <code>wp-content/plugins/noortemplates</code> in a WordPress install that already has WooCommerce active (a product with at least one review is useful for testing the Reviews/Review Carousel blocks).</li>
+        <li><strong>Place the plugin</strong> at <code>wp-content/plugins/noorpdp</code> in a WordPress install that already has WooCommerce active (a product with at least one review is useful for testing the Reviews/Review Carousel blocks).</li>
         <li><strong>Install JS dependencies:</strong> <code>npm install</code>.</li>
         <li><strong>(Optional) install PHP dev tooling:</strong> <code>composer install</code> — only needed to run <code>composer lint</code>/<code>lint:fix</code> (PHPCS against WordPress Coding Standards).</li>
         <li><strong>Start the watcher:</strong> <code>npm run start</code> — rebuilds <code>build/</code> on every save under <code>src/</code>. Activate the plugin in wp-admin as normal; there's no separate dev-server/proxy, you're editing the real plugin the real site loads.</li>
       </ol>
       <div class="callout tip">
         <span class="callout-icon">&#9432;</span>
-        <p>If you're also working on <strong>NoorTemplates Pro</strong> alongside the free plugin, install it as a normal sibling plugin at <code>wp-content/plugins/noortemplates-pro</code> and activate both — it has no build step of its own (plain PHP + the vendored Freemius SDK), so there's nothing to <code>npm install</code> there.</p>
+        <p>If you're also working on <strong>NoorPDP Pro</strong> alongside the free plugin, install it as a normal sibling plugin at <code>wp-content/plugins/noorpdp-pro</code> and activate both — it has no build step of its own (plain PHP + the vendored Freemius SDK), so there's nothing to <code>npm install</code> there.</p>
       </div>
     </section>
 
     <section class="doc-section" id="creating-a-block">
       <h2>Creating a new block</h2>
-      <p>This walks through adding a block to this codebase directly (as opposed to <a href="#other-extensions">registering an external block from a separate add-on plugin</a>, which is a different recipe using the <code>noortemplates/block_dirs</code> filter instead of the steps below). Every block lives in its own folder under <code>src/blocks/</code>; <code>Blocks\Manager::get_block_dirs()</code> auto-discovers every folder under the built <code>build/blocks/*</code> matching one via <code>glob()</code> and calls <code>register_block_type( $dir )</code> on each — so a new block only needs the right files in the right shape, no manual registration call anywhere in PHP.</p>
+      <p>This walks through adding a block to this codebase directly (as opposed to <a href="#other-extensions">registering an external block from a separate add-on plugin</a>, which is a different recipe using the <code>noorpdp/block_dirs</code> filter instead of the steps below). Every block lives in its own folder under <code>src/blocks/</code>; <code>Blocks\Manager::get_block_dirs()</code> auto-discovers every folder under the built <code>build/blocks/*</code> matching one via <code>glob()</code> and calls <code>register_block_type( $dir )</code> on each — so a new block only needs the right files in the right shape, no manual registration call anywhere in PHP.</p>
       <h3>The minimum file set</h3>
       <p>The simplest real block in this codebase, <strong>Advanced Button</strong> (<code>src/blocks/button/</code>), is a good template to copy:</p>
       <div class="tree">src/blocks/button/
@@ -864,14 +746,14 @@ registerBlockType( metadata.name, {
       </div>
       <ol class="steps">
         <li><strong>Create the folder</strong> under <code>src/blocks/your-block/</code>.</li>
-        <li><strong>Write <code>block.json</code></strong> — set <code>"name": "noortemplates/your-block"</code>, <code>"category": "noortemplates"</code> (the plugin's own inserter category), and declare every attribute you need.</li>
-        <li><strong>Write <code>edit.js</code></strong> — the Inspector controls and in-canvas editing UI. If the block should get the plugin's own icon picker, unique-id helper, or Pro upsell badge, reuse the shared components in <code>src/utils/</code> rather than rebuilding them (<code>icon-picker.js</code>, <code>use-unique-id.js</code>, <code>pro-control.js</code>).</li>
+        <li><strong>Write <code>block.json</code></strong> — set <code>"name": "noorpdp/your-block"</code>, <code>"category": "noorpdp"</code> (the plugin's own inserter category), and declare every attribute you need.</li>
+        <li><strong>Write <code>edit.js</code></strong> — the Inspector controls and in-canvas editing UI. If the block should get the plugin's own icon picker or unique-id helper, reuse the shared components in <code>src/utils/</code> rather than rebuilding them (<code>icon-picker.js</code>, <code>use-unique-id.js</code>). Don't wrap a control in a Pro-upsell gate unless the feature it controls ships entirely in a separate add-on — see <a href="#licensing">Licensing &amp; the Pro gate</a>.</li>
         <li><strong>Choose static or dynamic rendering:</strong> a <strong>static</strong> block ships a <code>save.js</code> whose output is serialized straight into <code>post_content</code> (fine for pure layout/content blocks with nothing to compute at render time). A <strong>dynamic</strong> block (any block that needs live WooCommerce data — see every Product block in <a href="#codebase-map">Codebase map</a>) has <strong>no <code>save.js</code></strong> and instead declares <code>"render": "file:./render.php"</code> in <code>block.json</code>, which webpack copies alongside the built JS (<code>--webpack-copy-php</code> in the build script — see <a href="#build-tooling">Build tooling &amp; shipping</a>).</li>
-        <li><strong>Run <code>npm run start</code></strong> (or <code>build</code> for a one-off) — the block appears in the inserter under the "NoorTemplates" category as soon as <code>build/blocks/your-block/block.json</code> exists and the plugin's <code>init</code> hook re-runs (reload wp-admin).</li>
+        <li><strong>Run <code>npm run start</code></strong> (or <code>build</code> for a one-off) — the block appears in the inserter under the "NoorPDP" category as soon as <code>build/blocks/your-block/block.json</code> exists and the plugin's <code>init</code> hook re-runs (reload wp-admin).</li>
       </ol>
       <div class="callout tip">
         <span class="callout-icon">&#9432;</span>
-        <p>Every NoorTemplates block automatically gains the shared Visibility/Animation Inspector panel and front-end behavior from <code>src/extensions/</code> — you don't opt in explicitly, it's applied to any block whose name starts with <code>noortemplates/</code>. If your new block is <em>dynamic</em>, double-check its <code>render.php</code> actually applies the visibility classes/animation data-attributes itself; the extension's save-props filter only fires for static blocks' <code>save.js</code> output.</p>
+        <p>Every NoorPDP block automatically gains the shared Visibility/Animation Inspector panel and front-end behavior from <code>src/extensions/</code> — you don't opt in explicitly, it's applied to any block whose name starts with <code>noorpdp/</code>. If your new block is <em>dynamic</em>, double-check its <code>render.php</code> actually applies the visibility classes/animation data-attributes itself; the extension's save-props filter only fires for static blocks' <code>save.js</code> output.</p>
       </div>
     </section>
 
@@ -882,11 +764,10 @@ registerBlockType( metadata.name, {
       <h2>Conventions &amp; gotchas</h2>
       <ul>
         <li><strong>Every service is a singleton via the shared <code>Singleton</code> trait</strong> (protected constructor, cloning disabled) &mdash; access an already-booted service through its own <code>::instance()</code>, never <code>new</code>.</li>
-        <li><strong>Meta and option keys are always class constants</strong>, never inline string literals &mdash; e.g. <code>Resolver::PRODUCT_META_KEY</code>, <code>Split_Test::VARIANT_B_META_KEY</code>. Reference the constant, not the raw string, so a rename only touches one place.</li>
-        <li><strong><code>Split_Test::resolve_variant()</code> is memoized per product per request</strong> &mdash; <code>Resolver::get_layout_id()</code> is called more than once per pageview, and re-rolling the bucket on the second call would break sticky bucketing within a single request.</li>
+        <li><strong>Meta and option keys are always class constants</strong>, never inline string literals &mdash; e.g. <code>Resolver::PRODUCT_META_KEY</code>. Reference the constant, not the raw string, so a rename only touches one place.</li>
         <li><strong>An add-on's contributed template directory is always Pro-tier</strong>, regardless of the JSON's own <code>is_pro</code> field &mdash; see the callout in <a href="#templates-system">Templates &amp; Patterns system</a>. Don't rely on setting <code>is_pro: false</code> in an add-on's own template to make it free; it won't work, by design.
         </li>
-        <li><strong><code>ProControl</code> is editor-UX only, never the real gate.</strong> Always pair it with a matching <code>Gate::is_pro()</code>/<code>Gate::has_feature()</code> check at the point a value is actually rendered or served &mdash; see the callout in <a href="#licensing">Licensing &amp; the Pro gate</a>.</li>
+        <li><strong>Never lock a feature that's physically implemented in this repo</strong>, even editor-UX-only. This is the hard rule the first WP.org submission was rejected over &mdash; see the warning in <a href="#licensing">Licensing &amp; the Pro gate</a> before adding anything to <code>Gate::feature_keys()</code>.</li>
         <li><strong>No <code>the_content</code> filtering anywhere.</strong> The single-product override is a whole-template swap via <code>template_include</code> at priority 100 &mdash; keep it that way if you're touching <code>Layouts\Template_Override</code>, since filtering content instead would break the WooCommerce structural hooks other plugins depend on.</li>
         <li><strong><code>Blocks\WP_Icon_Registry</code> is generated, not hand-written</strong> &mdash; it mirrors the <code>@wordpress/icons</code> package via <code>scripts/generate-icon-registry.js</code>. Regenerate it rather than editing it directly if the icon set changes.</li>
       </ul>
@@ -907,22 +788,22 @@ registerBlockType( metadata.name, {
           </tbody>
         </table>
       </div>
-      <p>Built with <code>@wordpress/scripts</code> (<code>--experimental-modules --webpack-copy-php</code>, since several blocks ship a <code>view.js</code> as a script module and a <code>render.php</code> alongside their JS). NoorTemplates Pro has no build step of its own today &mdash; it's plain PHP plus the vendored Freemius SDK, so shipping it is just zipping the folder directly.</p>
+      <p>Built with <code>@wordpress/scripts</code> (<code>--experimental-modules --webpack-copy-php</code>, since several blocks ship a <code>view.js</code> as a script module and a <code>render.php</code> alongside their JS). NoorPDP Pro has no build step of its own today &mdash; it's plain PHP plus the vendored Freemius SDK, so shipping it is just zipping the folder directly.</p>
 
       <h3>Shipping a release</h3>
       <ol class="steps">
-        <li><strong>Bump the version in two places</strong>: the <code>Version:</code> header in <code>noortemplates.php</code> (which also sets the <code>NOORTEMPLATES_VERSION</code> constant), and <code>Stable tag:</code> in <code>readme.txt</code>. Unlike NoorQuiz's release script, nothing in this codebase cross-checks these automatically today — they can silently drift, so bump both by hand every time.</li>
-        <li><strong>Run <code>npm run release</code></strong> &mdash; builds <code>build/</code> fresh, then zips exactly the paths listed in <code>package.json</code>'s <code>files</code> array (currently <code>noortemplates.php</code>, <code>readme.txt</code>, <code>includes</code>, <code>patterns</code>, <code>templates</code>, <code>build</code>) via <code>wp-scripts plugin-zip</code>. <code>src/</code> and <code>node_modules/</code> are never included — only compiled output ships.</li>
+        <li><strong>Bump the version in two places</strong>: the <code>Version:</code> header in <code>noorpdp.php</code> (which also sets the <code>NOORPDP_VERSION</code> constant), and <code>Stable tag:</code> in <code>readme.txt</code>. Unlike NoorQuiz's release script, nothing in this codebase cross-checks these automatically today — they can silently drift, so bump both by hand every time.</li>
+        <li><strong>Run <code>npm run release</code></strong> &mdash; builds <code>build/</code> fresh, then zips exactly the paths listed in <code>package.json</code>'s <code>files</code> array (currently <code>noorpdp.php</code>, <code>readme.txt</code>, <code>includes</code>, <code>patterns</code>, <code>templates</code>, <code>build</code>) via <code>wp-scripts plugin-zip</code>. <code>src/</code> and <code>node_modules/</code> are never included — only compiled output ships.</li>
         <li><strong>Sanity-check <code>readme.txt</code></strong> separately from the version bump &mdash; it's a real wp.org-format readme (Requires at least, Tested up to, Requires PHP, feature list), not a stub, so keep its description in sync with what actually shipped.</li>
       </ol>
       <div class="callout warn">
         <span class="callout-icon">&#9888;</span>
-        <p>As of this writing, <code>noortemplates.php</code>'s header version and <code>readme.txt</code>'s <code>Stable tag</code>/<code>package.json</code>'s <code>version</code> are already out of sync (<code>1.1.0</code> vs <code>1.0.0</code>) &mdash; a concrete example of exactly the drift the step above warns about. Worth reconciling before the next release.</p>
+        <p>As of this writing, <code>noorpdp.php</code>'s header version and <code>readme.txt</code>'s <code>Stable tag</code>/<code>package.json</code>'s <code>version</code> are already out of sync (<code>1.1.0</code> vs <code>1.0.0</code>) &mdash; a concrete example of exactly the drift the step above warns about. Worth reconciling before the next release.</p>
       </div>
     </section>
 
     <footer class="doc-footer">
-      <p>NoorTemplates Developer Guide &middot; v1.1.0</p>
+      <p>NoorPDP Developer Guide &middot; v1.1.0</p>
     </footer>
   </main>
 </div>

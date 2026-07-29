@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "noortemplates/product-tabs",
+    "name": "noorpdp/product-tabs",
     "title": "Product Tabs",
-    "category": "noortemplates",
+    "category": "noorpdp",
     "icon": "editor-table",
     "description": "Displays the current WooCommerce product's description, additional information and reviews tabs.",
     "keywords": [
@@ -14,7 +14,7 @@
         "description"
     ],
     "version": "1.0.0",
-    "textdomain": "noortemplates",
+    "textdomain": "noorpdp",
     "attributes": {
         "boxed": {
             "type": "boolean",

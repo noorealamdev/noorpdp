@@ -1,9 +1,9 @@
 // Styles WooCommerce's own tab/review/additional-information markup
 // (this block is a thin wrapper around woocommerce_output_product_data_tabs()
 // and intentionally renders no markup of its own to style against).
-.wp-block-noortemplates-product-tabs {
+.wp-block-noorpdp-product-tabs {
 
-	.noortemplates-product-tabs__inner.is-boxed {
+	.noorpdp-product-tabs__inner.is-boxed {
 		margin-left: auto;
 		margin-right: auto;
 	}

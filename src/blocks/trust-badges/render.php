@@ -2,16 +2,16 @@
 /**
  * Trust Badges block server render.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  *
  * @var array $attributes Block attributes.
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$noortemplates_items = isset( $attributes['items'] ) && is_array( $attributes['items'] ) ? $attributes['items'] : array();
+$noorpdp_items = isset( $attributes['items'] ) && is_array( $attributes['items'] ) ? $attributes['items'] : array();
 
-if ( empty( $noortemplates_items ) ) {
+if ( empty( $noorpdp_items ) ) {
 	return;
 }
 
@@ -25,26 +25,26 @@ if ( empty( $noortemplates_items ) ) {
  * block from the inserter and its own default color/border/spacing
  * values (set once via Inspector, no code needed) give the same look.
  */
-$noortemplates_wrapper = get_block_wrapper_attributes();
+$noorpdp_wrapper = get_block_wrapper_attributes();
 
-$noortemplates_boxed       = ! isset( $attributes['boxed'] ) || (bool) $attributes['boxed'];
-$noortemplates_boxed_width = isset( $attributes['boxedWidth'] ) ? absint( $attributes['boxedWidth'] ) : 1200;
+$noorpdp_boxed       = ! isset( $attributes['boxed'] ) || (bool) $attributes['boxed'];
+$noorpdp_boxed_width = isset( $attributes['boxedWidth'] ) ? absint( $attributes['boxedWidth'] ) : 1200;
 ?>
-<div <?php echo $noortemplates_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>>
+<div <?php echo $noorpdp_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-escaped. ?>>
 	<ul
-		class="noortemplates-trust-badges__list<?php echo $noortemplates_boxed ? ' is-boxed' : ''; ?>"
-		<?php if ( $noortemplates_boxed ) : ?>
-			style="max-width:<?php echo esc_attr( $noortemplates_boxed_width ); ?>px"
+		class="noorpdp-trust-badges__list<?php echo $noorpdp_boxed ? ' is-boxed' : ''; ?>"
+		<?php if ( $noorpdp_boxed ) : ?>
+			style="max-width:<?php echo esc_attr( $noorpdp_boxed_width ); ?>px"
 		<?php endif; ?>
 	>
-		<?php foreach ( $noortemplates_items as $noortemplates_item ) : ?>
-			<li class="noortemplates-trust-badges__item">
-				<?php if ( ! empty( $noortemplates_item['icon'] ) ) : ?>
-					<span class="noortemplates-trust-badges__icon">
-						<?php echo \NoorTemplates\Blocks\WP_Icon_Registry::render( $noortemplates_item['icon'], 'nt-shieldCheck' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- self-escaping, fixed internal registry. ?>
+		<?php foreach ( $noorpdp_items as $noorpdp_item ) : ?>
+			<li class="noorpdp-trust-badges__item">
+				<?php if ( ! empty( $noorpdp_item['icon'] ) ) : ?>
+					<span class="noorpdp-trust-badges__icon">
+						<?php echo \NoorPDP\Blocks\WP_Icon_Registry::render( $noorpdp_item['icon'], 'nt-shieldCheck' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- self-escaping, fixed internal registry. ?>
 					</span>
 				<?php endif; ?>
-				<span class="noortemplates-trust-badges__label"><?php echo wp_kses_post( $noortemplates_item['label'] ?? '' ); ?></span>
+				<span class="noorpdp-trust-badges__label"><?php echo wp_kses_post( $noorpdp_item['label'] ?? '' ); ?></span>
 			</li>
 		<?php endforeach; ?>
 	</ul>

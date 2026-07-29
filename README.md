@@ -1,4 +1,4 @@
-# NoorTemplates
+# NoorPDP
 
 A WooCommerce product page builder: blocks that wrap WooCommerce's own single-product rendering (gallery, price, add to cart, tabs, related products, …), a Product Layouts post type for assembling full page arrangements from them, and per-product / per-category / site-wide template assignment — no FSE/block theme required.
 
@@ -21,7 +21,7 @@ Use `npm start` for watch mode while developing.
 | `npm run lint:js` | ESLint via @wordpress/scripts |
 | `npm run lint:css` | Stylelint via @wordpress/scripts |
 
-All of these run in CI on every push (`.github/workflows/ci.yml`), which also uploads an installable `noortemplates.zip` artifact.
+All of these run in CI on every push (`.github/workflows/ci.yml`), which also uploads an installable `noorpdp.zip` artifact.
 
 ## Releasing
 
@@ -29,14 +29,14 @@ All of these run in CI on every push (`.github/workflows/ci.yml`), which also up
 npm run release
 ```
 
-Builds the assets and produces `noortemplates.zip` containing only the distributable files (defined in the `files` field of `package.json`) — no sources, tooling, or dev dependencies.
+Builds the assets and produces `noorpdp.zip` containing only the distributable files (defined in the `files` field of `package.json`) — no sources, tooling, or dev dependencies.
 
 ## Architecture
 
-- `noortemplates.php` — bootstrap: constants, PSR-4 autoloader, boots `NoorTemplates\Plugin` (requires WooCommerce active)
-- `includes/` — all PHP under the `NoorTemplates\` namespace:
+- `noorpdp.php` — bootstrap: constants, PSR-4 autoloader, boots `NoorPDP\Plugin` (requires WooCommerce active)
+- `includes/` — all PHP under the `NoorPDP\` namespace:
   - `Blocks\Manager` — auto-registers every `build/blocks/*/block.json`; per-block disable option
-  - `Layouts\Post_Type` — registers the `noortemplates_layout` post type (edited in the standard block editor, works on any theme)
+  - `Layouts\Post_Type` — registers the `noorpdp_layout` post type (edited in the standard block editor, works on any theme)
   - `Layouts\Resolver` — resolves which Layout applies to a product: product meta → category default → site-wide default → none
   - `Layouts\Meta_Box` — the product/category assignment UI
   - `Layouts\Template_Override` — swaps in `templates/single-product-layout.php` on `template_include` when a Layout resolves
@@ -44,7 +44,7 @@ Builds the assets and produces `noortemplates.zip` containing only the distribut
   - `Assets\Manager` — enqueues the template library app in the editor
   - `Admin\Dashboard` — block enable/disable settings + site-wide default Layout
 - `src/blocks/<name>/` — block sources (block.json apiVersion 3, edit/save, SCSS). Layout primitives (Container, Heading, Button, Accordion, Tabs) are generic; the `product-*` and `related-products` blocks are thin dynamic wrappers around WooCommerce's own `woocommerce_template_single_*()` functions, so variations, stock and reviews keep working exactly as WooCommerce implements them.
-- `src/library/` — the editor Template Library app (NoorTemplates/Export as JSON buttons in the top bar), shown only while editing a Product Layout
+- `src/library/` — the editor Template Library app (NoorPDP/Export as JSON buttons in the top bar), shown only while editing a Product Layout
 - `templates/library/` — premade demo template JSON files; layout templates compose sections via `Patterns\Manager::get_section_content()`
 
 ### Adding a block

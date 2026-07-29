@@ -2,28 +2,26 @@
 /**
  * Main plugin class.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates;
+namespace NoorPDP;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Blocks\Manager as Blocks_Manager;
-use NoorTemplates\Blocks\Interactivity;
-use NoorTemplates\Blocks\Extensions as Blocks_Extensions;
-use NoorTemplates\Blocks\Buy_Now;
-use NoorTemplates\Patterns\Manager as Patterns_Manager;
-use NoorTemplates\Assets\Manager as Assets_Manager;
-use NoorTemplates\Rest\Templates_Controller;
-use NoorTemplates\Rest\Product_Reviews_Controller;
-use NoorTemplates\Admin\Dashboard;
-use NoorTemplates\Layouts\Post_Type as Layouts_Post_Type;
-use NoorTemplates\Layouts\Meta_Box as Layouts_Meta_Box;
-use NoorTemplates\Layouts\Template_Override as Layouts_Template_Override;
-use NoorTemplates\Layouts\Split_Test;
-use NoorTemplates\Layouts\Duplicate as Layouts_Duplicate;
-use NoorTemplates\Layouts\Preview as Layouts_Preview;
-use NoorTemplates\Admin\Split_Tests_Page;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Blocks\Manager as Blocks_Manager;
+use NoorPDP\Blocks\Interactivity;
+use NoorPDP\Blocks\Extensions as Blocks_Extensions;
+use NoorPDP\Blocks\Buy_Now;
+use NoorPDP\Patterns\Manager as Patterns_Manager;
+use NoorPDP\Assets\Manager as Assets_Manager;
+use NoorPDP\Rest\Templates_Controller;
+use NoorPDP\Rest\Product_Reviews_Controller;
+use NoorPDP\Admin\Dashboard;
+use NoorPDP\Layouts\Post_Type as Layouts_Post_Type;
+use NoorPDP\Layouts\Meta_Box as Layouts_Meta_Box;
+use NoorPDP\Layouts\Template_Override as Layouts_Template_Override;
+use NoorPDP\Layouts\Duplicate as Layouts_Duplicate;
+use NoorPDP\Layouts\Preview as Layouts_Preview;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -69,8 +67,8 @@ class Plugin {
 			<p>
 				<?php
 				esc_html_e(
-					'NoorTemplates requires WooCommerce to be installed and active.',
-					'noortemplates'
+					'NoorPDP requires WooCommerce to be installed and active.',
+					'noorpdp'
 				);
 				?>
 			</p>
@@ -100,11 +98,9 @@ class Plugin {
 		Layouts_Template_Override::instance();
 		Layouts_Duplicate::instance();
 		Layouts_Preview::instance();
-		Split_Test::instance();
 
 		if ( is_admin() ) {
 			Dashboard::instance();
-			Split_Tests_Page::instance();
 		}
 
 		/**
@@ -114,6 +110,6 @@ class Plugin {
 		 *
 		 * @param Plugin $plugin The plugin instance.
 		 */
-		do_action( 'noortemplates/loaded', $this );
+		do_action( 'noorpdp/loaded', $this );
 	}
 }

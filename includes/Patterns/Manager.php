@@ -2,20 +2,20 @@
 /**
  * Bundled JSON template registration manager.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Patterns;
+namespace NoorPDP\Patterns;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Licensing\Gate;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Licensing\Gate;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Registers every premade template shipped in the plugin's
  * `templates/library/` folder, both as native Gutenberg block patterns and
- * as entries in the NoorTemplates library (Templates\Sources\Local_Source).
+ * as entries in the NoorPDP library (Templates\Sources\Local_Source).
  *
  * (Not the plugin-root `templates/` folder itself — that also holds
  * `single-product-layout.php`, the unrelated frontend template file used to
@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
  *         "type": "layout",
  *         "category": "bold",
  *         "is_pro": true,
- *         "content": "<!-- wp:noortemplates/product-title /-->…"
+ *         "content": "<!-- wp:noorpdp/product-title /-->…"
  *     }
  *
  * `type` is required ('layout' or 'section'); `description`, `category` and
@@ -45,8 +45,8 @@ defined( 'ABSPATH' ) || exit;
  * `templates/library/thumbnails/{file name}.{png,jpg,webp}` when present —
  * no field needed in the JSON itself.
  *
- * Add-ons (e.g. NoorTemplates Pro) contribute their own template folder via
- * the `noortemplates/pattern_dirs` filter. Every template found in such a
+ * Add-ons (e.g. NoorPDP Pro) contribute their own template folder via
+ * the `noorpdp/pattern_dirs` filter. Every template found in such a
  * folder is always treated as `is_pro: true`, regardless of its own JSON
  * field — that folder only exists on a site because the add-on is
  * installed, so nothing in it is ever free.
@@ -58,12 +58,12 @@ class Manager {
 	/**
 	 * Transient key the parsed template collection is cached under.
 	 */
-	const CACHE_KEY = 'noortemplates_patterns';
+	const CACHE_KEY = 'noorpdp_patterns';
 
 	/**
 	 * Block pattern category every bundled template is registered under.
 	 */
-	const PATTERN_CATEGORY = 'noortemplates';
+	const PATTERN_CATEGORY = 'noorpdp';
 
 	/**
 	 * Per-request memoized templates, keyed by name.
@@ -87,7 +87,7 @@ class Manager {
 	 * @return string[] Absolute directory paths.
 	 */
 	private function get_pattern_dirs() {
-		$dirs = array( NOORTEMPLATES_DIR . 'templates/library' );
+		$dirs = array( NOORPDP_DIR . 'templates/library' );
 
 		/**
 		 * Filters the directories bundled template JSON files are scanned
@@ -95,7 +95,7 @@ class Manager {
 		 *
 		 * @param string[] $dirs Absolute directory paths.
 		 */
-		return (array) apply_filters( 'noortemplates/pattern_dirs', $dirs );
+		return (array) apply_filters( 'noorpdp/pattern_dirs', $dirs );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Manager {
 		 *
 		 * @param bool $needed Whether patterns are needed.
 		 */
-		return (bool) apply_filters( 'noortemplates/patterns_are_needed', false );
+		return (bool) apply_filters( 'noorpdp/patterns_are_needed', false );
 	}
 
 	/**
@@ -139,7 +139,7 @@ class Manager {
 
 		register_block_pattern_category(
 			self::PATTERN_CATEGORY,
-			array( 'label' => __( 'NoorTemplates', 'noortemplates' ) )
+			array( 'label' => __( 'NoorPDP', 'noorpdp' ) )
 		);
 
 		foreach ( $this->get_patterns() as $name => $pattern ) {
@@ -151,7 +151,7 @@ class Manager {
 				continue;
 			}
 
-			register_block_pattern( 'noortemplates/' . $name, $pattern );
+			register_block_pattern( 'noorpdp/' . $name, $pattern );
 		}
 	}
 
@@ -340,7 +340,7 @@ class Manager {
 	 */
 	private function scan_patterns() {
 		$patterns = array();
-		$own_dir  = NOORTEMPLATES_DIR . 'templates/library';
+		$own_dir  = NOORPDP_DIR . 'templates/library';
 
 		foreach ( $this->get_pattern_dirs() as $dir ) {
 			// Every directory contributed by an add-on (i.e. not this

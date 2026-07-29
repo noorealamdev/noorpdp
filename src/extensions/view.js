@@ -1,21 +1,21 @@
 import './style.scss';
 
-const SELECTOR = '[data-noortemplates-animation]';
+const SELECTOR = '[data-noorpdp-animation]';
 
 function reveal( el ) {
-	const duration = el.getAttribute( 'data-noortemplates-duration' );
-	const delay = el.getAttribute( 'data-noortemplates-delay' );
+	const duration = el.getAttribute( 'data-noorpdp-duration' );
+	const delay = el.getAttribute( 'data-noorpdp-delay' );
 
 	if ( duration ) {
 		el.style.setProperty(
-			'--noortemplates-animation-duration',
+			'--noorpdp-animation-duration',
 			duration + 'ms'
 		);
 	}
 
 	if ( delay ) {
 		el.style.setProperty(
-			'--noortemplates-animation-delay',
+			'--noorpdp-animation-delay',
 			delay + 'ms'
 		);
 	}

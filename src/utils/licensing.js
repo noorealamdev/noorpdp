@@ -1,5 +1,5 @@
 /**
- * Whether this site currently has an active NoorTemplates Pro license.
+ * Whether this site currently has an active NoorPDP Pro license.
  *
  * Backed by window.noorTemplatesLicensing, localized by
  * Assets\Manager::enqueue_editor_assets() from Licensing\Gate — the same

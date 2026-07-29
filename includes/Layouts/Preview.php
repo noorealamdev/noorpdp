@@ -2,12 +2,12 @@
 /**
  * "Preview" row action for Product Layout posts.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Layouts;
+namespace NoorPDP\Layouts;
 
-use NoorTemplates\Traits\Singleton;
+use NoorPDP\Traits\Singleton;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ class Preview {
 	/**
 	 * Query var carrying the layout ID to preview.
 	 */
-	const QUERY_VAR = 'noortemplates_preview';
+	const QUERY_VAR = 'noorpdp_preview';
 
 	/**
 	 * Hooks the row action.
@@ -54,15 +54,15 @@ class Preview {
 		$url = add_query_arg(
 			array(
 				self::QUERY_VAR => $post->ID,
-				'_wpnonce'      => wp_create_nonce( 'noortemplates_preview_layout_' . $post->ID ),
+				'_wpnonce'      => wp_create_nonce( 'noorpdp_preview_layout_' . $post->ID ),
 			),
 			get_permalink( $preview_product_id )
 		);
 
-		$actions['noortemplates_preview'] = sprintf(
+		$actions['noorpdp_preview'] = sprintf(
 			'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
 			esc_url( $url ),
-			esc_html__( 'Preview', 'noortemplates' )
+			esc_html__( 'Preview', 'noorpdp' )
 		);
 
 		return $actions;
@@ -94,7 +94,7 @@ class Preview {
 
 		$nonce = sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) );
 
-		if ( ! wp_verify_nonce( $nonce, 'noortemplates_preview_layout_' . $layout_id ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'noorpdp_preview_layout_' . $layout_id ) ) {
 			return 0;
 		}
 

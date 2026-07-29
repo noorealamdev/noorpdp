@@ -9,9 +9,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...useBlockProps() }>
 			<InspectorControls>
-				<PanelBody title={ __( 'Gallery', 'noortemplates' ) } initialOpen>
+				<PanelBody title={ __( 'Gallery', 'noorpdp' ) } initialOpen>
 					<ToggleControl
-						label={ __( 'Show thumbnail strip', 'noortemplates' ) }
+						label={ __( 'Show thumbnail strip', 'noorpdp' ) }
 						checked={ showThumbnails }
 						onChange={ ( value ) =>
 							setAttributes( { showThumbnails: value } )
@@ -20,11 +20,11 @@ export default function Edit( { attributes, setAttributes } ) {
 							showThumbnails
 								? __(
 										'A row of clickable thumbnails appears below the main image.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Only dots indicate the current image.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
@@ -32,10 +32,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<WooPlaceholder
 				icon="images-alt2"
-				label={ __( 'Product Gallery Carousel', 'noortemplates' ) }
+				label={ __( 'Product Gallery Carousel', 'noorpdp' ) }
 				instructions={ __(
 					"A swipeable carousel of the current product's own images. Preview appears on the product page.",
-					'noortemplates'
+					'noorpdp'
 				) }
 			/>
 		</div>

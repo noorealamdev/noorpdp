@@ -29,29 +29,29 @@ export default function Edit( { attributes, setAttributes } ) {
 		type === 'stock'
 			? __(
 					'Shows a low-stock warning based on the live stock level once it drops to or below the threshold. Preview appears on the product page.',
-					'noortemplates'
+					'noorpdp'
 			  )
 			: __(
 					'Counts down to the sale end date or a custom deadline. Preview appears on the product page.',
-					'noortemplates'
+					'noorpdp'
 			  );
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Urgency type', 'noortemplates' ) }>
+				<PanelBody title={ __( 'Urgency type', 'noorpdp' ) }>
 					<SelectControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
-						label={ __( 'Type', 'noortemplates' ) }
+						label={ __( 'Type', 'noorpdp' ) }
 						value={ type }
 						options={ [
 							{
-								label: __( 'Low stock warning', 'noortemplates' ),
+								label: __( 'Low stock warning', 'noorpdp' ),
 								value: 'stock',
 							},
 							{
-								label: __( 'Countdown timer', 'noortemplates' ),
+								label: __( 'Countdown timer', 'noorpdp' ),
 								value: 'countdown',
 							},
 						] }
@@ -60,13 +60,13 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				{ type === 'stock' && (
-					<PanelBody title={ __( 'Low stock settings', 'noortemplates' ) }>
+					<PanelBody title={ __( 'Low stock settings', 'noorpdp' ) }>
 						<RangeControl
 							__nextHasNoMarginBottom
 							__next40pxDefaultSize
 							label={ __(
 								'Show when stock is at or below',
-								'noortemplates'
+								'noorpdp'
 							) }
 							value={ stockThreshold }
 							onChange={ ( value ) =>
@@ -77,10 +77,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						<TextControl
 							__nextHasNoMarginBottom
-							label={ __( 'Message', 'noortemplates' ) }
+							label={ __( 'Message', 'noorpdp' ) }
 							help={ __(
 								'Use {stock} where the remaining quantity should appear.',
-								'noortemplates'
+								'noorpdp'
 							) }
 							value={ stockMessage }
 							onChange={ ( value ) =>
@@ -89,7 +89,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						<ToggleControl
 							__nextHasNoMarginBottom
-							label={ __( 'Show icon', 'noortemplates' ) }
+							label={ __( 'Show icon', 'noorpdp' ) }
 							checked={ showIcon }
 							onChange={ ( value ) =>
 								setAttributes( { showIcon: value } )
@@ -99,22 +99,22 @@ export default function Edit( { attributes, setAttributes } ) {
 				) }
 
 				{ type === 'countdown' && (
-					<PanelBody title={ __( 'Countdown settings', 'noortemplates' ) }>
+					<PanelBody title={ __( 'Countdown settings', 'noorpdp' ) }>
 						<SelectControl
 							__nextHasNoMarginBottom
 							__next40pxDefaultSize
-							label={ __( 'Count down to', 'noortemplates' ) }
+							label={ __( 'Count down to', 'noorpdp' ) }
 							value={ countdownSource }
 							options={ [
 								{
 									label: __(
 										"Product's scheduled sale end date",
-										'noortemplates'
+										'noorpdp'
 									),
 									value: 'sale',
 								},
 								{
-									label: __( 'Custom date & time', 'noortemplates' ),
+									label: __( 'Custom date & time', 'noorpdp' ),
 									value: 'custom',
 								},
 							] }
@@ -126,15 +126,15 @@ export default function Edit( { attributes, setAttributes } ) {
 							<p className="components-base-control__help">
 								{ __(
 									'Only shows while the product has an active sale with a scheduled end date set in Product data → General.',
-									'noortemplates'
+									'noorpdp'
 								) }
 							</p>
 						) }
 						{ countdownSource === 'custom' && (
 							<BaseControl
 								__nextHasNoMarginBottom
-								label={ __( 'Deadline', 'noortemplates' ) }
-								help={ __( "Uses your site's timezone.", 'noortemplates' ) }
+								label={ __( 'Deadline', 'noorpdp' ) }
+								help={ __( "Uses your site's timezone.", 'noorpdp' ) }
 							>
 								<input
 									type="datetime-local"
@@ -148,7 +148,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 						<TextControl
 							__nextHasNoMarginBottom
-							label={ __( 'Label', 'noortemplates' ) }
+							label={ __( 'Label', 'noorpdp' ) }
 							value={ countdownLabel }
 							onChange={ ( value ) =>
 								setAttributes( { countdownLabel: value } )
@@ -156,7 +156,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						<ToggleControl
 							__nextHasNoMarginBottom
-							label={ __( 'Hide once expired', 'noortemplates' ) }
+							label={ __( 'Hide once expired', 'noorpdp' ) }
 							checked={ hideWhenExpired }
 							onChange={ ( value ) =>
 								setAttributes( { hideWhenExpired: value } )
@@ -165,18 +165,18 @@ export default function Edit( { attributes, setAttributes } ) {
 								hideWhenExpired
 									? __(
 											'The block disappears once the deadline passes.',
-											'noortemplates'
+											'noorpdp'
 									  )
 									: __(
 											'Shows the message below once the deadline passes.',
-											'noortemplates'
+											'noorpdp'
 									  )
 							}
 						/>
 						{ ! hideWhenExpired && (
 							<TextControl
 								__nextHasNoMarginBottom
-								label={ __( 'Expired message', 'noortemplates' ) }
+								label={ __( 'Expired message', 'noorpdp' ) }
 								value={ expiredMessage }
 								onChange={ ( value ) =>
 									setAttributes( { expiredMessage: value } )
@@ -186,21 +186,21 @@ export default function Edit( { attributes, setAttributes } ) {
 					</PanelBody>
 				) }
 
-				<PanelBody title={ __( 'Layout', 'noortemplates' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Layout', 'noorpdp' ) } initialOpen={ false }>
 					<ToggleControl
 						__nextHasNoMarginBottom
-						label={ __( 'Boxed width', 'noortemplates' ) }
+						label={ __( 'Boxed width', 'noorpdp' ) }
 						checked={ boxed }
 						onChange={ ( value ) => setAttributes( { boxed: value } ) }
 						help={
 							boxed
 								? __(
 										'Constrained to a max width and centered.',
-										'noortemplates'
+										'noorpdp'
 								  )
 								: __(
 										'Stretches the full width of its container.',
-										'noortemplates'
+										'noorpdp'
 								  )
 						}
 					/>
@@ -208,7 +208,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<RangeControl
 							__nextHasNoMarginBottom
 							__next40pxDefaultSize
-							label={ __( 'Max width (px)', 'noortemplates' ) }
+							label={ __( 'Max width (px)', 'noorpdp' ) }
 							value={ boxedWidth }
 							onChange={ ( value ) =>
 								setAttributes( { boxedWidth: value } )
@@ -229,7 +229,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			>
 				<WooPlaceholder
 					icon="warning"
-					label={ __( 'Urgency & Countdown', 'noortemplates' ) }
+					label={ __( 'Urgency & Countdown', 'noorpdp' ) }
 					instructions={ instructions }
 				/>
 			</div>

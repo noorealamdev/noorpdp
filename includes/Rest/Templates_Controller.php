@@ -2,15 +2,15 @@
 /**
  * Templates REST controller.
  *
- * @package NoorTemplates
+ * @package NoorPDP
  */
 
-namespace NoorTemplates\Rest;
+namespace NoorPDP\Rest;
 
-use NoorTemplates\Traits\Singleton;
-use NoorTemplates\Templates\Repository;
-use NoorTemplates\Templates\Media_Sideloader;
-use NoorTemplates\Licensing\Gate;
+use NoorPDP\Traits\Singleton;
+use NoorPDP\Templates\Repository;
+use NoorPDP\Templates\Media_Sideloader;
+use NoorPDP\Licensing\Gate;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ class Templates_Controller {
 	/**
 	 * REST namespace.
 	 */
-	const REST_NAMESPACE = 'noortemplates/v1';
+	const REST_NAMESPACE = 'noorpdp/v1';
 
 	/**
 	 * Hooks route registration.
@@ -115,8 +115,8 @@ class Templates_Controller {
 
 		if ( ! $template ) {
 			return new \WP_Error(
-				'noortemplates_template_not_found',
-				__( 'Template not found.', 'noortemplates' ),
+				'noorpdp_template_not_found',
+				__( 'Template not found.', 'noorpdp' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -126,8 +126,8 @@ class Templates_Controller {
 		// templates exist), full content is refused without a license.
 		if ( ! empty( $template['is_pro'] ) && ! Gate::is_pro() ) {
 			return new \WP_Error(
-				'noortemplates_pro_required',
-				__( 'This template requires NoorTemplates Pro.', 'noortemplates' ),
+				'noorpdp_pro_required',
+				__( 'This template requires NoorPDP Pro.', 'noorpdp' ),
 				array( 'status' => 403 )
 			);
 		}
