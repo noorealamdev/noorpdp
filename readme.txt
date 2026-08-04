@@ -40,7 +40,7 @@ When enabled, the plugin sends a single `GET` request to the configured URL (no 
 
 == Source Code ==
 
-The JavaScript in the `build/` directory is compiled from the human-readable source in `src/`. Full source, including the build tooling, is available at https://github.com/noorealamdev/noortemplates. To regenerate the compiled files:
+The JavaScript in the `build/` directory is compiled from the human-readable source in `src/`. Full source, including the build tooling, is available at https://github.com/noorealamdev/noorpdp. To regenerate the compiled files:
 
 `npm install && npm run build`
 
