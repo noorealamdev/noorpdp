@@ -20,14 +20,6 @@ const LAYOUT_POST_TYPE = 'noorpdp_layout';
 // Delay, in ms, before a search keystroke triggers a new request.
 const SEARCH_DEBOUNCE = 300;
 
-// Localized by Assets\Manager::enqueue_editor_assets() from
-// Licensing\Gate — the same check the REST layer uses to refuse a Pro
-// template's full content (Rest\Templates_Controller::get_template()).
-const LICENSING = window.noorTemplatesLicensing || {
-	isPro: false,
-	checkoutUrl: '',
-};
-
 // Renders children into a container appended to the editor header toolbar.
 function ToolbarPortal( { children } ) {
 	const [ container, setContainer ] = useState( null );
@@ -56,13 +48,8 @@ function ToolbarPortal( { children } ) {
 
 // A single template card. Shows a static thumbnail (or a placeholder) so
 // the grid stays cheap to render even with hundreds of templates; the full
-// block content is only fetched when the card is applied. Pro templates
-// are still shown to everyone as an upsell (this plugin ships one
-// codebase — nothing is stripped for a Free build), just refused by the
-// server when applied without an active license.
+// block content is only fetched when the card is applied.
 function TemplateCard( { template, isBusy, onSelect } ) {
-	const isLocked = template.is_pro && ! LICENSING.isPro;
-
 	return (
 		<div className="noorpdp-library__card">
 			<button
@@ -89,18 +76,11 @@ function TemplateCard( { template, isBusy, onSelect } ) {
 					</span>
 				) }
 				<span className="noorpdp-library__card-action">
-					{ isLocked
-						? __( 'Upgrade to Pro', 'noorpdp' )
-						: template.type === 'layout'
+					{ template.type === 'layout'
 						? __( 'Use Layout', 'noorpdp' )
 						: __( 'Insert Section', 'noorpdp' ) }
 				</span>
 			</button>
-			{ isLocked && (
-				<span className="noorpdp-library__card-badge">
-					{ __( 'Pro', 'noorpdp' ) }
-				</span>
-			) }
 			<div className="noorpdp-library__card-title">
 				{ template.title }
 			</div>
@@ -335,13 +315,6 @@ export default function Library() {
 		apiFetch( { path: `/noorpdp/v1/templates/${ name }` } );
 
 	const handleSelect = ( template ) => {
-		if ( template.is_pro && ! LICENSING.isPro ) {
-			if ( LICENSING.checkoutUrl ) {
-				window.open( LICENSING.checkoutUrl, '_blank', 'noopener' );
-			}
-			return;
-		}
-
 		setApplyingName( template.name );
 
 		fetchFullTemplate( template.name )

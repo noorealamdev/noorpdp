@@ -198,13 +198,6 @@
     display: flex; align-items: center; gap: 8px;
   }
   .card p { font-size: 13.5px; color: var(--text-muted); margin: 0; max-width: none; }
-  .chip {
-    display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.04em; color: var(--accent); background: var(--accent-soft);
-    border-radius: 999px; padding: 2px 8px;
-  }
-  .chip.pro { color: var(--warn); background: var(--warn-bg); }
-
   .steps { counter-reset: step; list-style: none; padding: 0; margin: 0 0 24px; max-width: 68ch; }
   .steps li { counter-increment: step; position: relative; padding-left: 40px; margin-bottom: 18px; }
   .steps li::before {
@@ -307,13 +300,6 @@
       <p class="nav-eyebrow">Assigning layouts</p>
       <ul>
         <li><a href="#assigning">Per-product, per-category, site-wide</a></li>
-      </ul>
-    </div>
-
-    <div class="nav-group">
-      <p class="nav-eyebrow">Going Pro</p>
-      <ul>
-        <li><a href="#going-pro">What's included</a></li>
       </ul>
     </div>
 
@@ -443,11 +429,7 @@
         <li><strong>Full Layouts</strong> are complete product-page designs, ready to use as-is or as a starting point.</li>
         <li><strong>Sections</strong> are smaller, individual pieces (a hero banner, an FAQ block, a trust-badges row) you insert alongside whatever you've already built.</li>
       </ul>
-      <p>Search or filter by category to narrow things down. Clicking a Full Layout card <strong>replaces</strong> your current content (you'll be asked to confirm if the Layout already has real content in it); clicking a Section card <strong>adds</strong> it alongside what's already there.</p>
-      <div class="callout tip">
-        <span class="callout-icon">&#9432;</span>
-        <p>A card marked <span class="chip pro">PRO</span> is a Pro-only template — you can still see its title, description, and thumbnail as a preview, but using it requires NoorPDP Pro. Clicking it takes you to the upgrade page instead of inserting it. See <a href="#going-pro">Going Pro</a>.</p>
-      </div>
+      <p>Search or filter by category to narrow things down. Clicking a Full Layout card <strong>replaces</strong> your current content (you'll be asked to confirm if the Layout already has real content in it); clicking a Section card <strong>adds</strong> it alongside what's already there. Every template in the library is free to use.</p>
     </section>
 
     <section class="doc-section" id="saving-templates">
@@ -476,57 +458,40 @@
 
     <hr class="divider" />
 
-    <section class="doc-section" id="going-pro">
-      <p class="doc-eyebrow-section">Going Pro</p>
-      <h2>What's included</h2>
-      <p>NoorPDP itself is fully free and doesn't stop working if you never upgrade — every block (including the Hero block's video background), the Layout system, and template library all work without a license. NoorPDP Pro is a separate, small companion plugin that unlocks Pro-only template content once installed and licensed:</p>
-      <div class="card-grid">
-        <div class="card"><h4>Pro-only templates</h4><p>Additional premade Full Layouts and Sections in the template library, marked <span class="chip pro">PRO</span>.</p></div>
-      </div>
-      <ol class="steps">
-        <li><strong>Purchase a license</strong> through the checkout link shown next to any locked/Pro feature.</li>
-        <li><strong>Install the NoorPDP Pro plugin</strong> (a separate download) alongside NoorPDP — both need to be active.</li>
-        <li><strong>Activate your license</strong> from the connect screen or the Account page NoorPDP Pro adds to your admin menu, using the license key from your purchase email.</li>
-        <li><strong>Everything unlocks immediately</strong> — no further setup. If you ever move your license to a different site, the Account page lets you deactivate it there and activate it elsewhere with the same key, without buying again.</li>
-      </ol>
-    </section>
-
-    <hr class="divider" />
-
     <section class="doc-section" id="blocks-reference">
       <p class="doc-eyebrow-section">Reference</p>
       <h2>Blocks reference</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Block</th><th>Type</th><th>Pro?</th></tr></thead>
+          <thead><tr><th>Block</th><th>Type</th></tr></thead>
           <tbody>
-            <tr><td>Product Title</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Price</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Category</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Rating</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Breadcrumbs</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Gallery Carousel</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Short Description</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Add to Cart</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Meta</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Specifications</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Tabs</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Reviews</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Review Carousel</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Related Products</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Product Grid</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Sticky Add to Cart Bar</td><td>Product data</td><td>&mdash;</td></tr>
-            <tr><td>Hero</td><td>Content</td><td>Video background only</td></tr>
-            <tr><td>Advanced Heading</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Advanced Button</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Container</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Icon List</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Trust Badges</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Feature Cards</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Comparison Table</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Tabs</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>Accordion</td><td>Content</td><td>&mdash;</td></tr>
-            <tr><td>FAQ Accordion</td><td>Content</td><td>&mdash;</td></tr>
+            <tr><td>Product Title</td><td>Product data</td></tr>
+            <tr><td>Product Price</td><td>Product data</td></tr>
+            <tr><td>Product Category</td><td>Product data</td></tr>
+            <tr><td>Product Rating</td><td>Product data</td></tr>
+            <tr><td>Product Breadcrumbs</td><td>Product data</td></tr>
+            <tr><td>Product Gallery Carousel</td><td>Product data</td></tr>
+            <tr><td>Product Short Description</td><td>Product data</td></tr>
+            <tr><td>Product Add to Cart</td><td>Product data</td></tr>
+            <tr><td>Product Meta</td><td>Product data</td></tr>
+            <tr><td>Product Specifications</td><td>Product data</td></tr>
+            <tr><td>Product Tabs</td><td>Product data</td></tr>
+            <tr><td>Product Reviews</td><td>Product data</td></tr>
+            <tr><td>Review Carousel</td><td>Product data</td></tr>
+            <tr><td>Related Products</td><td>Product data</td></tr>
+            <tr><td>Product Grid</td><td>Product data</td></tr>
+            <tr><td>Sticky Add to Cart Bar</td><td>Product data</td></tr>
+            <tr><td>Hero</td><td>Content</td></tr>
+            <tr><td>Advanced Heading</td><td>Content</td></tr>
+            <tr><td>Advanced Button</td><td>Content</td></tr>
+            <tr><td>Container</td><td>Content</td></tr>
+            <tr><td>Icon List</td><td>Content</td></tr>
+            <tr><td>Trust Badges</td><td>Content</td></tr>
+            <tr><td>Feature Cards</td><td>Content</td></tr>
+            <tr><td>Comparison Table</td><td>Content</td></tr>
+            <tr><td>Tabs</td><td>Content</td></tr>
+            <tr><td>Accordion</td><td>Content</td></tr>
+            <tr><td>FAQ Accordion</td><td>Content</td></tr>
           </tbody>
         </table>
       </div>
@@ -567,9 +532,6 @@
 
       <h3>A product block shows nothing / looks empty</h3>
       <p>Product blocks only render real data on an actual product page — in the Layout editor itself they show a plain placeholder by design. Use the "Preview" link on the Layouts list to see it with real data.</p>
-
-      <h3>A Pro template card won't apply when I click it</h3>
-      <p>Pro-tier templates are visible to everyone as a preview (title, description, thumbnail) but only actually apply once NoorPDP Pro is installed and licensed — clicking one instead takes you to the upgrade page.</p>
     </section>
 
     <footer class="doc-footer">

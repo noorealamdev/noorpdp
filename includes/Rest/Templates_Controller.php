@@ -10,7 +10,6 @@ namespace NoorPDP\Rest;
 use NoorPDP\Traits\Singleton;
 use NoorPDP\Templates\Repository;
 use NoorPDP\Templates\Media_Sideloader;
-use NoorPDP\Licensing\Gate;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -118,17 +117,6 @@ class Templates_Controller {
 				'noorpdp_template_not_found',
 				__( 'Template not found.', 'noorpdp' ),
 				array( 'status' => 404 )
-			);
-		}
-
-		// Mirrors NoorQuiz's TemplatesController::use_template() exactly:
-		// the list stays unfiltered (an upsell — everyone sees Pro
-		// templates exist), full content is refused without a license.
-		if ( ! empty( $template['is_pro'] ) && ! Gate::is_pro() ) {
-			return new \WP_Error(
-				'noorpdp_pro_required',
-				__( 'This template requires NoorPDP Pro.', 'noorpdp' ),
-				array( 'status' => 403 )
 			);
 		}
 

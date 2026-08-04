@@ -22,6 +22,8 @@ NoorPDP lets you redesign the WooCommerce single product page without touching a
 * Assign a Layout per product, per product category, or as the site-wide default; unconfigured products keep rendering exactly as vanilla WooCommerce always has
 * An editor Template Library with premade full layouts and drop-in sections (FAQ accordion, trust badges, feature table)
 
+Everything above is free — no license, upsell, or locked feature anywhere in the plugin.
+
 == Installation ==
 
 1. Make sure WooCommerce is installed and active.
@@ -38,7 +40,7 @@ When enabled, the plugin sends a single `GET` request to the configured URL (no 
 
 == Source Code ==
 
-The JavaScript in the `build/` directory is compiled from the human-readable source in `src/`. Full source, including the build tooling, is available at https://github.com/noorealamdev/noorpdp. To regenerate the compiled files:
+The JavaScript in the `build/` directory is compiled from the human-readable source in `src/`. Full source, including the build tooling, is available at https://github.com/noorealamdev/noortemplates. To regenerate the compiled files:
 
 `npm install && npm run build`
 

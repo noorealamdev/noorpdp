@@ -98,7 +98,7 @@ class Product_Reviews_Controller {
 		$product_id = absint( $request['product_id'] );
 		$product    = wc_get_product( $product_id );
 
-		if ( ! $product ) {
+		if ( ! $product || ! $this->is_publicly_viewable( $product ) ) {
 			return new \WP_Error( 'noorpdp_invalid_product', __( 'Invalid product.', 'noorpdp' ), array( 'status' => 404 ) );
 		}
 
@@ -126,6 +126,18 @@ class Product_Reviews_Controller {
 	}
 
 	/**
+	 * Whether a product is published and visible to anonymous visitors, so
+	 * this public, unauthenticated endpoint never leaks reviews belonging
+	 * to a draft, private, pending or password-protected product.
+	 *
+	 * @param \WC_Product $product Product to check.
+	 * @return bool
+	 */
+	private function is_publicly_viewable( $product ) {
+		return 'publish' === $product->get_status() && ! post_password_required( $product->get_id() );
+	}
+
+	/**
 	 * Returns a rendered page of a product's reviews.
 	 *
 	 * @param \WP_REST_Request $request Full data about the request.
@@ -139,7 +151,7 @@ class Product_Reviews_Controller {
 		$product_id = absint( $request['product_id'] );
 		$product    = wc_get_product( $product_id );
 
-		if ( ! $product ) {
+		if ( ! $product || ! $this->is_publicly_viewable( $product ) ) {
 			return new \WP_Error( 'noorpdp_invalid_product', __( 'Invalid product.', 'noorpdp' ), array( 'status' => 404 ) );
 		}
 

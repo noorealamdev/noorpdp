@@ -23,8 +23,6 @@ define( 'NOORPDP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'NOORPDP_URL', plugin_dir_url( __FILE__ ) );
 define( 'NOORPDP_BASENAME', plugin_basename( __FILE__ ) );
 
-define( 'NOORPDP_CHECKOUT_URL', 'https://checkout.freemius.com/plugin/35066/plan/57625/' );
-
 // Register the PSR-4 autoloader.
 require_once NOORPDP_DIR . 'includes/Autoloader.php';
 \NoorPDP\Autoloader::register();

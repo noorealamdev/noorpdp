@@ -8,7 +8,6 @@
 namespace NoorPDP\Patterns;
 
 use NoorPDP\Traits\Singleton;
-use NoorPDP\Licensing\Gate;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,27 +28,19 @@ defined( 'ABSPATH' ) || exit;
  *         "description": "…",
  *         "type": "layout",
  *         "category": "bold",
- *         "is_pro": true,
  *         "content": "<!-- wp:noorpdp/product-title /-->…"
  *     }
  *
- * `type` is required ('layout' or 'section'); `description`, `category` and
- * `is_pro` are optional (`category` falls back to `type`, `is_pro` falls
- * back to `false`). Content always ships with the template — this plugin
- * is a single codebase, nothing is stripped for a "Free" build (see
- * Licensing\Gate's own docblock for why). A `pro`-tier template's metadata
- * is listed for everyone (an upsell), and Rest\Templates_Controller
- * refuses to serve its full content unless Licensing\Gate::is_pro() is
- * true — the exact same shape as NoorQuiz's TemplatesController::use_template().
- * A thumbnail is picked up automatically from
+ * `type` is required ('layout' or 'section'); `description` and `category`
+ * are optional (`category` falls back to `type`). Every bundled template is
+ * fully free — everything in this plugin is a single, fully-functional
+ * codebase with nothing stripped, disabled, or gated behind a license. A
+ * thumbnail is picked up automatically from
  * `templates/library/thumbnails/{file name}.{png,jpg,webp}` when present —
  * no field needed in the JSON itself.
  *
- * Add-ons (e.g. NoorPDP Pro) contribute their own template folder via
- * the `noorpdp/pattern_dirs` filter. Every template found in such a
- * folder is always treated as `is_pro: true`, regardless of its own JSON
- * field — that folder only exists on a site because the add-on is
- * installed, so nothing in it is ever free.
+ * Add-ons can contribute their own template folder via the
+ * `noorpdp/pattern_dirs` filter.
  */
 class Manager {
 
@@ -143,14 +134,6 @@ class Manager {
 		);
 
 		foreach ( $this->get_patterns() as $name => $pattern ) {
-			// Native block patterns are inserted directly from the editor's
-			// Patterns tab with no REST round-trip, so Rest\Templates_Controller's
-			// gate never runs for this path — a Pro-tier template's real
-			// content must never be registered here unless actually licensed.
-			if ( ! empty( $pattern['is_pro'] ) && ! Gate::is_pro() ) {
-				continue;
-			}
-
 			register_block_pattern( 'noorpdp/' . $name, $pattern );
 		}
 	}
@@ -160,7 +143,7 @@ class Manager {
 	 * lightweight metadata (no `content`).
 	 *
 	 * @return array[] Each item: name, title, description, type
-	 *                 (layout|section), category, is_pro (bool), thumbnail.
+	 *                 (layout|section), category, thumbnail.
 	 */
 	public function get_library_templates() {
 		$templates = array();
@@ -176,7 +159,6 @@ class Manager {
 				'description' => $pattern['description'],
 				'type'        => $pattern['type'],
 				'category'    => $pattern['category'],
-				'is_pro'      => $pattern['is_pro'],
 				'thumbnail'   => $pattern['thumbnail'],
 			);
 		}
@@ -205,7 +187,6 @@ class Manager {
 			'description' => $pattern['description'],
 			'type'        => $pattern['type'],
 			'category'    => $pattern['category'],
-			'is_pro'      => $pattern['is_pro'],
 			'thumbnail'   => $pattern['thumbnail'],
 			'content'     => $pattern['content'],
 		);
@@ -340,16 +321,8 @@ class Manager {
 	 */
 	private function scan_patterns() {
 		$patterns = array();
-		$own_dir  = NOORPDP_DIR . 'templates/library';
 
 		foreach ( $this->get_pattern_dirs() as $dir ) {
-			// Every directory contributed by an add-on (i.e. not this
-			// plugin's own) only exists on a site because that add-on is
-			// installed, so its templates are always Pro — regardless of
-			// the JSON's own `is_pro` field, which an add-on author might
-			// forget to set.
-			$dir_is_pro = ( $dir !== $own_dir );
-
 			foreach ( $this->glob_pattern_files( $dir ) as $file ) {
 				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading this plugin's own bundled local template files, not a remote URL.
 				$pattern = json_decode( (string) file_get_contents( $file ), true );
@@ -369,7 +342,6 @@ class Manager {
 				$pattern['title']       = isset( $pattern['title'] ) ? $pattern['title'] : $raw_name;
 				$pattern['description'] = isset( $pattern['description'] ) ? $pattern['description'] : '';
 				$pattern['category']    = isset( $pattern['category'] ) ? $pattern['category'] : $pattern['type'];
-				$pattern['is_pro']      = $dir_is_pro || ! empty( $pattern['is_pro'] );
 				$pattern['thumbnail']   = isset( $pattern['thumbnail'] ) ? $pattern['thumbnail'] : $this->guess_thumbnail( $dir, $raw_name );
 				$pattern['categories']  = array( self::PATTERN_CATEGORY );
 
