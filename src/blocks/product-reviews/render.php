@@ -238,8 +238,13 @@ $noorpdp_boxed_width = isset( $attributes['boxedWidth'] ) ? absint( $attributes[
 
 						$noorpdp_comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . esc_html__( 'Your review', 'noorpdp' ) . '&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p>';
 
-						// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- intentionally reusing WooCommerce's own review-form filter name (not a new hook) so plugins/themes that already customize the native review form via this filter keep working here too.
-						comment_form( apply_filters( 'woocommerce_product_review_comment_form_args', $noorpdp_comment_form ) );
+						/**
+						 * Filters the arguments passed to comment_form() for this
+						 * block's review form.
+						 *
+						 * @param array $noorpdp_comment_form comment_form() arguments.
+						 */
+						comment_form( apply_filters( 'noorpdp_review_comment_form_args', $noorpdp_comment_form ) );
 						?>
 					</div>
 				</div>
