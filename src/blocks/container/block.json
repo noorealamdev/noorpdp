@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "noorpdp/container",
+    "title": "Container",
+    "category": "noorpdp",
+    "icon": "align-wide",
+    "description": "A flexible wrapper section for grouping and laying out other blocks.",
+    "keywords": [
+        "section",
+        "wrapper",
+        "group",
+        "row"
+    ],
+    "version": "1.0.0",
+    "textdomain": "noorpdp",
+    "supports": {
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "html": false,
+        "color": {
+            "background": true,
+            "text": true,
+            "gradients": true,
+            "link": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        },
+        "__experimentalBorder": {
+            "radius": true,
+            "width": true,
+            "color": true
+        },
+        "shadow": true,
+        "layout": true
+    },
+    "editorScript": "file:./index.js",
+    "style": "file:./style-index.css",
+    "editorStyle": "file:./index.css"
+}

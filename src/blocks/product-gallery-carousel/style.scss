@@ -1,0 +1,18 @@
+// Deliberately minimal: the gallery markup inside is WooCommerce's own
+// `.woocommerce-product-gallery` (via `woocommerce_show_product_images()`
+// in render.php), so its layout, zoom and lightbox styling already come
+// from WooCommerce's own CSS and whatever the active theme adds on top —
+// the same as any other WooCommerce single-product page. Restyling it
+// here would fight that, not complement it.
+.wp-block-noorpdp-product-gallery-carousel {
+
+	.woocommerce-product-gallery__image img {
+		// Several themes leave WooCommerce's own gallery images sized by
+		// their intrinsic attributes with no responsive constraint of
+		// their own; inside a NoorPDP Layout (any theme, any container
+		// width) that assumption doesn't hold, so this is asserted
+		// explicitly rather than left to chance.
+		height: auto;
+		max-width: 100%;
+	}
+}

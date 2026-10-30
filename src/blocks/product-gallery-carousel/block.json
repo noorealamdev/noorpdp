@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "noorpdp/product-gallery-carousel",
+	"title": "Product Gallery",
+	"category": "noorpdp",
+	"icon": "images-alt2",
+	"description": "The current WooCommerce product's own image gallery, rendered exactly as WooCommerce's own single-product template would — zoom, lightbox and variation-gallery swapping included wherever the active theme supports them.",
+	"keywords": [ "woocommerce", "product", "gallery", "images", "carousel", "slider", "zoom", "lightbox" ],
+	"version": "1.0.0",
+	"textdomain": "noorpdp",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"__experimentalBorder": {
+			"radius": true,
+			"width": true,
+			"color": true
+		},
+		"shadow": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

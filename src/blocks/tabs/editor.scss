@@ -1,0 +1,15 @@
+.wp-block-noorpdp-tabs {
+
+	.noorpdp-tabs__tab {
+		cursor: pointer;
+	}
+
+	.noorpdp-tabs__add.components-button {
+		align-self: center;
+	}
+
+	// Only the active tab panel is visible while editing.
+	.wp-block-noorpdp-tab:not(.is-active) {
+		display: none;
+	}
+}
